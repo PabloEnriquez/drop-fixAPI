@@ -1,7 +1,7 @@
 package com.itesm.demo.endpoint;
 
-import com.itesm.demo.domain.Faq;
-import com.itesm.demo.service.FaqService;
+import com.itesm.demo.domain.CentroServicio ;
+import com.itesm.demo.service.CentroServicioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,17 +21,17 @@ import java.util.Optional;
 @Component
 @Path("/v1")
 @Produces(MediaType.APPLICATION_JSON)
-public class FaqEndpoint {
+public class CentroServicioEndpoint {
     @Autowired
-    private FaqService faqService;
+    private CentroServicioService centroServicioService;
 
     @GET
-    @Path("/faq/{uuid}")
+    @Path("/centroServicio/{uuid}")
     public Response getFaq(@PathParam("uuid") String uuid){
-        Optional<Faq> faq = faqService.get(uuid);
+        Optional<CentroServicio > centroServicio = centroServicioService.get(uuid);
         Response response;
-        if(faq.isPresent()) {
-            response = Response.ok(faq.get()).build();
+        if(centroServicio.isPresent()) {
+            response = Response.ok(centroServicio.get()).build();
         }else{
             response = Response.noContent().build();
         }
@@ -39,9 +39,9 @@ public class FaqEndpoint {
     }
 
     @GET
-    @Path("/faq")
+    @Path("/centroServicio")
     public Response search(@QueryParam("page") Integer page, @QueryParam("size") Integer size ){
-        Optional<List<Faq>> faqs = faqService.list(page, size);
+        Optional<List<CentroServicio >> faqs = centroServicioService.list(page, size);
         Response response;
         if(faqs.isPresent()) {
             response = Response.ok(faqs.get()).build();
@@ -52,12 +52,12 @@ public class FaqEndpoint {
     }
 
     @POST
-    @Path("/faq")
-    public Response insert(Faq faq){
-        Optional<Faq> faqDB = faqService.insert(faq);
+    @Path("/centroServicio")
+    public Response insert(CentroServicio  centroServicio){
+        Optional<CentroServicio > centroServicioDB = centroServicioService.insert(centroServicio);
         Response response;
-        if(faqDB.isPresent()) {
-            response = Response.ok(faqDB.get()).build();
+        if(centroServicioDB.isPresent()) {
+            response = Response.ok(centroServicioDB.get()).build();
         }else{
             response = Response.noContent().build();
         }
@@ -65,13 +65,13 @@ public class FaqEndpoint {
     }
 
     @PUT
-    @Path("/faq/{uuid}")
-    public Response insert(@PathParam("uuid") String uuid, Faq faq){
-        faq.setUuid(uuid);
-        Optional<Faq> faqDB = faqService.update(faq);
+    @Path("/centroServicio/{uuid}")
+    public Response insert(@PathParam("uuid") String uuid, CentroServicio  centroServicio){
+        centroServicio.setUuid(uuid);
+        Optional<CentroServicio > centroServicioDB = centroServicioService.update(centroServicio);
         Response response;
-        if(faqDB.isPresent()) {
-            response = Response.ok(faqDB.get()).build();
+        if(centroServicioDB.isPresent()) {
+            response = Response.ok(centroServicioDB.get()).build();
         }else{
             response = Response.noContent().build();
         }
@@ -79,14 +79,14 @@ public class FaqEndpoint {
     }
 
     @DELETE
-    @Path("/faq/{uuid}")
+    @Path("/centroServicio/{uuid}")
     public Response delete(@PathParam("uuid") String uuid){
-        Optional<Faq> faq = faqService.get(uuid);
-        faq.get().setStatus(-1);
-        Optional<Faq> faqDB = faqService.update(faq.get());
+        Optional<CentroServicio > centroServicio = centroServicioService.get(uuid);
+        centroServicio.get().setStatus(-1);
+        Optional<CentroServicio > centroServicioDB = centroServicioService.update(centroServicio.get());
         Response response;
-        if(faqDB.isPresent()) {
-            response = Response.ok(faqDB.get()).build();
+        if(centroServicioDB.isPresent()) {
+            response = Response.ok(centroServicioDB.get()).build();
         }else{
             response = Response.noContent().build();
         }

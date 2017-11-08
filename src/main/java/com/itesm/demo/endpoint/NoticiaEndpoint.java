@@ -82,7 +82,7 @@ public class NoticiaEndpoint {
     @Path("/noticia/{uuid}")
     public Response delete(@PathParam("uuid") String uuid){
         Optional<Noticia> noticia = noticiaService.get(uuid);
-        noticia.get().setStatus(-1);
+        noticia.get().setStatus("-1");//marca error de incopatibilidad con int to java.lang.string
         Optional<Noticia> noticiaDB = noticiaService.update(noticia.get());
         Response response;
         if(noticiaDB.isPresent()) {

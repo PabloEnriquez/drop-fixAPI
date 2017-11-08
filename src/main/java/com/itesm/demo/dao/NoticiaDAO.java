@@ -45,7 +45,7 @@ public class NoticiaDAO {
                             + " titulo,descripcion)"
                             + " VALUES (?,?,?,?, ?,?,?)",
                     newUuid, noticia.getStatus(), Timestamp.from(Instant.now()), Timestamp.from(Instant.now()),
-                    noticia.getTitulo,noticia.Descripcion());
+                    noticia.getTitulo(),noticia.getDescripcion());
             logger.debug("Inserting noticia");
             return getByUuid(newUuid);
         } catch (Exception e) {
