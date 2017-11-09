@@ -83,7 +83,7 @@ public class ReporteEndpoint {
     @Path("/reportes/{uuid}")
     public Response delete(@PathParam("uuid") String uuid){
         Optional<Reporte> reporte = reporteService.get(uuid);
-        reporte.get().setStatus("-1");
+        reporte.get().setStatus(-1);
         Optional<Reporte> reporteDB = reporteService.update(reporte.get());
         Response response;
         if(reporteDB.isPresent()) {

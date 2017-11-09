@@ -25,7 +25,7 @@ public class ReporteService {
     public Optional<Reporte> insert(Reporte reporte){
         // validar que el correo no existe por ejemplo
         // validar que vengan todos los campos necesarios
-        reporte.setStatus("1");
+        reporte.setStatus(1);
 //        user.setPassword(DigestUtils.sha1Hex(user.getPassword()));
         return reporteDAO.insert(reporte);
     }

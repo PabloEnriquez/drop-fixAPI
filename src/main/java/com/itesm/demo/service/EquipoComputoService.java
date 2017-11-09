@@ -26,7 +26,7 @@ public class EquipoComputoService {
     public Optional<EquipoComputo> insert(EquipoComputo equipo_computo){
         // validar que el correo no existe por ejemplo
         // validar que vengan todos los campos necesarios
-        equipo_computo.setStatus("1");
+        equipo_computo.setStatus(1);
 //        user.setPassword(DigestUtils.sha1Hex(user.getPassword()));
         return equipoComputoDAO.insert(equipo_computo);
     }

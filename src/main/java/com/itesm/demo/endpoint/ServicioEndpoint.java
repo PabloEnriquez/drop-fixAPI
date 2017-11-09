@@ -83,7 +83,7 @@ public class ServicioEndpoint {
     @Path("/servicios/{uuid}")
     public Response delete(@PathParam("uuid") String uuid){
         Optional<Servicio> servicio = servicioService.get(uuid);
-        servicio.get().setStatus("-1");
+        servicio.get().setStatus(-1);
         Optional<Servicio> srevicioDB = servicioService.update(servicio.get());
         Response response;
         if(srevicioDB.isPresent()) {

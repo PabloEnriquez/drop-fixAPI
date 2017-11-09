@@ -41,11 +41,11 @@ public class FaqDAO {
         try {
             jdbcTemplate.update(
                     "INSERT INTO faq "
-                            + " (uuid, titulo, descripcion,"
-                            + " status, date_created, date_modified)"
-                            + " VALUES (?,?,?,?, ?,?,?)",
-                    newUuid, faq.getTitulo(), faq.getDescripcion(),
-                    faq.getStatus(), Timestamp.from(Instant.now()), Timestamp.from(Instant.now()));
+                            + " (uuid, status, fecha_creacion, fecha_modificacion, "
+                            + " titulo, descripcion )"
+                            + " VALUES (?,?,?,?,?,?)",
+                    newUuid, faq.getStatus(), Timestamp.from(Instant.now()),
+                    Timestamp.from(Instant.now()), faq.getTitulo(), faq.getDescripcion() );
             logger.debug("Inserting faq");
             return getByUuid(newUuid);
         } catch (Exception e) {
@@ -58,9 +58,9 @@ public class FaqDAO {
     public Optional<Faq> update(Faq faq){
         try {
             jdbcTemplate.update("UPDATE faq SET " +
-                    "titulo=?, descripcion=?, status=?, date_modified=? WHERE uuid=?",
-                    faq.getTitulo(), faq.getDescripcion(), faq.getStatus(),
-                    Timestamp.from(Instant.now()), faq.getUuid());
+                    "status=?, fecha_modificacion=?, titulo=?, descripcion=? WHERE uuid=?",
+                    faq.getStatus(), Timestamp.from(Instant.now()), faq.getTitulo(),
+                    faq.getDescripcion(), faq.getUuid());
             logger.debug("Updating faq: " + faq.getUuid());
             return getByUuid(faq.getUuid());
         } catch (Exception e) {

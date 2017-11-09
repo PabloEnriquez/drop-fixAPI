@@ -28,7 +28,7 @@ public class NoticiaService {
     public Optional<Noticia> insert(Noticia noticia){
         // validar que el correo no existe por ejemplo
         // validar que vengan todos los campos necesarios
-        noticia.setStatus("1");//marca error de incopatibilidad con int to java.lang.string
+        noticia.setStatus(1);//marca error de incopatibilidad con int to java.lang.string
         return noticiaDAO.insert(noticia);
     }
 

@@ -8,13 +8,13 @@ import java.util.Date;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CasoAtendido {
+public class Usuario {
 
     private Long id;
 
     private String uuid;
 
-    private String status;
+    private Integer status;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date fecha_creacion;
@@ -22,11 +22,17 @@ public class CasoAtendido {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date fecha_modificacion;
 
-    private String descripcion;
+    private String email;
 
-    private Long id_reporte;
+    private String nombre;
 
-    private Long id_usuario;
+    private String contrasena;
+
+    private String telefono;
+
+    private String usuario;
+
+    private String tipo_usuario;
 
     public Long getId() {
         return id;
@@ -44,11 +50,11 @@ public class CasoAtendido {
         this.uuid = uuid;
     }
 
-    public String getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
@@ -68,27 +74,51 @@ public class CasoAtendido {
         this.fecha_modificacion = fecha_modificacion;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getEmail() {
+        return email;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public Long getId_reporte() {
-        return id_reporte;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setId_reporte(Long id_reporte) {
-        this.id_reporte = id_reporte;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public Long getId_usuario() {
-        return id_usuario;
+    public String getContrasena() {
+        return contrasena;
     }
 
-    public void setId_usuario(Long id_usuario) {
-        this.id_usuario = id_usuario;
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getTipo_usuario() {
+        return tipo_usuario;
+    }
+
+    public void setTipo_usuario(String tipo_usuario) {
+        this.tipo_usuario = tipo_usuario;
     }
 }

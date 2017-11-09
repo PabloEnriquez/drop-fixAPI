@@ -16,17 +16,15 @@ public class Faq {
 
     private Integer status;
 
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	private Date fecha_creacion;
+
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	private Date fecha_modificacion;
+
     private String titulo;
 
     private String descripcion;
-
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    private Date dateCreated;
-
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    private Date dateModified;
-
-
 
 	/**
 	* Returns value of id
@@ -108,35 +106,19 @@ public class Faq {
 		this.descripcion = descripcion;
 	}
 
-	/**
-	* Returns value of dateCreated
-	* @return
-	*/
-	public Date getDateCreated() {
-		return dateCreated;
-	}
+    public Date getFecha_creacion() {
+        return fecha_creacion;
+    }
 
-	/**
-	* Sets new value of dateCreated
-	* @param
-	*/
-	public void setDateCreated(Date dateCreated) {
-		this.dateCreated = dateCreated;
-	}
+    public void setFecha_creacion(Date fecha_creacion) {
+        this.fecha_creacion = fecha_creacion;
+    }
 
-	/**
-	* Returns value of dateModified
-	* @return
-	*/
-	public Date getDateModified() {
-		return dateModified;
-	}
+    public Date getFecha_modificacion() {
+        return fecha_modificacion;
+    }
 
-	/**
-	* Sets new value of dateModified
-	* @param
-	*/
-	public void setDateModified(Date dateModified) {
-		this.dateModified = dateModified;
-	}
+    public void setFecha_modificacion(Date fecha_modificacion) {
+        this.fecha_modificacion = fecha_modificacion;
+    }
 }

@@ -25,7 +25,7 @@ public class ChatService {
     public Optional<Chat> insert(Chat chat){
         // validar que el correo no existe por ejemplo
         // validar que vengan todos los campos necesarios
-        chat.setStatus("1");
+        chat.setStatus(1);
 //        user.setPassword(DigestUtils.sha1Hex(user.getPassword()));
         return chatDAO.insert(chat);
     }

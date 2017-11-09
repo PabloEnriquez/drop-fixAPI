@@ -24,7 +24,7 @@ public class CentroServicioDAO {
     private static final Logger logger = LoggerFactory.getLogger(CentroServicioDAO.class);
 
     public Optional<CentroServicio> getByUuid(String uuid) {
-        String sql = "SELECT * FROM centroServicio WHERE uuid=?";
+        String sql = "SELECT * FROM centro_de_servicio WHERE uuid=?";
         try {
             BeanPropertyRowMapper<CentroServicio> rowMapper = new BeanPropertyRowMapper<>(CentroServicio.class);
             CentroServicio centroServicio = jdbcTemplate.queryForObject(sql, rowMapper, uuid);
@@ -40,12 +40,13 @@ public class CentroServicioDAO {
         String newUuid = UUID.randomUUID().toString();
         try {
             jdbcTemplate.update(
-                    "INSERT INTO centroServicio "
-                            + " (uuid, longitud, latitud,descripcion,direccion,titulo,url,"
-                            + " status, date_created, date_modified)"
-                            + " VALUES (?,?,?,?, ?,?,?)",
-                    newUuid, centroServicio.getLongitud(), centroServicio.getLatitud(),centroServicio.getDescripcion(),centroServicio.getDireccion(),centroServicio.getTitulo(),
-                    centroServicio.getUrl(),centroServicio.getStatus(), Timestamp.from(Instant.now()), Timestamp.from(Instant.now()));
+                    "INSERT INTO centro_de_servicio "
+                            + " (uuid, status, fecha_creacion, fecha_modificacion, longitud, latitud, "
+                            + " descripcion, direccion, titulo, url )"
+                            + " VALUES (?,?,?,?,?,?,?,?,?,?)",
+                    newUuid, centroServicio.getStatus(), Timestamp.from(Instant.now()), Timestamp.from(Instant.now()),
+                    centroServicio.getLongitud(), centroServicio.getLatitud(), centroServicio.getDescripcion(),
+                    centroServicio.getDireccion(), centroServicio.getTitulo(), centroServicio.getUrl() );
             logger.debug("Inserting centroServicio");
             return getByUuid(newUuid);
         } catch (Exception e) {
@@ -57,10 +58,12 @@ public class CentroServicioDAO {
 
     public Optional<CentroServicio> update(CentroServicio centroServicio){
         try {
-            jdbcTemplate.update("UPDATE centroServicio SET " +
-                    "longitud=?,latitud=?,descripcion=?,direccion=?, titulo=?,url=?, status=?, date_modified=? WHERE uuid=?",
-                    centroServicio.getLongitud(), centroServicio.getLatitud(),centroServicio.getDescripcion(),centroServicio.getDireccion(),centroServicio.getTitulo(),  centroServicio.getUrl(),centroServicio.getStatus(),
-                    Timestamp.from(Instant.now()), centroServicio.getUuid());
+            jdbcTemplate.update("UPDATE centro_de_servicio SET " +
+                    "status=?, fecha_modificacion=?, longitud=?, latitud=?," +
+                            "descripcion=?, direccion=?, titulo=?, url=? WHERE uuid=?",
+                    centroServicio.getStatus(), Timestamp.from(Instant.now()), centroServicio.getLongitud(),
+                    centroServicio.getLatitud(), centroServicio.getDescripcion(), centroServicio.getDireccion(),
+                    centroServicio.getTitulo(), centroServicio.getUrl(), centroServicio.getUuid() );
             logger.debug("Updating centroServicio: " + centroServicio.getUuid());
             return getByUuid(centroServicio.getUuid());
         } catch (Exception e) {
@@ -72,7 +75,7 @@ public class CentroServicioDAO {
 
 
     public Optional<List<CentroServicio>> list(Integer page, Integer size) {
-        String sql = "SELECT * FROM centroServicio WHERE status != -1 LIMIT ?, ?";
+        String sql = "SELECT * FROM centro_de_servicio WHERE status != -1 LIMIT ?, ?";
         try {
             List<CentroServicio> centroServicios = jdbcTemplate.query(sql,
                     new BeanPropertyRowMapper<>(CentroServicio.class), (page * size), size);

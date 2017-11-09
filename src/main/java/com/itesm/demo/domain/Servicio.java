@@ -15,7 +15,7 @@ public class Servicio {
 
     private String uuid;
 
-    private String status;
+    private Integer status;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date fecha_creacion;
@@ -47,11 +47,11 @@ public class Servicio {
         this.uuid = uuid;
     }
 
-    public String getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 

@@ -83,7 +83,7 @@ public class ChatEndpoint {
     @Path("/chats/{uuid}")
     public Response delete(@PathParam("uuid") String uuid){
         Optional<Chat> chat = chatService.get(uuid);
-        chat.get().setStatus("-1");
+        chat.get().setStatus(-1);
         Optional<Chat> chatDB = chatService.update(chat.get());
         Response response;
         if(chatDB.isPresent()) {

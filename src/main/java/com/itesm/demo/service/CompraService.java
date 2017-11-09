@@ -25,7 +25,7 @@ public class CompraService {
     public Optional<Compra> insert(Compra compra){
         // validar que el correo no existe por ejemplo
         // validar que vengan todos los campos necesarios
-        compra.setStatus("1");
+        compra.setStatus(1);
 //        user.setPassword(DigestUtils.sha1Hex(user.getPassword()));
         return compraDAO.insert(compra);
     }

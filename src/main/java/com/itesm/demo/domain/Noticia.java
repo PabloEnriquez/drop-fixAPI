@@ -10,23 +10,23 @@ import java.util.Date;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Noticia {
 
-private Long id;
+	private Long id;
 
-private String uuid;
+	private String uuid;
 
-private String status;
+	private Integer status;
 
-@JsonFormat(pattern = "yyyy-MM-dd")
-private Date dateCreated;
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	private Date fecha_creacion;
 
-@JsonFormat(pattern = "yyyy-MM-dd")
-private Date dateModified;
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	private Date fecha_modificacion;
 
-private String titulo;
+	private String titulo;
 
-private String descripcion;
+	private String descripcion;
 
-private String url;
+	private String url;
 
 
 	public Long getId() {
@@ -49,34 +49,39 @@ private String url;
 	}
 
 
-	public String getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
 
 
-	public void setStatus(String status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 
 
-	public Date getDateCreated() {
-		return dateCreated;
+	public Date getFecha_creacion() {
+		return fecha_creacion;
 	}
 
-
-	public void setDateCreated(Date dateCreated) {
-		this.dateCreated = dateCreated;
+	public void setFecha_creacion(Date fecha_creacion) {
+		this.fecha_creacion = fecha_creacion;
 	}
 
-
-	public Date getDateModified() {
-		return dateModified;
+	public Date getFecha_modificacion() {
+		return fecha_modificacion;
 	}
 
-	public void setDateModified(Date dateModified) {
-		this.dateModified = dateModified;
+	public void setFecha_modificacion(Date fecha_modificacion) {
+		this.fecha_modificacion = fecha_modificacion;
 	}
 
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
 
 	public String getTitulo() {
 		return titulo;

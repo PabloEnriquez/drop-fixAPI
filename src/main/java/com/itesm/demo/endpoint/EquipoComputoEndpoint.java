@@ -83,7 +83,7 @@ public class EquipoComputoEndpoint {
     @Path("/equipos/{uuid}")
     public Response delete(@PathParam("uuid") String uuid){
         Optional<EquipoComputo> equipo_computo = equipoComputoService.get(uuid);
-        equipo_computo.get().setStatus("-1");
+        equipo_computo.get().setStatus(-1);
         Optional<EquipoComputo> equipoComputoDB = equipoComputoService.update(equipo_computo.get());
         Response response;
         if(equipoComputoDB.isPresent()) {

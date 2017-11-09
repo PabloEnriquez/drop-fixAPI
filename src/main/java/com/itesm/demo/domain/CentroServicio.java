@@ -16,6 +16,12 @@ public class CentroServicio {
 
     private Integer status;
 
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	private Date fecha_creacion;
+
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	private Date fecha_modificacion;
+
     private Long longitud;
 
     private Long latitud;
@@ -27,12 +33,6 @@ public class CentroServicio {
     private String titulo;
 
     private String url;
-
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    private Date dateCreated;
-
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    private Date dateModified;
 
 	/**
 	* Returns value of id
@@ -178,35 +178,20 @@ public class CentroServicio {
 		this.url = url;
 	}
 
-	/**
-	* Returns value of dateCreated
-	* @return
-	*/
-	public Date getDateCreated() {
-		return dateCreated;
-	}
 
-	/**
-	* Sets new value of dateCreated
-	* @param
-	*/
-	public void setDateCreated(Date dateCreated) {
-		this.dateCreated = dateCreated;
-	}
+    public Date getFecha_creacion() {
+        return fecha_creacion;
+    }
 
-	/**
-	* Returns value of dateModified
-	* @return
-	*/
-	public Date getDateModified() {
-		return dateModified;
-	}
+    public void setFecha_creacion(Date fecha_creacion) {
+        this.fecha_creacion = fecha_creacion;
+    }
 
-	/**
-	* Sets new value of dateModified
-	* @param
-	*/
-	public void setDateModified(Date dateModified) {
-		this.dateModified = dateModified;
-	}
+    public Date getFecha_modificacion() {
+        return fecha_modificacion;
+    }
+
+    public void setFecha_modificacion(Date fecha_modificacion) {
+        this.fecha_modificacion = fecha_modificacion;
+    }
 }

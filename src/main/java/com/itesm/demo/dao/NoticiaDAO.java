@@ -41,11 +41,11 @@ public class NoticiaDAO {
         try {
             jdbcTemplate.update(
                     "INSERT INTO noticia "
-                            + " (uuid,status, date_created, date_modified,"
-                            + " titulo,descripcion)"
-                            + " VALUES (?,?,?,?, ?,?,?)",
+                            + " (uuid, status, fecha_creacion, fecha_modificacion,"
+                            + " titulo, descripcion, url)"
+                            + " VALUES (?,?,?,?,?,?,?)",
                     newUuid, noticia.getStatus(), Timestamp.from(Instant.now()), Timestamp.from(Instant.now()),
-                    noticia.getTitulo(),noticia.getDescripcion());
+                    noticia.getTitulo(),noticia.getDescripcion(), noticia.getUrl() );
             logger.debug("Inserting noticia");
             return getByUuid(newUuid);
         } catch (Exception e) {
@@ -58,9 +58,9 @@ public class NoticiaDAO {
     public Optional<Noticia> update(Noticia noticia){
         try {
             jdbcTemplate.update("UPDATE noticia SET " +
-                    "status=?, date_modified=?, titulo=?, descripcion=?,  WHERE uuid=?",
-                    noticia.getStatus(),
-                    Timestamp.from(Instant.now()),noticia.getTitulo(), noticia.getDescripcion(),noticia.getUuid());
+                    "status=?, fecha_modificacion=?, titulo=?, descripcion=?, url=?  WHERE uuid=?",
+                    noticia.getStatus(), Timestamp.from(Instant.now()), noticia.getTitulo(),
+                    noticia.getDescripcion(), noticia.getUrl(), noticia.getUuid() );
             logger.debug("Updating noticia: " + noticia.getUuid());
             return getByUuid(noticia.getUuid());
         } catch (Exception e) {

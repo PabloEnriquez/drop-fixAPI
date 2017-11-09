@@ -26,7 +26,7 @@ public class ServicioService {
     public Optional<Servicio> insert(Servicio servicio){
         // validar que el correo no existe por ejemplo
         // validar que vengan todos los campos necesarios
-        servicio.setStatus("1");
+        servicio.setStatus(1);
 //        user.setPassword(DigestUtils.sha1Hex(user.getPassword()));
         return servicioDAO.insert(servicio);
     }
