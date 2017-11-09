@@ -32,7 +32,7 @@ public class Usuario {
 
     private String usuario;
 
-    private String tipo_usuario;
+    private Integer tipo_usuario;
 
     public Long getId() {
         return id;
@@ -114,11 +114,11 @@ public class Usuario {
         this.usuario = usuario;
     }
 
-    public String getTipo_usuario() {
+    public Integer getTipo_usuario() {
         return tipo_usuario;
     }
 
-    public void setTipo_usuario(String tipo_usuario) {
+    public void setTipo_usuario(Integer tipo_usuario) {
         this.tipo_usuario = tipo_usuario;
     }
 }
