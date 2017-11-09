@@ -1,7 +1,9 @@
 package com.itesm.demo.service;
 
 import com.itesm.demo.dao.EquipoComputoDAO;
+import com.itesm.demo.dao.ReporteDAO;
 import com.itesm.demo.domain.EquipoComputo;
+import com.itesm.demo.domain.Reporte;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,9 @@ public class EquipoComputoService {
 
     @Autowired
     private EquipoComputoDAO equipoComputoDAO;
+
+    @Autowired
+    private ReporteDAO reporteDAO;
 
     public Optional<EquipoComputo> get(String uuid){
         // validar los datos y cualquier lógica de negocio
@@ -111,6 +116,11 @@ public class EquipoComputoService {
         Optional<EquipoComputo> equipo_computo = equipoComputoDAO.getBySistemaOp(sistema_operativo);
 //        equipo_computo.set;
         return equipo_computo;
+    }
+
+    public Optional<List<Reporte>> listReportes(String uuid, Integer page, Integer size){
+        // validar los datos y cualquier lógica de negocio
+        return reporteDAO.listReportesEquipo(uuid, page, size);
     }
 
 }

@@ -16,6 +16,8 @@ public class Reporte {
 
     private Integer status;
 
+    private Integer status_atendido;
+
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date fecha_creacion;
 
@@ -27,6 +29,8 @@ public class Reporte {
     private Long id_equipo_computo;
 
     private Long id_usuario;
+
+    private Long id_chat;
 
     public Long getId() {
         return id;
@@ -90,5 +94,21 @@ public class Reporte {
 
     public void setId_usuario(Long id_usuario) {
         this.id_usuario = id_usuario;
+    }
+
+    public Integer getStatus_atendido() {
+        return status_atendido;
+    }
+
+    public void setStatus_atendido(Integer status_atendido) {
+        this.status_atendido = status_atendido;
+    }
+
+    public Long getId_chat() {
+        return id_chat;
+    }
+
+    public void setId_chat(Long id_chat) {
+        this.id_chat = id_chat;
     }
 }

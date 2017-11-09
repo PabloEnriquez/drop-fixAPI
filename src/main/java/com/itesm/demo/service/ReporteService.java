@@ -5,6 +5,7 @@ import com.itesm.demo.domain.Reporte;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,6 +50,22 @@ public class ReporteService {
     public Optional<List<Reporte>> list(Integer page, Integer size){
         // validar los datos y cualquier lógica de negocio
         return reporteDAO.list(page, size);
+    }
+
+    public Optional<Reporte> getStatusAtendido(Long status_atendido){
+        // validar los datos y cualquier lógica de negocio
+        // modificar el objeto o agregar datos
+        Optional<Reporte> reporte = reporteDAO.getByStatusAtendido(status_atendido);
+//        equipo_computo.set;
+        return reporte;
+    }
+
+    public Optional<Reporte> getFechaCreacion(Date fecha_creacion){
+        // validar los datos y cualquier lógica de negocio
+        // modificar el objeto o agregar datos
+        Optional<Reporte> reporte = reporteDAO.getByFechaCreacion(fecha_creacion);
+//        equipo_computo.set;
+        return reporte;
     }
 
 }

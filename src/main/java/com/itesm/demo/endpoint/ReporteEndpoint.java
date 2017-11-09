@@ -15,6 +15,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -88,6 +89,32 @@ public class ReporteEndpoint {
         Response response;
         if(reporteDB.isPresent()) {
             response = Response.ok(reporteDB.get()).build();
+        }else{
+            response = Response.noContent().build();
+        }
+        return response;
+    }
+
+    @GET
+    @Path("/reportes")
+    public Response searchByStatusAtendido(@QueryParam("status_atendido") Long status_atendido ){
+        Optional<Reporte> reporte = reporteService.getStatusAtendido(status_atendido);
+        Response response;
+        if(reporte.isPresent()) {
+            response = Response.ok(reporte.get()).build();
+        }else{
+            response = Response.noContent().build();
+        }
+        return response;
+    }
+
+    @GET
+    @Path("/reportes")
+    public Response searchByFechaCreacion(@QueryParam("fecha_creacion") Date fecha_creacion ){
+        Optional<Reporte> reporte = reporteService.getFechaCreacion(fecha_creacion);
+        Response response;
+        if(reporte.isPresent()) {
+            response = Response.ok(reporte.get()).build();
         }else{
             response = Response.noContent().build();
         }

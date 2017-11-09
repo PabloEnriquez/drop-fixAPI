@@ -1,7 +1,9 @@
 package com.itesm.demo.service;
 
 import com.itesm.demo.dao.ChatDAO;
+import com.itesm.demo.dao.ReporteDAO;
 import com.itesm.demo.domain.Chat;
+import com.itesm.demo.domain.Reporte;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,9 @@ public class ChatService {
 
     @Autowired
     private ChatDAO chatDAO;
+
+    @Autowired
+    private ReporteDAO reporteDAO;
 
     public Optional<Chat> get(String uuid){
         // validar los datos y cualquier lógica de negocio
@@ -46,6 +51,11 @@ public class ChatService {
     public Optional<List<Chat>> list(Integer page, Integer size){
         // validar los datos y cualquier lógica de negocio
         return chatDAO.list(page, size);
+    }
+
+    public Optional<List<Reporte>> listReportes(String uuid, Integer page, Integer size){
+        // validar los datos y cualquier lógica de negocio
+        return reporteDAO.listReportesChat(uuid, page, size);
     }
 
 }

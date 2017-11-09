@@ -1,6 +1,7 @@
 package com.itesm.demo.endpoint;
 
 import com.itesm.demo.domain.EquipoComputo;
+import com.itesm.demo.domain.Reporte;
 import com.itesm.demo.service.EquipoComputoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -167,6 +168,19 @@ public class EquipoComputoEndpoint {
         Response response;
         if(equipo_computo.isPresent()) {
             response = Response.ok(equipo_computo.get()).build();
+        }else{
+            response = Response.noContent().build();
+        }
+        return response;
+    }
+
+    @GET
+    @Path("/equipos")
+    public Response getListaReportes(@QueryParam("uuid") String uuid, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+        Optional<List<Reporte>> reportesEquipo = equipoComputoService.listReportes(uuid, page, size);
+        Response response;
+        if(reportesEquipo.isPresent()) {
+            response = Response.ok(reportesEquipo.get()).build();
         }else{
             response = Response.noContent().build();
         }

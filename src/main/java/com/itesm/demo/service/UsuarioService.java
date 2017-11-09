@@ -1,8 +1,10 @@
 package com.itesm.demo.service;
 
+import com.itesm.demo.dao.ReporteDAO;
 import com.itesm.demo.dao.UsuarioDAO;
 import com.itesm.demo.dao.EquipoComputoDAO;
 import com.itesm.demo.domain.EquipoComputo;
+import com.itesm.demo.domain.Reporte;
 import com.itesm.demo.domain.Usuario;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,9 @@ public class UsuarioService {
 
     @Autowired
     private EquipoComputoDAO equipoComputoDAO;
+
+    @Autowired
+    private ReporteDAO reporteDAO;
 
     public Optional<Usuario> get(String uuid){
         // validar los datos y cualquier lógica de negocio
@@ -111,6 +116,11 @@ public class UsuarioService {
     public Optional<List<EquipoComputo>> listEquipos(Integer page, Integer size, String uuid){
         // validar los datos y cualquier lógica de negocio
         return equipoComputoDAO.listEquiposUsuario(page, size, uuid);
+    }
+
+    public Optional<List<Reporte>> listReportes(String uuid, Integer page, Integer size){
+        // validar los datos y cualquier lógica de negocio
+        return reporteDAO.listReportesUsuario(uuid, page, size);
     }
 
 }

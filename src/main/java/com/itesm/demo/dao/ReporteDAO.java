@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -42,11 +43,11 @@ public class ReporteDAO {
         try {
             jdbcTemplate.update(
                     "INSERT INTO reporte "
-                            + " (uuid, status, fecha_creacion, fecha_modificacion,"
-                            + " descripcion, id_equipo_computo, id_usuario )"
-                            + " VALUES (?,?,?,?,?,?,?)",
-                    newUuid, reporte.getStatus(), Timestamp.from(Instant.now()), Timestamp.from(Instant.now()),
-                    reporte.getDescripcion(), reporte.getId_equipo_computo(), reporte.getId_usuario() );
+                            + " (uuid, status, status_atendido, fecha_creacion, fecha_modificacion,"
+                            + " descripcion, id_equipo_computo, id_usuario, id_chat )"
+                            + " VALUES (?,?,?,?,?,?,?,?,?)",
+                    newUuid, reporte.getStatus(), reporte.getStatus_atendido(), Timestamp.from(Instant.now()), Timestamp.from(Instant.now()),
+                    reporte.getDescripcion(), reporte.getId_equipo_computo(), reporte.getId_usuario(), reporte.getId_chat() );
             logger.debug("Inserting reporte");
             return getByUuid(newUuid);
         } catch (Exception e) {
@@ -59,8 +60,8 @@ public class ReporteDAO {
     public Optional<Reporte> update(Reporte reporte){
         try {
             jdbcTemplate.update("UPDATE reporte SET " +
-                            "status=?, fecha_modificacion=?, descripcion=? WHERE uuid=?",
-                    reporte.getStatus(), Timestamp.from(Instant.now()),
+                            "status=?, status_atendido=?, fecha_modificacion=?, descripcion=? WHERE uuid=?",
+                    reporte.getStatus(), reporte.getStatus_atendido(), Timestamp.from(Instant.now()),
                     reporte.getDescripcion(), reporte.getUuid() );
             logger.debug("Updating reporte: " + reporte.getUuid());
             return getByUuid(reporte.getUuid());
@@ -81,6 +82,74 @@ public class ReporteDAO {
         } catch (EmptyResultDataAccessException e) {
             e.printStackTrace();
             logger.debug("Could not get reportes list ");
+        }
+        return Optional.empty();
+    }
+
+    public Optional<Reporte> getByStatusAtendido(Long status_atendido) {
+        String sql = "SELECT * FROM reporte WHERE status_atendido=?";
+        try {
+            BeanPropertyRowMapper<Reporte> rowMapper = new BeanPropertyRowMapper<>(Reporte.class);
+            Reporte reporte = jdbcTemplate.queryForObject(sql, rowMapper, status_atendido);
+            logger.debug("Getting reporte with status atendido: " + status_atendido);
+            return Optional.of(reporte);
+        } catch (EmptyResultDataAccessException e) {
+            logger.debug("No reporte with status atendido: " + status_atendido);
+        }
+        return Optional.empty();
+    }
+
+    public Optional<Reporte> getByFechaCreacion(Date fecha_creacion) {
+        String sql = "SELECT * FROM reporte WHERE fecha_creacion=?";
+        try {
+            BeanPropertyRowMapper<Reporte> rowMapper = new BeanPropertyRowMapper<>(Reporte.class);
+            Reporte reporte = jdbcTemplate.queryForObject(sql, rowMapper, fecha_creacion);
+            logger.debug("Getting reporte with fecha de creacion: " + fecha_creacion);
+            return Optional.of(reporte);
+        } catch (EmptyResultDataAccessException e) {
+            logger.debug("No reporte with fecha de creacion: " + fecha_creacion);
+        }
+        return Optional.empty();
+    }
+
+    public Optional<List<Reporte>> listReportesEquipo(String uuid, Integer page, Integer size) {
+        String sql = "SELECT * FROM reporte WHERE id_equipo_computo=? LIMIT ?, ?";
+        try {
+            List<Reporte> reportes = jdbcTemplate.query(sql,
+                    new BeanPropertyRowMapper<>(Reporte.class), uuid, (page * size), size);
+            logger.debug("Getting reportes equipos list ");
+            return Optional.of(reportes);
+        } catch (EmptyResultDataAccessException e) {
+            e.printStackTrace();
+            logger.debug("Could not get reportes equipos list ");
+        }
+        return Optional.empty();
+    }
+
+    public Optional<List<Reporte>> listReportesUsuario(String uuid, Integer page, Integer size) {
+        String sql = "SELECT * FROM reporte WHERE id_usuario=? LIMIT ?, ?";
+        try {
+            List<Reporte> reportes = jdbcTemplate.query(sql,
+                    new BeanPropertyRowMapper<>(Reporte.class), uuid, (page * size), size);
+            logger.debug("Getting reportes equipos list ");
+            return Optional.of(reportes);
+        } catch (EmptyResultDataAccessException e) {
+            e.printStackTrace();
+            logger.debug("Could not get reportes equipos list ");
+        }
+        return Optional.empty();
+    }
+
+    public Optional<List<Reporte>> listReportesChat(String uuid, Integer page, Integer size) {
+        String sql = "SELECT * FROM reporte WHERE id_chat=? LIMIT ?, ?";
+        try {
+            List<Reporte> reportes = jdbcTemplate.query(sql,
+                    new BeanPropertyRowMapper<>(Reporte.class), uuid, (page * size), size);
+            logger.debug("Getting reportes equipos list ");
+            return Optional.of(reportes);
+        } catch (EmptyResultDataAccessException e) {
+            e.printStackTrace();
+            logger.debug("Could not get reportes equipos list ");
         }
         return Optional.empty();
     }
