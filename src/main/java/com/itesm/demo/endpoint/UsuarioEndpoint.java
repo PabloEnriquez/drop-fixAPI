@@ -15,6 +15,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+//import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,7 +30,7 @@ public class UsuarioEndpoint {
 
     @GET
     @Path("/usuarios/{uuid}")
-    public Response getUser(@PathParam("uuid") String uuid){
+    public Response getUsuario(@PathParam("uuid") String uuid){
         Optional<Usuario> usuario = usuarioService.get(uuid);
         Response response;
         if(usuario.isPresent()) {
@@ -41,7 +43,7 @@ public class UsuarioEndpoint {
 
     @GET
     @Path("/usuarios")
-    public Response search(@QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+    public Response getListaUsuarios(@QueryParam("page") Integer page, @QueryParam("size") Integer size ){
         Optional<List<Usuario>> usuarios = usuarioService.list(page, size);
         Response response;
         if(usuarios.isPresent()) {
@@ -54,7 +56,7 @@ public class UsuarioEndpoint {
 
     @POST
     @Path("/usuarios")
-    public Response insert(Usuario usuario){
+    public Response insertUsuario(Usuario usuario){
         Optional<Usuario> usuarioDB = usuarioService.insert(usuario);
         Response response;
         if(usuarioDB.isPresent()) {
@@ -67,7 +69,7 @@ public class UsuarioEndpoint {
 
     @PUT
     @Path("/usuarios/{uuid}")
-    public Response insert(@PathParam("uuid") String uuid, Usuario usuario){
+    public Response updateUsuario(@PathParam("uuid") String uuid, Usuario usuario){
         usuario.setUuid(uuid);
         Optional<Usuario> usuarioDB = usuarioService.update(usuario);
         Response response;
@@ -81,13 +83,78 @@ public class UsuarioEndpoint {
 
     @DELETE
     @Path("/usuarios/{uuid}")
-    public Response delete(@PathParam("uuid") String uuid){
+    public Response deleteUsuario(@PathParam("uuid") String uuid){
         Optional<Usuario> usuario = usuarioService.get(uuid);
         usuario.get().setStatus(-1);
         Optional<Usuario> usuarioDB = usuarioService.update(usuario.get());
         Response response;
         if(usuarioDB.isPresent()) {
             response = Response.ok(usuarioDB.get()).build();
+        }else{
+            response = Response.noContent().build();
+        }
+        return response;
+    }
+
+    @GET
+    @Path("/usuarios")
+    public Response searchByEmail(@QueryParam("email") String email ){
+        Optional<Usuario> usuario = usuarioService.getMail(email);
+        Response response;
+        if(usuario.isPresent()) {
+            response = Response.ok(usuario.get()).build();
+        }else{
+            response = Response.noContent().build();
+        }
+        return response;
+    }
+
+    @GET
+    @Path("/usuarios")
+    public Response searchByNombre(@QueryParam("nombre") String nombre ){
+        Optional<Usuario> usuario = usuarioService.getNombre(nombre);
+        Response response;
+        if(usuario.isPresent()) {
+            response = Response.ok(usuario.get()).build();
+        }else{
+            response = Response.noContent().build();
+        }
+        return response;
+    }
+
+    @GET
+    @Path("/usuarios")
+    public Response searchByUsuarioNombre(@QueryParam("usuario") String usuario ){
+        Optional<Usuario> usuarioAObtener = usuarioService.getUsuarioNombre(usuario);
+        Response response;
+        if(usuarioAObtener.isPresent()) {
+            response = Response.ok(usuarioAObtener.get()).build();
+        }else{
+            response = Response.noContent().build();
+        }
+        return response;
+    }
+
+    @GET
+    @Path("/usuarios")
+    public Response searchByFechaCreacion(@QueryParam("fecha_creacion") Date fecha_creacion ){
+        Optional<Usuario> usuario = usuarioService.getFechaCreacion(fecha_creacion);
+        Response response;
+        if(usuario.isPresent()) {
+            response = Response.ok(usuario.get()).build();
+        }else{
+            response = Response.noContent().build();
+        }
+        return response;
+    }
+
+    @GET
+    @Path("/usuarios")
+    public Response searchByTipoUsuario(@QueryParam("tipo_usuario") Integer tipo_usuario ){
+        Optional<Usuario> usuario = usuarioService.getTipoUsuario(tipo_usuario);
+        Response response;
+        if(usuario.isPresent()) {
+            response = Response.ok(usuario.get()).build();
         }else{
             response = Response.noContent().build();
         }

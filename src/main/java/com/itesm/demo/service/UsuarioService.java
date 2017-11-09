@@ -6,6 +6,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -65,6 +66,41 @@ public class UsuarioService {
     public Optional<List<Usuario>> list(Integer page, Integer size){
         // validar los datos y cualquier lógica de negocio
         return usuarioDAO.list(page, size);
+    }
+
+    public Optional<Usuario> getMail(String email){
+        // validar los datos y cualquier lógica de negocio
+        // modificar el objeto o agregar datos
+        Optional<Usuario> usuario = usuarioDAO.getByMail(email);
+        return usuario;
+    }
+
+    public Optional<Usuario> getNombre(String nombre){
+        // validar los datos y cualquier lógica de negocio
+        // modificar el objeto o agregar datos
+        Optional<Usuario> usuario = usuarioDAO.getByNombre(nombre);
+        return usuario;
+    }
+
+    public Optional<Usuario> getUsuarioNombre(String usuario_nombre){
+        // validar los datos y cualquier lógica de negocio
+        // modificar el objeto o agregar datos
+        Optional<Usuario> usuario = usuarioDAO.getByUsuario(usuario_nombre);
+        return usuario;
+    }
+
+    public Optional<Usuario> getFechaCreacion(Date fecha_creacion){
+        // validar los datos y cualquier lógica de negocio
+        // modificar el objeto o agregar datos
+        Optional<Usuario> usuario = usuarioDAO.getByFechaCreacion(fecha_creacion);
+        return usuario;
+    }
+
+    public Optional<Usuario> getTipoUsuario(Integer tipo_usuario){
+        // validar los datos y cualquier lógica de negocio
+        // modificar el objeto o agregar datos
+        Optional<Usuario> usuario = usuarioDAO.getByTipoUsuario(tipo_usuario);
+        return usuario;
     }
 
 }
