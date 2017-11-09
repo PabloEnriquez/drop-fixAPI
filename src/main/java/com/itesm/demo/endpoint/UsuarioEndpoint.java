@@ -1,9 +1,6 @@
 package com.itesm.demo.endpoint;
 
-import com.itesm.demo.domain.Chat;
-import com.itesm.demo.domain.EquipoComputo;
-import com.itesm.demo.domain.Reporte;
-import com.itesm.demo.domain.Usuario;
+import com.itesm.demo.domain.*;
 import com.itesm.demo.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -210,6 +207,19 @@ public class UsuarioEndpoint {
         Response response;
         if(chatsTecnico.isPresent()) {
             response = Response.ok(chatsTecnico.get()).build();
+        }else{
+            response = Response.noContent().build();
+        }
+        return response;
+    }
+
+    @GET
+    @Path("/usuarios")
+    public Response getListaComprasUsuario(@QueryParam("id_usuario") Long id_usuario, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+        Optional<List<Compra>> comprasUsuario = usuarioService.listComprasUsuario(id_usuario, page, size);
+        Response response;
+        if(comprasUsuario.isPresent()) {
+            response = Response.ok(comprasUsuario.get()).build();
         }else{
             response = Response.noContent().build();
         }

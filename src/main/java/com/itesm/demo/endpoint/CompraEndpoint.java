@@ -15,6 +15,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,7 +42,7 @@ public class CompraEndpoint {
 
     @GET
     @Path("/compras")
-    public Response search(@QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+    public Response getListaCompras(@QueryParam("page") Integer page, @QueryParam("size") Integer size ){
         Optional<List<Compra>> compras = compraService.list(page, size);
         Response response;
         if(compras.isPresent()) {
@@ -54,7 +55,7 @@ public class CompraEndpoint {
 
     @POST
     @Path("/compras")
-    public Response insert(Compra compra){
+    public Response insertCompra(Compra compra){
         Optional<Compra> compraDB = compraService.insert(compra);
         Response response;
         if(compraDB.isPresent()) {
@@ -67,7 +68,7 @@ public class CompraEndpoint {
 
     @PUT
     @Path("/compras/{uuid}")
-    public Response insert(@PathParam("uuid") String uuid, Compra compra){
+    public Response updateCompra(@PathParam("uuid") String uuid, Compra compra){
         compra.setUuid(uuid);
         Optional<Compra> compraDB = compraService.update(compra);
         Response response;
@@ -81,13 +82,26 @@ public class CompraEndpoint {
 
     @DELETE
     @Path("/compras/{uuid}")
-    public Response delete(@PathParam("uuid") String uuid){
+    public Response deleteCompra(@PathParam("uuid") String uuid){
         Optional<Compra> compra = compraService.get(uuid);
         compra.get().setStatus(-1);
         Optional<Compra> compraDB = compraService.update(compra.get());
         Response response;
         if(compraDB.isPresent()) {
             response = Response.ok(compraDB.get()).build();
+        }else{
+            response = Response.noContent().build();
+        }
+        return response;
+    }
+
+    @GET
+    @Path("/compras")
+    public Response searchByFechaCreacion(@QueryParam("fecha_cracion") Date fecha_creacion ){
+        Optional<Compra> compra = compraService.getFechaCreacion(fecha_creacion);
+        Response response;
+        if(compra.isPresent()) {
+            response = Response.ok(compra.get()).build();
         }else{
             response = Response.noContent().build();
         }

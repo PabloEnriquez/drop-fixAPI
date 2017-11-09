@@ -117,11 +117,11 @@ public class ReporteDAO {
         try {
             List<Reporte> reportes = jdbcTemplate.query(sql,
                     new BeanPropertyRowMapper<>(Reporte.class), id_equipo_computo, (page * size), size);
-            logger.debug("Getting reportes equipos list ");
+            logger.debug("Getting reportes por equipos list ");
             return Optional.of(reportes);
         } catch (EmptyResultDataAccessException e) {
             e.printStackTrace();
-            logger.debug("Could not get reportes equipos list ");
+            logger.debug("Could not get reportes por equipos list ");
         }
         return Optional.empty();
     }
@@ -131,11 +131,11 @@ public class ReporteDAO {
         try {
             List<Reporte> reportes = jdbcTemplate.query(sql,
                     new BeanPropertyRowMapper<>(Reporte.class), id_usuario, (page * size), size);
-            logger.debug("Getting reportes equipos list ");
+            logger.debug("Getting reportes por usuario list ");
             return Optional.of(reportes);
         } catch (EmptyResultDataAccessException e) {
             e.printStackTrace();
-            logger.debug("Could not get reportes equipos list ");
+            logger.debug("Could not get reportes por usuario list ");
         }
         return Optional.empty();
     }
@@ -145,11 +145,11 @@ public class ReporteDAO {
         try {
             List<Reporte> reportes = jdbcTemplate.query(sql,
                     new BeanPropertyRowMapper<>(Reporte.class), id_chat, (page * size), size);
-            logger.debug("Getting reportes equipos list ");
+            logger.debug("Getting reportes por chat list ");
             return Optional.of(reportes);
         } catch (EmptyResultDataAccessException e) {
             e.printStackTrace();
-            logger.debug("Could not get reportes equipos list ");
+            logger.debug("Could not get reportes por chat list ");
         }
         return Optional.empty();
     }

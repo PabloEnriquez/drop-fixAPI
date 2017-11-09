@@ -5,6 +5,7 @@ import com.itesm.demo.domain.Compra;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,6 +50,14 @@ public class CompraService {
     public Optional<List<Compra>> list(Integer page, Integer size){
         // validar los datos y cualquier lógica de negocio
         return compraDAO.list(page, size);
+    }
+
+    public Optional<Compra> getFechaCreacion(Date fecha_creacion){
+        // validar los datos y cualquier lógica de negocio
+        // modificar el objeto o agregar datos
+        Optional<Compra> compra = compraDAO.getByFechaCreacion(fecha_creacion);
+//        equipo_computo.set;
+        return compra;
     }
 
 }

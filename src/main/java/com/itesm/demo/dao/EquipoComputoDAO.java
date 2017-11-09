@@ -173,11 +173,11 @@ public class EquipoComputoDAO {
         try {
             List<EquipoComputo> equipos = jdbcTemplate.query(sql,
                     new BeanPropertyRowMapper<>(EquipoComputo.class), id_usuario, (page * size), size);
-            logger.debug("Getting equipo computo list ");
+            logger.debug("Getting equipo computo por usuario list ");
             return Optional.of(equipos);
         } catch (EmptyResultDataAccessException e) {
             e.printStackTrace();
-            logger.debug("Could not get equipos computo list ");
+            logger.debug("Could not get equipos computo por usuario list ");
         }
         return Optional.empty();
     }

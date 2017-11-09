@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -81,6 +82,61 @@ public class CompraDAO {
         } catch (EmptyResultDataAccessException e) {
             e.printStackTrace();
             logger.debug("Could not get compras list ");
+        }
+        return Optional.empty();
+    }
+
+    public Optional<Compra> getByFechaCreacion(Date fecha_creacion) {
+        String sql = "SELECT * FROM compra WHERE fecha_creacion=?";
+        try {
+            BeanPropertyRowMapper<Compra> rowMapper = new BeanPropertyRowMapper<>(Compra.class);
+            Compra compra = jdbcTemplate.queryForObject(sql, rowMapper, fecha_creacion);
+            logger.debug("Getting compra with fecha de creacion: " + fecha_creacion);
+            return Optional.of(compra);
+        } catch (EmptyResultDataAccessException e) {
+            logger.debug("No compra with fecha de creacion: " + fecha_creacion);
+        }
+        return Optional.empty();
+    }
+
+    public Optional<List<Compra>> listComprasReporte(Long id_reporte, Integer page, Integer size) {
+        String sql = "SELECT * FROM compra WHERE id_reporte=? LIMIT ?, ?";
+        try {
+            List<Compra> compras = jdbcTemplate.query(sql,
+                    new BeanPropertyRowMapper<>(Compra.class), id_reporte, (page * size), size);
+            logger.debug("Getting compras por reporte list ");
+            return Optional.of(compras);
+        } catch (EmptyResultDataAccessException e) {
+            e.printStackTrace();
+            logger.debug("Could not get compras por reporte list ");
+        }
+        return Optional.empty();
+    }
+
+    public Optional<List<Compra>> listComprasUsuario(Long id_usuario, Integer page, Integer size) {
+        String sql = "SELECT * FROM compra WHERE id_usuario=? LIMIT ?, ?";
+        try {
+            List<Compra> compras = jdbcTemplate.query(sql,
+                    new BeanPropertyRowMapper<>(Compra.class), id_usuario, (page * size), size);
+            logger.debug("Getting compras por usuario list ");
+            return Optional.of(compras);
+        } catch (EmptyResultDataAccessException e) {
+            e.printStackTrace();
+            logger.debug("Could not get compras por usuario list ");
+        }
+        return Optional.empty();
+    }
+
+    public Optional<List<Compra>> listComprasServicio(Long id_servicio, Integer page, Integer size) {
+        String sql = "SELECT * FROM compra WHERE id_servicio=? LIMIT ?, ?";
+        try {
+            List<Compra> compras = jdbcTemplate.query(sql,
+                    new BeanPropertyRowMapper<>(Compra.class), id_servicio, (page * size), size);
+            logger.debug("Getting compras por servicio list ");
+            return Optional.of(compras);
+        } catch (EmptyResultDataAccessException e) {
+            e.printStackTrace();
+            logger.debug("Could not get compras por servicio list ");
         }
         return Optional.empty();
     }

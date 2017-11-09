@@ -1,5 +1,6 @@
 package com.itesm.demo.endpoint;
 
+import com.itesm.demo.domain.Compra;
 import com.itesm.demo.domain.Reporte;
 import com.itesm.demo.service.ReporteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,7 @@ public class ReporteEndpoint {
 
     @GET
     @Path("/reportes")
-    public Response search(@QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+    public Response getListaReportes(@QueryParam("page") Integer page, @QueryParam("size") Integer size ){
         Optional<List<Reporte>> reportes = reporteService.list(page, size);
         Response response;
         if(reportes.isPresent()) {
@@ -55,7 +56,7 @@ public class ReporteEndpoint {
 
     @POST
     @Path("/reportes")
-    public Response insert(Reporte reporte){
+    public Response insertReporte(Reporte reporte){
         Optional<Reporte> reporteDB = reporteService.insert(reporte);
         Response response;
         if(reporteDB.isPresent()) {
@@ -68,7 +69,7 @@ public class ReporteEndpoint {
 
     @PUT
     @Path("/reportes/{uuid}")
-    public Response insert(@PathParam("uuid") String uuid, Reporte reporte){
+    public Response updateReporte(@PathParam("uuid") String uuid, Reporte reporte){
         reporte.setUuid(uuid);
         Optional<Reporte> reporteDB = reporteService.update(reporte);
         Response response;
@@ -82,7 +83,7 @@ public class ReporteEndpoint {
 
     @DELETE
     @Path("/reportes/{uuid}")
-    public Response delete(@PathParam("uuid") String uuid){
+    public Response deleteReporte(@PathParam("uuid") String uuid){
         Optional<Reporte> reporte = reporteService.get(uuid);
         reporte.get().setStatus(-1);
         Optional<Reporte> reporteDB = reporteService.update(reporte.get());
@@ -115,6 +116,19 @@ public class ReporteEndpoint {
         Response response;
         if(reporte.isPresent()) {
             response = Response.ok(reporte.get()).build();
+        }else{
+            response = Response.noContent().build();
+        }
+        return response;
+    }
+
+    @GET
+    @Path("/reportes")
+    public Response getListaComprasReporte(@QueryParam("id_reporte") Long id_reporte, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+        Optional<List<Compra>> comprasReporte = reporteService.listComprasReporte(id_reporte, page, size);
+        Response response;
+        if(comprasReporte.isPresent()) {
+            response = Response.ok(comprasReporte.get()).build();
         }else{
             response = Response.noContent().build();
         }

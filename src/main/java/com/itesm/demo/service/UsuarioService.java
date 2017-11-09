@@ -1,13 +1,7 @@
 package com.itesm.demo.service;
 
-import com.itesm.demo.dao.ChatDAO;
-import com.itesm.demo.dao.ReporteDAO;
-import com.itesm.demo.dao.UsuarioDAO;
-import com.itesm.demo.dao.EquipoComputoDAO;
-import com.itesm.demo.domain.Chat;
-import com.itesm.demo.domain.EquipoComputo;
-import com.itesm.demo.domain.Reporte;
-import com.itesm.demo.domain.Usuario;
+import com.itesm.demo.dao.*;
+import com.itesm.demo.domain.*;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +24,9 @@ public class UsuarioService {
 
     @Autowired
     private ChatDAO chatDAO;
+
+    @Autowired
+    private CompraDAO compraDAO;
 
     public Optional<Usuario> get(String uuid){
         // validar los datos y cualquier lógica de negocio
@@ -136,6 +133,11 @@ public class UsuarioService {
     public Optional<List<Chat>> listChatsTecnico(Long id_tecnico, Integer page, Integer size){
         // validar los datos y cualquier lógica de negocio
         return chatDAO.listChatsTecnico(id_tecnico, page, size);
+    }
+
+    public Optional<List<Compra>> listComprasUsuario(Long id_usuario, Integer page, Integer size){
+        // validar los datos y cualquier lógica de negocio
+        return compraDAO.listComprasUsuario(id_usuario, page, size);
     }
 
 }

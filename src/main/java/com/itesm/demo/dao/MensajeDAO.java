@@ -89,11 +89,11 @@ public class MensajeDAO {
         try {
             List<Mensaje> mensajes = jdbcTemplate.query(sql,
                     new BeanPropertyRowMapper<>(Mensaje.class), id_chat, (page * size), size);
-            logger.debug("Getting mensajes list ");
+            logger.debug("Getting mensajes por chat list ");
             return Optional.of(mensajes);
         } catch (EmptyResultDataAccessException e) {
             e.printStackTrace();
-            logger.debug("Could not get mensajes list ");
+            logger.debug("Could not get mensajes por chat list ");
         }
         return Optional.empty();
     }

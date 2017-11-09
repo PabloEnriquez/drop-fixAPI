@@ -1,6 +1,8 @@
 package com.itesm.demo.service;
 
+import com.itesm.demo.dao.CompraDAO;
 import com.itesm.demo.dao.ServicioDAO;
+import com.itesm.demo.domain.Compra;
 import com.itesm.demo.domain.Servicio;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,9 @@ public class ServicioService {
 
     @Autowired
     private ServicioDAO servicioDAO;
+
+    @Autowired
+    private CompraDAO compraDAO;
 
     public Optional<Servicio> get(String uuid){
         // validar los datos y cualquier lógica de negocio
@@ -59,6 +64,11 @@ public class ServicioService {
     public Optional<List<Servicio>> list(Integer page, Integer size){
         // validar los datos y cualquier lógica de negocio
         return servicioDAO.list(page, size);
+    }
+
+    public Optional<List<Compra>> listComprasServicio(Long id_servicio, Integer page, Integer size){
+        // validar los datos y cualquier lógica de negocio
+        return compraDAO.listComprasServicio(id_servicio, page, size);
     }
 
 }

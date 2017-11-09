@@ -1,5 +1,6 @@
 package com.itesm.demo.endpoint;
 
+import com.itesm.demo.domain.Compra;
 import com.itesm.demo.domain.Servicio;
 import com.itesm.demo.service.ServicioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,7 @@ public class ServicioEndpoint {
 
     @GET
     @Path("/servicios")
-    public Response search(@QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+    public Response getListaCompras(@QueryParam("page") Integer page, @QueryParam("size") Integer size ){
         Optional<List<Servicio>> servicios = servicioService.list(page, size);
         Response response;
         if(servicios.isPresent()) {
@@ -54,7 +55,7 @@ public class ServicioEndpoint {
 
     @POST
     @Path("/servicios")
-    public Response insert(Servicio servicio){
+    public Response insertCompra(Servicio servicio){
         Optional<Servicio> servicioDB = servicioService.insert(servicio);
         Response response;
         if(servicioDB.isPresent()) {
@@ -67,7 +68,7 @@ public class ServicioEndpoint {
 
     @PUT
     @Path("/servicios/{uuid}")
-    public Response insert(@PathParam("uuid") String uuid, Servicio servicio){
+    public Response updateCompra(@PathParam("uuid") String uuid, Servicio servicio){
         servicio.setUuid(uuid);
         Optional<Servicio> servicioDB = servicioService.update(servicio);
         Response response;
@@ -81,13 +82,26 @@ public class ServicioEndpoint {
 
     @DELETE
     @Path("/servicios/{uuid}")
-    public Response delete(@PathParam("uuid") String uuid){
+    public Response deleteCompra(@PathParam("uuid") String uuid){
         Optional<Servicio> servicio = servicioService.get(uuid);
         servicio.get().setStatus(-1);
         Optional<Servicio> srevicioDB = servicioService.update(servicio.get());
         Response response;
         if(srevicioDB.isPresent()) {
             response = Response.ok(srevicioDB.get()).build();
+        }else{
+            response = Response.noContent().build();
+        }
+        return response;
+    }
+
+    @GET
+    @Path("/servicios")
+    public Response getListaComprasServicio(@QueryParam("id_servicio") Long id_servicio, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+        Optional<List<Compra>> comprasServicio = servicioService.listComprasServicio(id_servicio, page, size);
+        Response response;
+        if(comprasServicio.isPresent()) {
+            response = Response.ok(comprasServicio.get()).build();
         }else{
             response = Response.noContent().build();
         }

@@ -90,10 +90,10 @@ public class ChatDAO {
         try {
             BeanPropertyRowMapper<Chat> rowMapper = new BeanPropertyRowMapper<>(Chat.class);
             Chat chat = jdbcTemplate.queryForObject(sql, rowMapper, fecha_creacion);
-            logger.debug("Getting chat with uuid: " + fecha_creacion);
+            logger.debug("Getting chat with fecha de creacion: " + fecha_creacion);
             return Optional.of(chat);
         } catch (EmptyResultDataAccessException e) {
-            logger.debug("No chat with uuid: " + fecha_creacion);
+            logger.debug("No chat with fecha de creacion: " + fecha_creacion);
         }
         return Optional.empty();
     }
@@ -103,11 +103,11 @@ public class ChatDAO {
         try {
             List<Chat> chats = jdbcTemplate.query(sql,
                     new BeanPropertyRowMapper<>(Chat.class), id_usuario, (page * size), size);
-            logger.debug("Getting chats list ");
+            logger.debug("Getting chats por usuario list ");
             return Optional.of(chats);
         } catch (EmptyResultDataAccessException e) {
             e.printStackTrace();
-            logger.debug("Could not get chats list ");
+            logger.debug("Could not get chats por usuario list ");
         }
         return Optional.empty();
     }
@@ -117,11 +117,11 @@ public class ChatDAO {
         try {
             List<Chat> chats = jdbcTemplate.query(sql,
                     new BeanPropertyRowMapper<>(Chat.class), id_tecnico, (page * size), size);
-            logger.debug("Getting chats list ");
+            logger.debug("Getting chats por tecnico list ");
             return Optional.of(chats);
         } catch (EmptyResultDataAccessException e) {
             e.printStackTrace();
-            logger.debug("Could not get chats list ");
+            logger.debug("Could not get chats por tecnico list ");
         }
         return Optional.empty();
     }

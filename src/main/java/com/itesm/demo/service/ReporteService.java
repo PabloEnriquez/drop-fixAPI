@@ -1,6 +1,8 @@
 package com.itesm.demo.service;
 
+import com.itesm.demo.dao.CompraDAO;
 import com.itesm.demo.dao.ReporteDAO;
+import com.itesm.demo.domain.Compra;
 import com.itesm.demo.domain.Reporte;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,9 @@ public class ReporteService {
 
     @Autowired
     private ReporteDAO reporteDAO;
+
+    @Autowired
+    private CompraDAO compraDAO;
 
     public Optional<Reporte> get(String uuid){
         // validar los datos y cualquier lógica de negocio
@@ -66,6 +71,11 @@ public class ReporteService {
         Optional<Reporte> reporte = reporteDAO.getByFechaCreacion(fecha_creacion);
 //        equipo_computo.set;
         return reporte;
+    }
+
+    public Optional<List<Compra>> listComprasReporte(Long id_reporte, Integer page, Integer size){
+        // validar los datos y cualquier lógica de negocio
+        return compraDAO.listComprasReporte(id_reporte, page, size);
     }
 
 }
