@@ -1,5 +1,6 @@
 package com.itesm.demo.endpoint;
 
+import com.itesm.demo.domain.Chat;
 import com.itesm.demo.domain.EquipoComputo;
 import com.itesm.demo.domain.Reporte;
 import com.itesm.demo.domain.Usuario;
@@ -183,6 +184,32 @@ public class UsuarioEndpoint {
         Response response;
         if(reportesUsuario.isPresent()) {
             response = Response.ok(reportesUsuario.get()).build();
+        }else{
+            response = Response.noContent().build();
+        }
+        return response;
+    }
+
+    @GET
+    @Path("/usuarios")
+    public Response getListaChatsUsuario(@QueryParam("id_usuario") Long id_usuario, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+        Optional<List<Chat>> chatsUsuario = usuarioService.listChatsUsuario(id_usuario, page, size);
+        Response response;
+        if(chatsUsuario.isPresent()) {
+            response = Response.ok(chatsUsuario.get()).build();
+        }else{
+            response = Response.noContent().build();
+        }
+        return response;
+    }
+
+    @GET
+    @Path("/usuarios")
+    public Response getListaChatsTecnico(@QueryParam("id_tecnico") Long id_tecnico, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+        Optional<List<Chat>> chatsTecnico = usuarioService.listChatsTecnico(id_tecnico, page, size);
+        Response response;
+        if(chatsTecnico.isPresent()) {
+            response = Response.ok(chatsTecnico.get()).build();
         }else{
             response = Response.noContent().build();
         }

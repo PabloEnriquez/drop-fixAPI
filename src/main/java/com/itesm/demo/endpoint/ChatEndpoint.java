@@ -17,6 +17,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,7 +44,7 @@ public class ChatEndpoint {
 
     @GET
     @Path("/chats")
-    public Response search(@QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+    public Response getListaChats(@QueryParam("page") Integer page, @QueryParam("size") Integer size ){
         Optional<List<Chat>> chats = chatService.list(page, size);
         Response response;
         if(chats.isPresent()) {
@@ -56,7 +57,7 @@ public class ChatEndpoint {
 
     @POST
     @Path("/chats")
-    public Response insert(Chat chat){
+    public Response insertChat(Chat chat){
         Optional<Chat> chatDB = chatService.insert(chat);
         Response response;
         if(chatDB.isPresent()) {
@@ -69,7 +70,7 @@ public class ChatEndpoint {
 
     @PUT
     @Path("/chats/{uuid}")
-    public Response insert(@PathParam("uuid") String uuid, Chat chat){
+    public Response updateChat(@PathParam("uuid") String uuid, Chat chat){
         chat.setUuid(uuid);
         Optional<Chat> chatDB = chatService.update(chat);
         Response response;
@@ -83,7 +84,7 @@ public class ChatEndpoint {
 
     @DELETE
     @Path("/chats/{uuid}")
-    public Response delete(@PathParam("uuid") String uuid){
+    public Response deleteChat(@PathParam("uuid") String uuid){
         Optional<Chat> chat = chatService.get(uuid);
         chat.get().setStatus(-1);
         Optional<Chat> chatDB = chatService.update(chat.get());
@@ -116,6 +117,19 @@ public class ChatEndpoint {
         Response response;
         if(mensajesChat.isPresent()) {
             response = Response.ok(mensajesChat.get()).build();
+        }else{
+            response = Response.noContent().build();
+        }
+        return response;
+    }
+
+    @GET
+    @Path("/chats")
+    public Response searchByFechaCreacion(@QueryParam("fecha_creacion") Date fecha_creacion){
+        Optional<Chat> chat = chatService.getFechaCreacion(fecha_creacion);
+        Response response;
+        if(chat.isPresent()) {
+            response = Response.ok(chat.get()).build();
         }else{
             response = Response.noContent().build();
         }

@@ -1,8 +1,10 @@
 package com.itesm.demo.service;
 
+import com.itesm.demo.dao.ChatDAO;
 import com.itesm.demo.dao.ReporteDAO;
 import com.itesm.demo.dao.UsuarioDAO;
 import com.itesm.demo.dao.EquipoComputoDAO;
+import com.itesm.demo.domain.Chat;
 import com.itesm.demo.domain.EquipoComputo;
 import com.itesm.demo.domain.Reporte;
 import com.itesm.demo.domain.Usuario;
@@ -25,6 +27,9 @@ public class UsuarioService {
 
     @Autowired
     private ReporteDAO reporteDAO;
+
+    @Autowired
+    private ChatDAO chatDAO;
 
     public Optional<Usuario> get(String uuid){
         // validar los datos y cualquier lógica de negocio
@@ -121,6 +126,16 @@ public class UsuarioService {
     public Optional<List<Reporte>> listReportes(Long id_usuario, Integer page, Integer size){
         // validar los datos y cualquier lógica de negocio
         return reporteDAO.listReportesUsuario(id_usuario, page, size);
+    }
+
+    public Optional<List<Chat>> listChatsUsuario(Long id_usuario, Integer page, Integer size){
+        // validar los datos y cualquier lógica de negocio
+        return chatDAO.listChatsUsuario(id_usuario, page, size);
+    }
+
+    public Optional<List<Chat>> listChatsTecnico(Long id_tecnico, Integer page, Integer size){
+        // validar los datos y cualquier lógica de negocio
+        return chatDAO.listChatsTecnico(id_tecnico, page, size);
     }
 
 }

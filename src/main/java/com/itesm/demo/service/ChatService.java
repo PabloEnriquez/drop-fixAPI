@@ -9,6 +9,7 @@ import com.itesm.demo.domain.Reporte;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -66,6 +67,14 @@ public class ChatService {
     public Optional<List<Mensaje>> listMensajes(Long id_chat, Integer page, Integer size){
         // validar los datos y cualquier lógica de negocio
         return mensajeDAO.listMensajesChat(id_chat, page, size);
+    }
+
+    public Optional<Chat> getFechaCreacion(Date fecha_creacion){
+        // validar los datos y cualquier lógica de negocio
+        // modificar el objeto o agregar datos
+        Optional<Chat> chat = chatDAO.getByFechaCreacion(fecha_creacion);
+//        equipo_computo.set;
+        return chat;
     }
 
 }

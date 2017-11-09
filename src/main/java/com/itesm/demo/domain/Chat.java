@@ -24,6 +24,8 @@ public class Chat {
 
     private Long id_usuario;
 
+    private Long id_tecnico;
+
     public Long getId() {
         return id;
     }
@@ -71,5 +73,13 @@ public class Chat {
 
     public void setId_usuario(Long id_usuario) {
         this.id_usuario = id_usuario;
+    }
+
+    public Long getId_tecnico() {
+        return id_tecnico;
+    }
+
+    public void setId_tecnico(Long id_tecnico) {
+        this.id_tecnico = id_tecnico;
     }
 }
