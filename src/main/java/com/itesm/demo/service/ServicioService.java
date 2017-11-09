@@ -71,4 +71,14 @@ public class ServicioService {
         return compraDAO.listComprasServicio(id_servicio, page, size);
     }
 
+    public Optional<List<Servicio>> getNombre(String nombre, Integer page, Integer size){
+        // validar los datos y cualquier lógica de negocio
+        return servicioDAO.getByNombre(nombre, page, size);
+    }
+
+    public Optional<List<Servicio>> getCosto(Double costo, Integer page, Integer size){
+        // validar los datos y cualquier lógica de negocio
+        return servicioDAO.getByCosto(costo, page, size);
+    }
+
 }

@@ -108,4 +108,30 @@ public class ServicioEndpoint {
         return response;
     }
 
+    @GET
+    @Path("/servicios")
+    public Response getByNombre(@QueryParam("nombre") String nombre, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+        Optional<List<Servicio>> serviciosPorNombre = servicioService.getNombre(nombre, page, size);
+        Response response;
+        if(serviciosPorNombre.isPresent()) {
+            response = Response.ok(serviciosPorNombre.get()).build();
+        }else{
+            response = Response.noContent().build();
+        }
+        return response;
+    }
+
+    @GET
+    @Path("/servicios")
+    public Response getByCosto(@QueryParam("costo") Double costo, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+        Optional<List<Servicio>> serviciosPorCosto = servicioService.getCosto(costo, page, size);
+        Response response;
+        if(serviciosPorCosto.isPresent()) {
+            response = Response.ok(serviciosPorCosto.get()).build();
+        }else{
+            response = Response.noContent().build();
+        }
+        return response;
+    }
+
 }

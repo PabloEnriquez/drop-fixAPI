@@ -29,7 +29,7 @@ public class Servicio {
 
     private String descripcion;
 
-    private Blob imagen;
+    private String imagen;
 
     public Long getId() {
         return id;
@@ -95,11 +95,11 @@ public class Servicio {
         this.descripcion = descripcion;
     }
 
-    public Blob getImagen() {
+    public String getImagen() {
         return imagen;
     }
 
-    public void setImagen(Blob imagen) {
+    public void setImagen(String imagen) {
         this.imagen = imagen;
     }
 }

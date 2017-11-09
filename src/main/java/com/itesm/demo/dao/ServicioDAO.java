@@ -86,4 +86,32 @@ public class ServicioDAO {
         return Optional.empty();
     }
 
+    public Optional<List<Servicio>> getByNombre(String nombre, Integer page, Integer size) {
+        String sql = "SELECT * FROM servicio WHERE nombre=? LIMIT ?, ?";
+        try {
+            List<Servicio> servicios = jdbcTemplate.query(sql,
+                    new BeanPropertyRowMapper<>(Servicio.class), nombre, (page * size), size);
+            logger.debug("Getting servicios list ");
+            return Optional.of(servicios);
+        } catch (EmptyResultDataAccessException e) {
+            e.printStackTrace();
+            logger.debug("Could not get servicios list ");
+        }
+        return Optional.empty();
+    }
+
+    public Optional<List<Servicio>> getByCosto(Double costo, Integer page, Integer size) {
+        String sql = "SELECT * FROM servicio WHERE costo=? LIMIT ?, ?";
+        try {
+            List<Servicio> servicios = jdbcTemplate.query(sql,
+                    new BeanPropertyRowMapper<>(Servicio.class), costo, (page * size), size);
+            logger.debug("Getting servicios list ");
+            return Optional.of(servicios);
+        } catch (EmptyResultDataAccessException e) {
+            e.printStackTrace();
+            logger.debug("Could not get servicios list ");
+        }
+        return Optional.empty();
+    }
+
 }
