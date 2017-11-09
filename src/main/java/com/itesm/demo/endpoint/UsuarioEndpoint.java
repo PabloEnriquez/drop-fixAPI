@@ -1,5 +1,6 @@
 package com.itesm.demo.endpoint;
 
+import com.itesm.demo.domain.EquipoComputo;
 import com.itesm.demo.domain.Usuario;
 import com.itesm.demo.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -155,6 +156,19 @@ public class UsuarioEndpoint {
         Response response;
         if(usuario.isPresent()) {
             response = Response.ok(usuario.get()).build();
+        }else{
+            response = Response.noContent().build();
+        }
+        return response;
+    }
+
+    @GET
+    @Path("/usuarios/{uuid}")
+    public Response getListaEquipos(@QueryParam("page") Integer page, @QueryParam("size") Integer size, @PathParam("uuid") String uuid ){
+        Optional<List<EquipoComputo>> equiposUsuario = usuarioService.listEquipos(page, size, uuid);
+        Response response;
+        if(equiposUsuario.isPresent()) {
+            response = Response.ok(equiposUsuario.get()).build();
         }else{
             response = Response.noContent().build();
         }

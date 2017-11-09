@@ -6,6 +6,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -62,6 +63,54 @@ public class EquipoComputoService {
     public Optional<List<EquipoComputo>> list(Integer page, Integer size){
         // validar los datos y cualquier lógica de negocio
         return equipoComputoDAO.list(page, size);
+    }
+
+    public Optional<EquipoComputo> getFechaCreacion(Date fecha_creacion){
+        // validar los datos y cualquier lógica de negocio
+        // modificar el objeto o agregar datos
+        Optional<EquipoComputo> equipo_computo = equipoComputoDAO.getByFechaCreacion(fecha_creacion);
+//        equipo_computo.set;
+        return equipo_computo;
+    }
+
+    public Optional<EquipoComputo> getNombre(String nombre){
+        // validar los datos y cualquier lógica de negocio
+        // modificar el objeto o agregar datos
+        Optional<EquipoComputo> equipo_computo = equipoComputoDAO.getByNombre(nombre);
+//        equipo_computo.set;
+        return equipo_computo;
+    }
+
+    public Optional<EquipoComputo> getNumSerie(String num_serie){
+        // validar los datos y cualquier lógica de negocio
+        // modificar el objeto o agregar datos
+        Optional<EquipoComputo> equipo_computo = equipoComputoDAO.getByNumSerie(num_serie);
+//        equipo_computo.set;
+        return equipo_computo;
+    }
+
+    public Optional<EquipoComputo> getModelo(String modelo){
+        // validar los datos y cualquier lógica de negocio
+        // modificar el objeto o agregar datos
+        Optional<EquipoComputo> equipo_computo = equipoComputoDAO.getByModelo(modelo);
+//        equipo_computo.set;
+        return equipo_computo;
+    }
+
+    public Optional<EquipoComputo> getMarca(String marca){
+        // validar los datos y cualquier lógica de negocio
+        // modificar el objeto o agregar datos
+        Optional<EquipoComputo> equipo_computo = equipoComputoDAO.getByMarca(marca);
+//        equipo_computo.set;
+        return equipo_computo;
+    }
+
+    public Optional<EquipoComputo> getSistOperativo(String sistema_operativo){
+        // validar los datos y cualquier lógica de negocio
+        // modificar el objeto o agregar datos
+        Optional<EquipoComputo> equipo_computo = equipoComputoDAO.getBySistemaOp(sistema_operativo);
+//        equipo_computo.set;
+        return equipo_computo;
     }
 
 }

@@ -15,6 +15,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,7 +42,7 @@ public class EquipoComputoEndpoint {
 
     @GET
     @Path("/equipos")
-    public Response search(@QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+    public Response getListaEquipos(@QueryParam("page") Integer page, @QueryParam("size") Integer size ){
         Optional<List<EquipoComputo>> equipos = equipoComputoService.list(page, size);
         Response response;
         if(equipos.isPresent()) {
@@ -54,7 +55,7 @@ public class EquipoComputoEndpoint {
 
     @POST
     @Path("/equipos")
-    public Response insert(EquipoComputo equipo_computo){
+    public Response insertEquipo(EquipoComputo equipo_computo){
         Optional<EquipoComputo> equipoComputoDB = equipoComputoService.insert(equipo_computo);
         Response response;
         if(equipoComputoDB.isPresent()) {
@@ -67,7 +68,7 @@ public class EquipoComputoEndpoint {
 
     @PUT
     @Path("/equipos/{uuid}")
-    public Response insert(@PathParam("uuid") String uuid, EquipoComputo equipo_computo){
+    public Response updateEquipo(@PathParam("uuid") String uuid, EquipoComputo equipo_computo){
         equipo_computo.setUuid(uuid);
         Optional<EquipoComputo> equipoComputoDB = equipoComputoService.update(equipo_computo);
         Response response;
@@ -81,13 +82,91 @@ public class EquipoComputoEndpoint {
 
     @DELETE
     @Path("/equipos/{uuid}")
-    public Response delete(@PathParam("uuid") String uuid){
+    public Response deleteEquipo(@PathParam("uuid") String uuid){
         Optional<EquipoComputo> equipo_computo = equipoComputoService.get(uuid);
         equipo_computo.get().setStatus(-1);
         Optional<EquipoComputo> equipoComputoDB = equipoComputoService.update(equipo_computo.get());
         Response response;
         if(equipoComputoDB.isPresent()) {
             response = Response.ok(equipoComputoDB.get()).build();
+        }else{
+            response = Response.noContent().build();
+        }
+        return response;
+    }
+
+    @GET
+    @Path("/equipos")
+    public Response getByFechaCreacion(@QueryParam("fecha_creacion") Date fecha_creacion ){
+        Optional<EquipoComputo> equipo_computo = equipoComputoService.getFechaCreacion(fecha_creacion);
+        Response response;
+        if(equipo_computo.isPresent()) {
+            response = Response.ok(equipo_computo.get()).build();
+        }else{
+            response = Response.noContent().build();
+        }
+        return response;
+    }
+
+    @GET
+    @Path("/equipos")
+    public Response getByNombre(@QueryParam("nombre") String nombre ){
+        Optional<EquipoComputo> equipo_computo = equipoComputoService.getNombre(nombre);
+        Response response;
+        if(equipo_computo.isPresent()) {
+            response = Response.ok(equipo_computo.get()).build();
+        }else{
+            response = Response.noContent().build();
+        }
+        return response;
+    }
+
+    @GET
+    @Path("/equipos")
+    public Response getByNumSerie(@QueryParam("num_serie") String num_serie ){
+        Optional<EquipoComputo> equipo_computo = equipoComputoService.getNumSerie(num_serie);
+        Response response;
+        if(equipo_computo.isPresent()) {
+            response = Response.ok(equipo_computo.get()).build();
+        }else{
+            response = Response.noContent().build();
+        }
+        return response;
+    }
+
+    @GET
+    @Path("/equipos")
+    public Response getByModelo(@QueryParam("modelo") String modelo ){
+        Optional<EquipoComputo> equipo_computo = equipoComputoService.getModelo(modelo);
+        Response response;
+        if(equipo_computo.isPresent()) {
+            response = Response.ok(equipo_computo.get()).build();
+        }else{
+            response = Response.noContent().build();
+        }
+        return response;
+    }
+
+    @GET
+    @Path("/equipos")
+    public Response getByMarca(@QueryParam("marca") String marca ){
+        Optional<EquipoComputo> equipo_computo = equipoComputoService.getMarca(marca);
+        Response response;
+        if(equipo_computo.isPresent()) {
+            response = Response.ok(equipo_computo.get()).build();
+        }else{
+            response = Response.noContent().build();
+        }
+        return response;
+    }
+
+    @GET
+    @Path("/equipos")
+    public Response getBySistOperativo(@QueryParam("sistema_operativo") String sistema_operativo ){
+        Optional<EquipoComputo> equipo_computo = equipoComputoService.getSistOperativo(sistema_operativo);
+        Response response;
+        if(equipo_computo.isPresent()) {
+            response = Response.ok(equipo_computo.get()).build();
         }else{
             response = Response.noContent().build();
         }

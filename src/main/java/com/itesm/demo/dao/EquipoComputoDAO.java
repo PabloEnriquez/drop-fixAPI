@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -80,6 +81,98 @@ public class EquipoComputoDAO {
         try {
             List<EquipoComputo> equipos = jdbcTemplate.query(sql,
                     new BeanPropertyRowMapper<>(EquipoComputo.class), (page * size), size);
+            logger.debug("Getting equipo computo list ");
+            return Optional.of(equipos);
+        } catch (EmptyResultDataAccessException e) {
+            e.printStackTrace();
+            logger.debug("Could not get equipos computo list ");
+        }
+        return Optional.empty();
+    }
+
+    public Optional<EquipoComputo> getByFechaCreacion(Date fecha_creacion) {
+        String sql = "SELECT * FROM equipo_computo WHERE fecha_creacion=?";
+        try {
+            BeanPropertyRowMapper<EquipoComputo> rowMapper = new BeanPropertyRowMapper<>(EquipoComputo.class);
+            EquipoComputo equipo_computo = jdbcTemplate.queryForObject(sql, rowMapper, fecha_creacion);
+            logger.debug("Getting equipo de computo with fecha de creacion: " + fecha_creacion);
+            return Optional.of(equipo_computo);
+        } catch (EmptyResultDataAccessException e) {
+            logger.debug("No equipo de computo with fecha de creacion: " + fecha_creacion);
+        }
+        return Optional.empty();
+    }
+
+    public Optional<EquipoComputo> getByNombre(String nombre) {
+        String sql = "SELECT * FROM equipo_computo WHERE nombre=?";
+        try {
+            BeanPropertyRowMapper<EquipoComputo> rowMapper = new BeanPropertyRowMapper<>(EquipoComputo.class);
+            EquipoComputo equipo_computo = jdbcTemplate.queryForObject(sql, rowMapper, nombre);
+            logger.debug("Getting equipo de computo with nombre: " + nombre);
+            return Optional.of(equipo_computo);
+        } catch (EmptyResultDataAccessException e) {
+            logger.debug("No equipo de computo with nombre: " + nombre);
+        }
+        return Optional.empty();
+    }
+
+    public Optional<EquipoComputo> getByNumSerie(String num_serie) {
+        String sql = "SELECT * FROM equipo_computo WHERE num_serie=?";
+        try {
+            BeanPropertyRowMapper<EquipoComputo> rowMapper = new BeanPropertyRowMapper<>(EquipoComputo.class);
+            EquipoComputo equipo_computo = jdbcTemplate.queryForObject(sql, rowMapper, num_serie);
+            logger.debug("Getting equipo de computo with num serie: " + num_serie);
+            return Optional.of(equipo_computo);
+        } catch (EmptyResultDataAccessException e) {
+            logger.debug("No equipo de computo with num serie: " + num_serie);
+        }
+        return Optional.empty();
+    }
+
+    public Optional<EquipoComputo> getByModelo(String modelo) {
+        String sql = "SELECT * FROM equipo_computo WHERE modelo=?";
+        try {
+            BeanPropertyRowMapper<EquipoComputo> rowMapper = new BeanPropertyRowMapper<>(EquipoComputo.class);
+            EquipoComputo equipo_computo = jdbcTemplate.queryForObject(sql, rowMapper, modelo);
+            logger.debug("Getting equipo de computo with modelo: " + modelo);
+            return Optional.of(equipo_computo);
+        } catch (EmptyResultDataAccessException e) {
+            logger.debug("No equipo de computo with modelo: " + modelo);
+        }
+        return Optional.empty();
+    }
+
+    public Optional<EquipoComputo> getByMarca(String marca) {
+        String sql = "SELECT * FROM equipo_computo WHERE marca=?";
+        try {
+            BeanPropertyRowMapper<EquipoComputo> rowMapper = new BeanPropertyRowMapper<>(EquipoComputo.class);
+            EquipoComputo equipo_computo = jdbcTemplate.queryForObject(sql, rowMapper, marca);
+            logger.debug("Getting equipo de computo with marca: " + marca);
+            return Optional.of(equipo_computo);
+        } catch (EmptyResultDataAccessException e) {
+            logger.debug("No equipo de computo with marca: " + marca);
+        }
+        return Optional.empty();
+    }
+
+    public Optional<EquipoComputo> getBySistemaOp(String sistema_operativo) {
+        String sql = "SELECT * FROM equipo_computo WHERE sistema_operativo=?";
+        try {
+            BeanPropertyRowMapper<EquipoComputo> rowMapper = new BeanPropertyRowMapper<>(EquipoComputo.class);
+            EquipoComputo equipo_computo = jdbcTemplate.queryForObject(sql, rowMapper, sistema_operativo);
+            logger.debug("Getting equipo de computo with sist operativo: " + sistema_operativo);
+            return Optional.of(equipo_computo);
+        } catch (EmptyResultDataAccessException e) {
+            logger.debug("No equipo de computo with nosbsist operativoe: " + sistema_operativo);
+        }
+        return Optional.empty();
+    }
+
+    public Optional<List<EquipoComputo>> listEquiposUsuario(Integer page, Integer size, String uuidUsuario) {
+        String sql = "SELECT * FROM equipo_computo WHERE id_usuario=? LIMIT ?, ?";
+        try {
+            List<EquipoComputo> equipos = jdbcTemplate.query(sql,
+                    new BeanPropertyRowMapper<>(EquipoComputo.class), uuidUsuario, (page * size), size);
             logger.debug("Getting equipo computo list ");
             return Optional.of(equipos);
         } catch (EmptyResultDataAccessException e) {
