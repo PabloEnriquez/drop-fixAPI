@@ -84,4 +84,18 @@ public class MensajeDAO {
         return Optional.empty();
     }
 
+    public Optional<List<Mensaje>> listMensajesChat(Long id_chat, Integer page, Integer size) {
+        String sql = "SELECT * FROM mensaje WHERE id_chat=? LIMIT ?, ?";
+        try {
+            List<Mensaje> mensajes = jdbcTemplate.query(sql,
+                    new BeanPropertyRowMapper<>(Mensaje.class), id_chat, (page * size), size);
+            logger.debug("Getting mensajes list ");
+            return Optional.of(mensajes);
+        } catch (EmptyResultDataAccessException e) {
+            e.printStackTrace();
+            logger.debug("Could not get mensajes list ");
+        }
+        return Optional.empty();
+    }
+
 }

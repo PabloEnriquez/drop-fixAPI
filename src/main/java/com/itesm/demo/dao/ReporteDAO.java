@@ -112,11 +112,11 @@ public class ReporteDAO {
         return Optional.empty();
     }
 
-    public Optional<List<Reporte>> listReportesEquipo(String uuid, Integer page, Integer size) {
+    public Optional<List<Reporte>> listReportesEquipo(Long id_equipo_computo, Integer page, Integer size) {
         String sql = "SELECT * FROM reporte WHERE id_equipo_computo=? LIMIT ?, ?";
         try {
             List<Reporte> reportes = jdbcTemplate.query(sql,
-                    new BeanPropertyRowMapper<>(Reporte.class), uuid, (page * size), size);
+                    new BeanPropertyRowMapper<>(Reporte.class), id_equipo_computo, (page * size), size);
             logger.debug("Getting reportes equipos list ");
             return Optional.of(reportes);
         } catch (EmptyResultDataAccessException e) {
@@ -126,11 +126,11 @@ public class ReporteDAO {
         return Optional.empty();
     }
 
-    public Optional<List<Reporte>> listReportesUsuario(String uuid, Integer page, Integer size) {
+    public Optional<List<Reporte>> listReportesUsuario(Long id_usuario, Integer page, Integer size) {
         String sql = "SELECT * FROM reporte WHERE id_usuario=? LIMIT ?, ?";
         try {
             List<Reporte> reportes = jdbcTemplate.query(sql,
-                    new BeanPropertyRowMapper<>(Reporte.class), uuid, (page * size), size);
+                    new BeanPropertyRowMapper<>(Reporte.class), id_usuario, (page * size), size);
             logger.debug("Getting reportes equipos list ");
             return Optional.of(reportes);
         } catch (EmptyResultDataAccessException e) {
@@ -140,11 +140,11 @@ public class ReporteDAO {
         return Optional.empty();
     }
 
-    public Optional<List<Reporte>> listReportesChat(String uuid, Integer page, Integer size) {
+    public Optional<List<Reporte>> listReportesChat(Long id_chat, Integer page, Integer size) {
         String sql = "SELECT * FROM reporte WHERE id_chat=? LIMIT ?, ?";
         try {
             List<Reporte> reportes = jdbcTemplate.query(sql,
-                    new BeanPropertyRowMapper<>(Reporte.class), uuid, (page * size), size);
+                    new BeanPropertyRowMapper<>(Reporte.class), id_chat, (page * size), size);
             logger.debug("Getting reportes equipos list ");
             return Optional.of(reportes);
         } catch (EmptyResultDataAccessException e) {

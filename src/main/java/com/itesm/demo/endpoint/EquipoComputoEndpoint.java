@@ -176,8 +176,8 @@ public class EquipoComputoEndpoint {
 
     @GET
     @Path("/equipos")
-    public Response getListaReportes(@QueryParam("uuid") String uuid, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
-        Optional<List<Reporte>> reportesEquipo = equipoComputoService.listReportes(uuid, page, size);
+    public Response getListaReportes(@QueryParam("id_equipo_computo") Long id_equipo_computo, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+        Optional<List<Reporte>> reportesEquipo = equipoComputoService.listReportes(id_equipo_computo, page, size);
         Response response;
         if(reportesEquipo.isPresent()) {
             response = Response.ok(reportesEquipo.get()).build();

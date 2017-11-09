@@ -113,14 +113,14 @@ public class UsuarioService {
         return usuario;
     }
 
-    public Optional<List<EquipoComputo>> listEquipos(Integer page, Integer size, String uuid){
+    public Optional<List<EquipoComputo>> listEquipos(Integer page, Integer size, Long id_usuario){
         // validar los datos y cualquier lógica de negocio
-        return equipoComputoDAO.listEquiposUsuario(page, size, uuid);
+        return equipoComputoDAO.listEquiposUsuario(page, size, id_usuario);
     }
 
-    public Optional<List<Reporte>> listReportes(String uuid, Integer page, Integer size){
+    public Optional<List<Reporte>> listReportes(Long id_usuario, Integer page, Integer size){
         // validar los datos y cualquier lógica de negocio
-        return reporteDAO.listReportesUsuario(uuid, page, size);
+        return reporteDAO.listReportesUsuario(id_usuario, page, size);
     }
 
 }

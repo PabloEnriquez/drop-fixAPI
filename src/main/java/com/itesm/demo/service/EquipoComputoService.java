@@ -118,9 +118,9 @@ public class EquipoComputoService {
         return equipo_computo;
     }
 
-    public Optional<List<Reporte>> listReportes(String uuid, Integer page, Integer size){
+    public Optional<List<Reporte>> listReportes(Long id_equipo_computo, Integer page, Integer size){
         // validar los datos y cualquier lógica de negocio
-        return reporteDAO.listReportesEquipo(uuid, page, size);
+        return reporteDAO.listReportesEquipo(id_equipo_computo, page, size);
     }
 
 }

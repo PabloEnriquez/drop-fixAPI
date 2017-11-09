@@ -1,6 +1,7 @@
 package com.itesm.demo.endpoint;
 
 import com.itesm.demo.domain.Chat;
+import com.itesm.demo.domain.Mensaje;
 import com.itesm.demo.domain.Reporte;
 import com.itesm.demo.service.ChatService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -97,11 +98,24 @@ public class ChatEndpoint {
 
     @GET
     @Path("/chats")
-    public Response getListaReportes(@QueryParam("uuid") String uuid, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
-        Optional<List<Reporte>> reportesChat = chatService.listReportes(uuid, page, size);
+    public Response getListaReportes(@QueryParam("id_chat") Long id_chat, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+        Optional<List<Reporte>> reportesChat = chatService.listReportes(id_chat, page, size);
         Response response;
         if(reportesChat.isPresent()) {
             response = Response.ok(reportesChat.get()).build();
+        }else{
+            response = Response.noContent().build();
+        }
+        return response;
+    }
+
+    @GET
+    @Path("/chats")
+    public Response getListaMensajes(@QueryParam("id_chat") Long id_chat, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+        Optional<List<Mensaje>> mensajesChat = chatService.listMensajes(id_chat, page, size);
+        Response response;
+        if(mensajesChat.isPresent()) {
+            response = Response.ok(mensajesChat.get()).build();
         }else{
             response = Response.noContent().build();
         }

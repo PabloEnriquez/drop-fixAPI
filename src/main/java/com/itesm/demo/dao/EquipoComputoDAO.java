@@ -168,11 +168,11 @@ public class EquipoComputoDAO {
         return Optional.empty();
     }
 
-    public Optional<List<EquipoComputo>> listEquiposUsuario(Integer page, Integer size, String uuidUsuario) {
+    public Optional<List<EquipoComputo>> listEquiposUsuario(Integer page, Integer size, Long id_usuario) {
         String sql = "SELECT * FROM equipo_computo WHERE id_usuario=? LIMIT ?, ?";
         try {
             List<EquipoComputo> equipos = jdbcTemplate.query(sql,
-                    new BeanPropertyRowMapper<>(EquipoComputo.class), uuidUsuario, (page * size), size);
+                    new BeanPropertyRowMapper<>(EquipoComputo.class), id_usuario, (page * size), size);
             logger.debug("Getting equipo computo list ");
             return Optional.of(equipos);
         } catch (EmptyResultDataAccessException e) {

@@ -1,8 +1,10 @@
 package com.itesm.demo.service;
 
 import com.itesm.demo.dao.ChatDAO;
+import com.itesm.demo.dao.MensajeDAO;
 import com.itesm.demo.dao.ReporteDAO;
 import com.itesm.demo.domain.Chat;
+import com.itesm.demo.domain.Mensaje;
 import com.itesm.demo.domain.Reporte;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,9 @@ public class ChatService {
 
     @Autowired
     private ReporteDAO reporteDAO;
+
+    @Autowired
+    private MensajeDAO mensajeDAO;
 
     public Optional<Chat> get(String uuid){
         // validar los datos y cualquier lógica de negocio
@@ -53,9 +58,14 @@ public class ChatService {
         return chatDAO.list(page, size);
     }
 
-    public Optional<List<Reporte>> listReportes(String uuid, Integer page, Integer size){
+    public Optional<List<Reporte>> listReportes(Long id_chat, Integer page, Integer size){
         // validar los datos y cualquier lógica de negocio
-        return reporteDAO.listReportesChat(uuid, page, size);
+        return reporteDAO.listReportesChat(id_chat, page, size);
+    }
+
+    public Optional<List<Mensaje>> listMensajes(Long id_chat, Integer page, Integer size){
+        // validar los datos y cualquier lógica de negocio
+        return mensajeDAO.listMensajesChat(id_chat, page, size);
     }
 
 }
