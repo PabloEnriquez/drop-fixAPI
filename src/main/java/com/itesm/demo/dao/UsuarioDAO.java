@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Repository
 public class UsuarioDAO {
@@ -39,13 +40,14 @@ public class UsuarioDAO {
 
     public Optional<Usuario> insert(Usuario usuario) {
         String newUuid = UUID.randomUUID().toString();
+        Long newId = Long.valueOf(new AtomicInteger(0).incrementAndGet());
         try {
             jdbcTemplate.update(
                     "INSERT INTO usuario "
-                            + " ( uuid, status, fecha_creacion, fecha_modificacion,"
+                            + " ( id, uuid, status, fecha_creacion, fecha_modificacion,"
                             + " email, nombre, contrasena, telefono, usuario, tipo_usuario )"
-                            + " VALUES (?,?,?,?,?,?,?,?,?,?)",
-                    newUuid, usuario.getStatus(), Timestamp.from(Instant.now()), Timestamp.from(Instant.now()),
+                            + " VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+                    newId, newUuid, usuario.getStatus(), Timestamp.from(Instant.now()), Timestamp.from(Instant.now()),
                     usuario.getEmail(), usuario.getNombre(), usuario.getContrasena(),
                     usuario.getTelefono(), usuario.getUsuario(), usuario.getTipo_usuario() );
             logger.debug("Inserting usuario");

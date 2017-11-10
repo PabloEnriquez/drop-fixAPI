@@ -15,6 +15,7 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Repository
 public class MensajeDAO {
@@ -39,13 +40,14 @@ public class MensajeDAO {
 
     public Optional<Mensaje> insert(Mensaje mensaje) {
         String newUuid = UUID.randomUUID().toString();
+        Long newId = Long.valueOf(new AtomicInteger(0).incrementAndGet());
         try {
             jdbcTemplate.update(
                     "INSERT INTO mensaje "
-                            + " (uuid, id_dueno, fecha_creacion,"
+                            + " ( id, uuid, id_dueno, fecha_creacion,"
                             + " contenido, id_chat )"
-                            + " VALUES (?,?,?,?,?)",
-                    newUuid, mensaje.getId_dueno(), Timestamp.from(Instant.now()),
+                            + " VALUES (?,?,?,?,?,?)",
+                    newId, newUuid, mensaje.getId_dueno(), Timestamp.from(Instant.now()),
                     mensaje.getContenido(), mensaje.getId_chat() );
             logger.debug("Inserting mensaje");
             return getByUuid(newUuid);

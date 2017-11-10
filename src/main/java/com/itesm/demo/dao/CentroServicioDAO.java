@@ -14,6 +14,7 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Repository
 public class CentroServicioDAO {
@@ -38,13 +39,14 @@ public class CentroServicioDAO {
 
     public Optional<CentroServicio> insert(CentroServicio centroServicio) {
         String newUuid = UUID.randomUUID().toString();
+        Long newId = Long.valueOf(new AtomicInteger(0).incrementAndGet());
         try {
             jdbcTemplate.update(
                     "INSERT INTO centro_de_servicio "
-                            + " (uuid, status, fecha_creacion, fecha_modificacion, longitud, latitud, "
+                            + " (id, uuid, status, fecha_creacion, fecha_modificacion, longitud, latitud, "
                             + " descripcion, direccion, titulo, url )"
-                            + " VALUES (?,?,?,?,?,?,?,?,?,?)",
-                    newUuid, centroServicio.getStatus(), Timestamp.from(Instant.now()), Timestamp.from(Instant.now()),
+                            + " VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+                    newId, newUuid, centroServicio.getStatus(), Timestamp.from(Instant.now()), Timestamp.from(Instant.now()),
                     centroServicio.getLongitud(), centroServicio.getLatitud(), centroServicio.getDescripcion(),
                     centroServicio.getDireccion(), centroServicio.getTitulo(), centroServicio.getUrl() );
             logger.debug("Inserting centroServicio");

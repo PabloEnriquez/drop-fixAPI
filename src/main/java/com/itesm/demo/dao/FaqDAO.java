@@ -14,6 +14,7 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Repository
 public class FaqDAO {
@@ -38,13 +39,14 @@ public class FaqDAO {
 
     public Optional<Faq> insert(Faq faq) {
         String newUuid = UUID.randomUUID().toString();
+        Long newId = Long.valueOf(new AtomicInteger(0).incrementAndGet());
         try {
             jdbcTemplate.update(
                     "INSERT INTO faq "
-                            + " (uuid, status, fecha_creacion, fecha_modificacion, "
+                            + " ( id, uuid, status, fecha_creacion, fecha_modificacion, "
                             + " titulo, descripcion )"
-                            + " VALUES (?,?,?,?,?,?)",
-                    newUuid, faq.getStatus(), Timestamp.from(Instant.now()),
+                            + " VALUES (?,?,?,?,?,?,?)",
+                    newId, newUuid, faq.getStatus(), Timestamp.from(Instant.now()),
                     Timestamp.from(Instant.now()), faq.getTitulo(), faq.getDescripcion() );
             logger.debug("Inserting faq");
             return getByUuid(newUuid);

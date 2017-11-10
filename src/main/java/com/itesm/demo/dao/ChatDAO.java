@@ -16,6 +16,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Repository
 public class ChatDAO {
@@ -40,13 +41,14 @@ public class ChatDAO {
 
     public Optional<Chat> insert(Chat chat) {
         String newUuid = UUID.randomUUID().toString();
+        Long newId = Long.valueOf(new AtomicInteger(0).incrementAndGet());
         try {
             jdbcTemplate.update(
                     "INSERT INTO chat "
-                            + " (uuid, status, fecha_creacion, fecha_modificacion,"
+                            + " ( id, uuid, status, fecha_creacion, fecha_modificacion,"
                             + " id_usuario, id_tecnico )"
-                            + " VALUES (?,?,?,?,?,?)",
-                    newUuid, chat.getStatus(), Timestamp.from(Instant.now()), Timestamp.from(Instant.now()),
+                            + " VALUES (?,?,?,?,?,?,?)",
+                    newId, newUuid, chat.getStatus(), Timestamp.from(Instant.now()), Timestamp.from(Instant.now()),
                     chat.getId_usuario(), chat.getId_tecnico() );
             logger.debug("Inserting chat");
             return getByUuid(newUuid);

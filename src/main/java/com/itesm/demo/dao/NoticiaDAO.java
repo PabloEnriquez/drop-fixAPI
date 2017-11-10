@@ -14,6 +14,7 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Repository
 public class NoticiaDAO {
@@ -38,13 +39,14 @@ public class NoticiaDAO {
 
     public Optional<Noticia> insert(Noticia noticia) {
         String newUuid = UUID.randomUUID().toString();
+        Long newId = Long.valueOf(new AtomicInteger(0).incrementAndGet());
         try {
             jdbcTemplate.update(
                     "INSERT INTO noticia "
-                            + " (uuid, status, fecha_creacion, fecha_modificacion,"
+                            + " ( id, uuid, status, fecha_creacion, fecha_modificacion,"
                             + " titulo, descripcion, url)"
-                            + " VALUES (?,?,?,?,?,?,?)",
-                    newUuid, noticia.getStatus(), Timestamp.from(Instant.now()), Timestamp.from(Instant.now()),
+                            + " VALUES (?,?,?,?,?,?,?,?)",
+                    newId, newUuid, noticia.getStatus(), Timestamp.from(Instant.now()), Timestamp.from(Instant.now()),
                     noticia.getTitulo(),noticia.getDescripcion(), noticia.getUrl() );
             logger.debug("Inserting noticia");
             return getByUuid(newUuid);

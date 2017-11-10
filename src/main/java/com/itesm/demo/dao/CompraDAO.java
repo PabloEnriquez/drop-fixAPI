@@ -16,6 +16,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Repository
 public class CompraDAO {
@@ -40,13 +41,14 @@ public class CompraDAO {
 
     public Optional<Compra> insert(Compra compra) {
         String newUuid = UUID.randomUUID().toString();
+        Long newId = Long.valueOf(new AtomicInteger(0).incrementAndGet());
         try {
             jdbcTemplate.update(
                     "INSERT INTO compra "
-                            + " (uuid, status, fecha_creacion, fecha_modificacion,"
+                            + " ( id, uuid, status, fecha_creacion, fecha_modificacion,"
                             + " monto_total, id_reporte, id_usuario, id_servicio )"
-                            + " VALUES (?,?,?,?,?,?,?,?)",
-                    newUuid, compra.getStatus(), Timestamp.from(Instant.now()), Timestamp.from(Instant.now()),
+                            + " VALUES (?,?,?,?,?,?,?,?,?)",
+                    newId, newUuid, compra.getStatus(), Timestamp.from(Instant.now()), Timestamp.from(Instant.now()),
                     compra.getMonto_total(), compra.getId_reporte(), compra.getId_usuario(), compra.getId_servicio() );
             logger.debug("Inserting compra");
             return getByUuid(newUuid);
