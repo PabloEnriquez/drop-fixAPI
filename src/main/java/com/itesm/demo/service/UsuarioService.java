@@ -80,44 +80,39 @@ public class UsuarioService {
         return usuarioDAO.list(page, size);
     }
 
-    public Optional<Usuario> getMail(String email){
+    public Optional<List<Usuario>> getMail(String email, Integer page, Integer size){
         // validar los datos y cualquier lógica de negocio
         // modificar el objeto o agregar datos
-        Optional<Usuario> usuario = usuarioDAO.getByMail(email);
-        return usuario;
+        return usuarioDAO.getByMail(email, page, size);
     }
 
-    public Optional<Usuario> getNombre(String nombre){
+    public Optional<List<Usuario>> getNombre(String nombre, Integer page, Integer size){
         // validar los datos y cualquier lógica de negocio
         // modificar el objeto o agregar datos
-        Optional<Usuario> usuario = usuarioDAO.getByNombre(nombre);
-        return usuario;
+        return usuarioDAO.getByNombre(nombre, page, size);
     }
 
-    public Optional<Usuario> getUsuarioNombre(String usuario_nombre){
+    public Optional<List<Usuario>> getUsuarioNombre(String usuario_nombre, Integer page, Integer size){
         // validar los datos y cualquier lógica de negocio
         // modificar el objeto o agregar datos
-        Optional<Usuario> usuario = usuarioDAO.getByUsuario(usuario_nombre);
-        return usuario;
+        return usuarioDAO.getByUsuario(usuario_nombre, page, size);
     }
 
-    public Optional<Usuario> getFechaCreacion(Date fecha_creacion){
+    public Optional<List<Usuario>> getFechaCreacion(Date fecha_creacion, Integer page, Integer size){
         // validar los datos y cualquier lógica de negocio
         // modificar el objeto o agregar datos
-        Optional<Usuario> usuario = usuarioDAO.getByFechaCreacion(fecha_creacion);
-        return usuario;
+        return usuarioDAO.getByFechaCreacion(fecha_creacion, page, size);
     }
 
-    public Optional<Usuario> getTipoUsuario(Integer tipo_usuario){
+    public Optional<List<Usuario>> getTipoUsuario(Integer tipo_usuario, Integer page, Integer size){
         // validar los datos y cualquier lógica de negocio
         // modificar el objeto o agregar datos
-        Optional<Usuario> usuario = usuarioDAO.getByTipoUsuario(tipo_usuario);
-        return usuario;
+        return usuarioDAO.getByTipoUsuario(tipo_usuario, page, size);
     }
 
-    public Optional<List<EquipoComputo>> listEquipos(Integer page, Integer size, Long id_usuario){
+    public Optional<List<EquipoComputo>> listEquipos(Long id_usuario, Integer page, Integer size){
         // validar los datos y cualquier lógica de negocio
-        return equipoComputoDAO.listEquiposUsuario(page, size, id_usuario);
+        return equipoComputoDAO.listEquiposUsuario(id_usuario, page, size);
     }
 
     public Optional<List<Reporte>> listReportes(Long id_usuario, Integer page, Integer size){

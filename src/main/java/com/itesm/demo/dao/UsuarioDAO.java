@@ -88,67 +88,72 @@ public class UsuarioDAO {
         return Optional.empty();
     }
 
-    public Optional<Usuario> getByMail(String email){
-        String sql = "SELECT * FROM usuario WHERE email=?";
+    public Optional<List<Usuario>> getByMail(String email, Integer page, Integer size){
+        String sql = "SELECT * FROM usuario WHERE email LIKE %?% LIMIT ?, ?";
         try {
-            BeanPropertyRowMapper<Usuario> rowMapper = new BeanPropertyRowMapper<>(Usuario.class);
-            Usuario usuario = jdbcTemplate.queryForObject(sql, rowMapper, email);
-            logger.debug("Getting usuario with email: " + email);
-            return Optional.of(usuario);
+            List<Usuario> usuarios = jdbcTemplate.query(sql,
+                    new BeanPropertyRowMapper<>(Usuario.class), email, (page * size), size);
+            logger.debug("Getting usuarios list por email ");
+            return Optional.of(usuarios);
         } catch (EmptyResultDataAccessException e) {
-            logger.debug("No usuario with email: " + email);
+            e.printStackTrace();
+            logger.debug("Could not get usuarios list por email ");
         }
         return Optional.empty();
     }
 
-    public Optional<Usuario> getByNombre(String nombre){
-        String sql = "SELECT * FROM usuario WHERE nombre=?";
+    public Optional<List<Usuario>> getByNombre(String nombre, Integer page, Integer size){
+        String sql = "SELECT * FROM usuario WHERE nombre LIKE %?% LIMIT ?, ?";
         try {
-            BeanPropertyRowMapper<Usuario> rowMapper = new BeanPropertyRowMapper<>(Usuario.class);
-            Usuario usuario = jdbcTemplate.queryForObject(sql, rowMapper, nombre);
-            logger.debug("Getting usuario with nombre: " + nombre);
-            return Optional.of(usuario);
+            List<Usuario> usuarios = jdbcTemplate.query(sql,
+                    new BeanPropertyRowMapper<>(Usuario.class), nombre, (page * size), size);
+            logger.debug("Getting usuarios list por nombre");
+            return Optional.of(usuarios);
         } catch (EmptyResultDataAccessException e) {
-            logger.debug("No usuario with nombre: " + nombre);
+            e.printStackTrace();
+            logger.debug("Could not get usuarios list por nombre ");
         }
         return Optional.empty();
     }
 
-    public Optional<Usuario> getByUsuario(String usuario_nombre){
-        String sql = "SELECT * FROM usuario WHERE usuario=?";
+    public Optional<List<Usuario>> getByUsuario(String usuario_nombre, Integer page, Integer size){
+        String sql = "SELECT * FROM usuario WHERE usuario LIKE %?% LIMIT ?, ?";
         try {
-            BeanPropertyRowMapper<Usuario> rowMapper = new BeanPropertyRowMapper<>(Usuario.class);
-            Usuario usuario = jdbcTemplate.queryForObject(sql, rowMapper, usuario_nombre);
-            logger.debug("Getting usuario with nombre usuario: " + usuario_nombre);
-            return Optional.of(usuario);
+            List<Usuario> usuarios = jdbcTemplate.query(sql,
+                    new BeanPropertyRowMapper<>(Usuario.class), usuario_nombre, (page * size), size);
+            logger.debug("Getting usuarios list por nombre de usuario");
+            return Optional.of(usuarios);
         } catch (EmptyResultDataAccessException e) {
-            logger.debug("No usuario with nombre usuario: " + usuario_nombre);
+            e.printStackTrace();
+            logger.debug("Could not get usuarios list por nombre de usuario ");
         }
         return Optional.empty();
     }
 
-    public Optional<Usuario> getByFechaCreacion(Date fecha_creacion){
-        String sql = "SELECT * FROM usuario WHERE fecha_creacion=?";
+    public Optional<List<Usuario>> getByFechaCreacion(Date fecha_creacion, Integer page, Integer size){
+        String sql = "SELECT * FROM usuario WHERE fecha_creacion LIKE %?% LIMIT ?, ?";
         try {
-            BeanPropertyRowMapper<Usuario> rowMapper = new BeanPropertyRowMapper<>(Usuario.class);
-            Usuario usuario = jdbcTemplate.queryForObject(sql, rowMapper, fecha_creacion);
-            logger.debug("Getting usuario with fecha de creacion: " + fecha_creacion);
-            return Optional.of(usuario);
+            List<Usuario> usuarios = jdbcTemplate.query(sql,
+                    new BeanPropertyRowMapper<>(Usuario.class), fecha_creacion, (page * size), size);
+            logger.debug("Getting usuarios list por fecha de creacion");
+            return Optional.of(usuarios);
         } catch (EmptyResultDataAccessException e) {
-            logger.debug("No usuario with fecha de creacion: " + fecha_creacion);
+            e.printStackTrace();
+            logger.debug("Could not get usuarios list por fecha de creacion ");
         }
         return Optional.empty();
     }
 
-    public Optional<Usuario> getByTipoUsuario(Integer tipo_usuario){
-        String sql = "SELECT * FROM usuario WHERE tipo_usuario=?";
+    public Optional<List<Usuario>> getByTipoUsuario(Integer tipo_usuario, Integer page, Integer size){
+        String sql = "SELECT * FROM usuario WHERE tipo_usuario LIKE %?% LIMIT ?, ?";
         try {
-            BeanPropertyRowMapper<Usuario> rowMapper = new BeanPropertyRowMapper<>(Usuario.class);
-            Usuario usuario = jdbcTemplate.queryForObject(sql, rowMapper, tipo_usuario);
-            logger.debug("Getting usuario with tipo usuario: " + tipo_usuario);
-            return Optional.of(usuario);
+            List<Usuario> usuarios = jdbcTemplate.query(sql,
+                    new BeanPropertyRowMapper<>(Usuario.class), tipo_usuario, (page * size), size);
+            logger.debug("Getting usuarios list por nombre de usuario");
+            return Optional.of(usuarios);
         } catch (EmptyResultDataAccessException e) {
-            logger.debug("No usuario with tipo usuario: " + tipo_usuario);
+            e.printStackTrace();
+            logger.debug("Could not get usuarios list por nombre de usuario ");
         }
         return Optional.empty();
     }

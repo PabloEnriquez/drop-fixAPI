@@ -70,52 +70,40 @@ public class EquipoComputoService {
         return equipoComputoDAO.list(page, size);
     }
 
-    public Optional<EquipoComputo> getFechaCreacion(Date fecha_creacion){
+    public Optional<List<EquipoComputo>> getFechaCreacion(Date fecha_creacion, Integer page, Integer size){
         // validar los datos y cualquier lógica de negocio
         // modificar el objeto o agregar datos
-        Optional<EquipoComputo> equipo_computo = equipoComputoDAO.getByFechaCreacion(fecha_creacion);
-//        equipo_computo.set;
-        return equipo_computo;
+        return equipoComputoDAO.getByFechaCreacion(fecha_creacion, page, size);
     }
 
-    public Optional<EquipoComputo> getNombre(String nombre){
+    public Optional<List<EquipoComputo>> getNombre(String nombre, Integer page, Integer size ){
         // validar los datos y cualquier lógica de negocio
         // modificar el objeto o agregar datos
-        Optional<EquipoComputo> equipo_computo = equipoComputoDAO.getByNombre(nombre);
-//        equipo_computo.set;
-        return equipo_computo;
+        return equipoComputoDAO.getByNombre(nombre, page, size);
     }
 
-    public Optional<EquipoComputo> getNumSerie(String num_serie){
+    public Optional<List<EquipoComputo>> getNumSerie(String num_serie, Integer page, Integer size ){
         // validar los datos y cualquier lógica de negocio
         // modificar el objeto o agregar datos
-        Optional<EquipoComputo> equipo_computo = equipoComputoDAO.getByNumSerie(num_serie);
-//        equipo_computo.set;
-        return equipo_computo;
+        return equipoComputoDAO.getByNumSerie(num_serie, page, size);
     }
 
-    public Optional<EquipoComputo> getModelo(String modelo){
+    public Optional<List<EquipoComputo>> getModelo(String modelo, Integer page, Integer size ){
         // validar los datos y cualquier lógica de negocio
         // modificar el objeto o agregar datos
-        Optional<EquipoComputo> equipo_computo = equipoComputoDAO.getByModelo(modelo);
-//        equipo_computo.set;
-        return equipo_computo;
+        return equipoComputoDAO.getByModelo(modelo, page, size);
     }
 
-    public Optional<EquipoComputo> getMarca(String marca){
+    public Optional<List<EquipoComputo>> getMarca(String marca, Integer page, Integer size ){
         // validar los datos y cualquier lógica de negocio
         // modificar el objeto o agregar datos
-        Optional<EquipoComputo> equipo_computo = equipoComputoDAO.getByMarca(marca);
-//        equipo_computo.set;
-        return equipo_computo;
+        return equipoComputoDAO.getByMarca(marca, page, size);
     }
 
-    public Optional<EquipoComputo> getSistOperativo(String sistema_operativo){
+    public Optional<List<EquipoComputo>> getSistOperativo(String sistema_operativo, Integer page, Integer size ){
         // validar los datos y cualquier lógica de negocio
         // modificar el objeto o agregar datos
-        Optional<EquipoComputo> equipo_computo = equipoComputoDAO.getBySistemaOp(sistema_operativo);
-//        equipo_computo.set;
-        return equipo_computo;
+        return equipoComputoDAO.getBySistemaOp(sistema_operativo, page, size);
     }
 
     public Optional<List<Reporte>> listReportes(Long id_equipo_computo, Integer page, Integer size){

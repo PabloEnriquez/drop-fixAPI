@@ -98,11 +98,11 @@ public class EquipoComputoEndpoint {
 
     @GET
     @Path("/equipos")
-    public Response getByFechaCreacion(@QueryParam("fecha_creacion") Date fecha_creacion ){
-        Optional<EquipoComputo> equipo_computo = equipoComputoService.getFechaCreacion(fecha_creacion);
+    public Response getByFechaCreacion(@QueryParam("fecha_creacion") Date fecha_creacion, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+        Optional<List<EquipoComputo>> equiposFechaCreacion = equipoComputoService.getFechaCreacion(fecha_creacion, page, size);
         Response response;
-        if(equipo_computo.isPresent()) {
-            response = Response.ok(equipo_computo.get()).build();
+        if(equiposFechaCreacion.isPresent()) {
+            response = Response.ok(equiposFechaCreacion.get()).build();
         }else{
             response = Response.noContent().build();
         }
@@ -111,11 +111,11 @@ public class EquipoComputoEndpoint {
 
     @GET
     @Path("/equipos")
-    public Response getByNombre(@QueryParam("nombre") String nombre ){
-        Optional<EquipoComputo> equipo_computo = equipoComputoService.getNombre(nombre);
+    public Response getByNombre(@QueryParam("nombre") String nombre, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+        Optional<List<EquipoComputo>> equiposNombre = equipoComputoService.getNombre(nombre, page, size);
         Response response;
-        if(equipo_computo.isPresent()) {
-            response = Response.ok(equipo_computo.get()).build();
+        if(equiposNombre.isPresent()) {
+            response = Response.ok(equiposNombre.get()).build();
         }else{
             response = Response.noContent().build();
         }
@@ -124,11 +124,11 @@ public class EquipoComputoEndpoint {
 
     @GET
     @Path("/equipos")
-    public Response getByNumSerie(@QueryParam("num_serie") String num_serie ){
-        Optional<EquipoComputo> equipo_computo = equipoComputoService.getNumSerie(num_serie);
+    public Response getByNumSerie(@QueryParam("num_serie") String num_serie, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+        Optional<List<EquipoComputo>> equiposNumSerie = equipoComputoService.getNumSerie(num_serie, page, size);
         Response response;
-        if(equipo_computo.isPresent()) {
-            response = Response.ok(equipo_computo.get()).build();
+        if(equiposNumSerie.isPresent()) {
+            response = Response.ok(equiposNumSerie.get()).build();
         }else{
             response = Response.noContent().build();
         }
@@ -137,11 +137,11 @@ public class EquipoComputoEndpoint {
 
     @GET
     @Path("/equipos")
-    public Response getByModelo(@QueryParam("modelo") String modelo ){
-        Optional<EquipoComputo> equipo_computo = equipoComputoService.getModelo(modelo);
+    public Response getByModelo(@QueryParam("modelo") String modelo, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+        Optional<List<EquipoComputo>> equiposModelo = equipoComputoService.getModelo(modelo, page, size);
         Response response;
-        if(equipo_computo.isPresent()) {
-            response = Response.ok(equipo_computo.get()).build();
+        if(equiposModelo.isPresent()) {
+            response = Response.ok(equiposModelo.get()).build();
         }else{
             response = Response.noContent().build();
         }
@@ -150,11 +150,11 @@ public class EquipoComputoEndpoint {
 
     @GET
     @Path("/equipos")
-    public Response getByMarca(@QueryParam("marca") String marca ){
-        Optional<EquipoComputo> equipo_computo = equipoComputoService.getMarca(marca);
+    public Response getByMarca(@QueryParam("marca") String marca, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+        Optional<List<EquipoComputo>> equiposMarca = equipoComputoService.getMarca(marca, page, size);
         Response response;
-        if(equipo_computo.isPresent()) {
-            response = Response.ok(equipo_computo.get()).build();
+        if(equiposMarca.isPresent()) {
+            response = Response.ok(equiposMarca.get()).build();
         }else{
             response = Response.noContent().build();
         }
@@ -163,11 +163,11 @@ public class EquipoComputoEndpoint {
 
     @GET
     @Path("/equipos")
-    public Response getBySistOperativo(@QueryParam("sistema_operativo") String sistema_operativo ){
-        Optional<EquipoComputo> equipo_computo = equipoComputoService.getSistOperativo(sistema_operativo);
+    public Response getBySistOperativo(@QueryParam("sistema_operativo") String sistema_operativo, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+        Optional<List<EquipoComputo>> equiposSistOperativo = equipoComputoService.getSistOperativo(sistema_operativo, page, size);
         Response response;
-        if(equipo_computo.isPresent()) {
-            response = Response.ok(equipo_computo.get()).build();
+        if(equiposSistOperativo.isPresent()) {
+            response = Response.ok(equiposSistOperativo.get()).build();
         }else{
             response = Response.noContent().build();
         }

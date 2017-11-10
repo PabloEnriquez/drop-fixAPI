@@ -98,11 +98,11 @@ public class UsuarioEndpoint {
 
     @GET
     @Path("/usuarios")
-    public Response searchByEmail(@QueryParam("email") String email ){
-        Optional<Usuario> usuario = usuarioService.getMail(email);
+    public Response searchByEmail(@QueryParam("email") String email, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+        Optional<List<Usuario>> usuariosMail = usuarioService.getMail(email, page, size);
         Response response;
-        if(usuario.isPresent()) {
-            response = Response.ok(usuario.get()).build();
+        if(usuariosMail.isPresent()) {
+            response = Response.ok(usuariosMail.get()).build();
         }else{
             response = Response.noContent().build();
         }
@@ -111,11 +111,11 @@ public class UsuarioEndpoint {
 
     @GET
     @Path("/usuarios")
-    public Response searchByNombre(@QueryParam("nombre") String nombre ){
-        Optional<Usuario> usuario = usuarioService.getNombre(nombre);
+    public Response searchByNombre(@QueryParam("nombre") String nombre, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+        Optional<List<Usuario>> usuariosNombre = usuarioService.getNombre(nombre, page, size);
         Response response;
-        if(usuario.isPresent()) {
-            response = Response.ok(usuario.get()).build();
+        if(usuariosNombre.isPresent()) {
+            response = Response.ok(usuariosNombre.get()).build();
         }else{
             response = Response.noContent().build();
         }
@@ -124,11 +124,11 @@ public class UsuarioEndpoint {
 
     @GET
     @Path("/usuarios")
-    public Response searchByUsuarioNombre(@QueryParam("usuario") String usuario ){
-        Optional<Usuario> usuarioAObtener = usuarioService.getUsuarioNombre(usuario);
+    public Response searchByUsuarioNombre(@QueryParam("usuario") String usuario, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+        Optional<List<Usuario>> usuariosUsuarioNombre = usuarioService.getUsuarioNombre(usuario, page, size);
         Response response;
-        if(usuarioAObtener.isPresent()) {
-            response = Response.ok(usuarioAObtener.get()).build();
+        if(usuariosUsuarioNombre.isPresent()) {
+            response = Response.ok(usuariosUsuarioNombre.get()).build();
         }else{
             response = Response.noContent().build();
         }
@@ -137,11 +137,11 @@ public class UsuarioEndpoint {
 
     @GET
     @Path("/usuarios")
-    public Response searchByFechaCreacion(@QueryParam("fecha_creacion") Date fecha_creacion ){
-        Optional<Usuario> usuario = usuarioService.getFechaCreacion(fecha_creacion);
+    public Response searchByFechaCreacion(@QueryParam("fecha_creacion") Date fecha_creacion, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+        Optional<List<Usuario>> usuariosFechaCreacion = usuarioService.getFechaCreacion(fecha_creacion, page, size);
         Response response;
-        if(usuario.isPresent()) {
-            response = Response.ok(usuario.get()).build();
+        if(usuariosFechaCreacion.isPresent()) {
+            response = Response.ok(usuariosFechaCreacion.get()).build();
         }else{
             response = Response.noContent().build();
         }
@@ -150,11 +150,11 @@ public class UsuarioEndpoint {
 
     @GET
     @Path("/usuarios")
-    public Response searchByTipoUsuario(@QueryParam("tipo_usuario") Integer tipo_usuario ){
-        Optional<Usuario> usuario = usuarioService.getTipoUsuario(tipo_usuario);
+    public Response searchByTipoUsuario(@QueryParam("tipo_usuario") Integer tipo_usuario, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+        Optional<List<Usuario>> usuariosTipoUsuario = usuarioService.getTipoUsuario(tipo_usuario, page, size);
         Response response;
-        if(usuario.isPresent()) {
-            response = Response.ok(usuario.get()).build();
+        if(usuariosTipoUsuario.isPresent()) {
+            response = Response.ok(usuariosTipoUsuario.get()).build();
         }else{
             response = Response.noContent().build();
         }
@@ -163,8 +163,8 @@ public class UsuarioEndpoint {
 
     @GET
     @Path("/usuarios")
-    public Response getListaEquipos(@QueryParam("page") Integer page, @QueryParam("size") Integer size, @QueryParam("id_usuario") Long id_usuario ){
-        Optional<List<EquipoComputo>> equiposUsuario = usuarioService.listEquipos(page, size, id_usuario);
+    public Response getListaEquipos(@QueryParam("id_usuario") Long id_usuario , @QueryParam("page") Integer page, @QueryParam("size") Integer size){
+        Optional<List<EquipoComputo>> equiposUsuario = usuarioService.listEquipos( id_usuario, page, size);
         Response response;
         if(equiposUsuario.isPresent()) {
             response = Response.ok(equiposUsuario.get()).build();
@@ -215,7 +215,7 @@ public class UsuarioEndpoint {
 
     @GET
     @Path("/usuarios")
-    public Response getListaComprasUsuario(@QueryParam("id_usuario") Long id_usuario, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+    public Response getListaCompras(@QueryParam("id_usuario") Long id_usuario, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
         Optional<List<Compra>> comprasUsuario = usuarioService.listComprasUsuario(id_usuario, page, size);
         Response response;
         if(comprasUsuario.isPresent()) {
