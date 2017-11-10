@@ -56,4 +56,9 @@ public class NoticiaService {
         return noticiaDAO.list(page, size);
     }
 
+    public Optional<List<Noticia>> getTitulo(String titulo, Integer page, Integer size){
+        // validar los datos y cualquier lógica de negocio
+        return noticiaDAO.getByTitulo(titulo, page, size);
+    }
+
 }

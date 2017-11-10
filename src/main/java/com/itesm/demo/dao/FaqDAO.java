@@ -85,6 +85,20 @@ public class FaqDAO {
         return Optional.empty();
     }
 
+    public Optional<List<Faq>> getByTitulo(String titulo, Integer page, Integer size) {
+        String sql = "SELECT * FROM faq WHERE titulo=? LIMIT ?, ?";
+        try {
+            List<Faq> faqs = jdbcTemplate.query(sql,
+                    new BeanPropertyRowMapper<>(Faq.class), titulo, (page * size), size);
+            logger.debug("Getting faq list por titulo ");
+            return Optional.of(faqs);
+        } catch (EmptyResultDataAccessException e) {
+            e.printStackTrace();
+            logger.debug("Could not get faq list por titulo ");
+        }
+        return Optional.empty();
+    }
+
 
 
 }

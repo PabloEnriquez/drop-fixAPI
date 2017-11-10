@@ -88,6 +88,34 @@ public class CentroServicioDAO {
         return Optional.empty();
     }
 
+    public Optional<List<CentroServicio>> getByTitulo(String titulo, Integer page, Integer size) {
+        String sql = "SELECT * FROM centro_de_servicio WHERE titulo=? LIMIT ?, ?";
+        try {
+            List<CentroServicio> centroServicios = jdbcTemplate.query(sql,
+                    new BeanPropertyRowMapper<>(CentroServicio.class), titulo, (page * size), size);
+            logger.debug("Getting centroServicio list por titulo ");
+            return Optional.of(centroServicios);
+        } catch (EmptyResultDataAccessException e) {
+            e.printStackTrace();
+            logger.debug("Could not get centroServicio list por titulo ");
+        }
+        return Optional.empty();
+    }
+
+    public Optional<List<CentroServicio>> getByDireccion(String direccion, Integer page, Integer size) {
+        String sql = "SELECT * FROM centro_de_servicio WHERE direccion=? LIMIT ?, ?";
+        try {
+            List<CentroServicio> centroServicios = jdbcTemplate.query(sql,
+                    new BeanPropertyRowMapper<>(CentroServicio.class), direccion, (page * size), size);
+            logger.debug("Getting centroServicio list por direccion ");
+            return Optional.of(centroServicios);
+        } catch (EmptyResultDataAccessException e) {
+            e.printStackTrace();
+            logger.debug("Could not get centroServicio list por direccion ");
+        }
+        return Optional.empty();
+    }
+
 
 
 }

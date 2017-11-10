@@ -55,4 +55,14 @@ public class CentroServicioService {
         return CentroServicioDAO.list(page, size);
     }
 
+    public Optional<List<CentroServicio>> getTitulo(String titulo, Integer page, Integer size){
+        // validar los datos y cualquier lógica de negocio
+        return CentroServicioDAO.getByTitulo(titulo, page, size);
+    }
+
+    public Optional<List<CentroServicio>> getDireccion(String direccion, Integer page, Integer size){
+        // validar los datos y cualquier lógica de negocio
+        return CentroServicioDAO.getByDireccion(direccion, page, size);
+    }
+
 }

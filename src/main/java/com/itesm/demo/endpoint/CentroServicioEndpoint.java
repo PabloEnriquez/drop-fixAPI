@@ -26,7 +26,7 @@ public class CentroServicioEndpoint {
     private CentroServicioService centroServicioService;
 
     @GET
-    @Path("/centroServicio/{uuid}")
+    @Path("/centrosServicio/{uuid}")
     public Response getFaq(@PathParam("uuid") String uuid){
         Optional<CentroServicio > centroServicio = centroServicioService.get(uuid);
         Response response;
@@ -39,8 +39,8 @@ public class CentroServicioEndpoint {
     }
 
     @GET
-    @Path("/centroServicio")
-    public Response search(@QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+    @Path("/centrosServicio")
+    public Response getListaCentros(@QueryParam("page") Integer page, @QueryParam("size") Integer size ){
         Optional<List<CentroServicio >> faqs = centroServicioService.list(page, size);
         Response response;
         if(faqs.isPresent()) {
@@ -52,8 +52,8 @@ public class CentroServicioEndpoint {
     }
 
     @POST
-    @Path("/centroServicio")
-    public Response insert(CentroServicio  centroServicio){
+    @Path("/centrosServicio")
+    public Response insertCentro(CentroServicio  centroServicio){
         Optional<CentroServicio > centroServicioDB = centroServicioService.insert(centroServicio);
         Response response;
         if(centroServicioDB.isPresent()) {
@@ -65,8 +65,8 @@ public class CentroServicioEndpoint {
     }
 
     @PUT
-    @Path("/centroServicio/{uuid}")
-    public Response insert(@PathParam("uuid") String uuid, CentroServicio  centroServicio){
+    @Path("/centrosServicio/{uuid}")
+    public Response updateCentro(@PathParam("uuid") String uuid, CentroServicio  centroServicio){
         centroServicio.setUuid(uuid);
         Optional<CentroServicio > centroServicioDB = centroServicioService.update(centroServicio);
         Response response;
@@ -79,14 +79,40 @@ public class CentroServicioEndpoint {
     }
 
     @DELETE
-    @Path("/centroServicio/{uuid}")
-    public Response delete(@PathParam("uuid") String uuid){
+    @Path("/centrosServicio/{uuid}")
+    public Response deleteCentro(@PathParam("uuid") String uuid){
         Optional<CentroServicio > centroServicio = centroServicioService.get(uuid);
         centroServicio.get().setStatus(-1);
         Optional<CentroServicio > centroServicioDB = centroServicioService.update(centroServicio.get());
         Response response;
         if(centroServicioDB.isPresent()) {
             response = Response.ok(centroServicioDB.get()).build();
+        }else{
+            response = Response.noContent().build();
+        }
+        return response;
+    }
+
+    @GET
+    @Path("/centrosServicio")
+    public Response getByTitulo(@QueryParam("titulo") String titulo, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+        Optional<List<CentroServicio >> faqsTitulo = centroServicioService.getTitulo(titulo, page, size);
+        Response response;
+        if(faqsTitulo.isPresent()) {
+            response = Response.ok(faqsTitulo.get()).build();
+        }else{
+            response = Response.noContent().build();
+        }
+        return response;
+    }
+
+    @GET
+    @Path("/centrosServicio")
+    public Response getByDireccion(@QueryParam("direccion") String direccion, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+        Optional<List<CentroServicio >> faqsDireccion = centroServicioService.getDireccion(direccion, page, size);
+        Response response;
+        if(faqsDireccion.isPresent()) {
+            response = Response.ok(faqsDireccion.get()).build();
         }else{
             response = Response.noContent().build();
         }

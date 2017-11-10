@@ -40,7 +40,7 @@ public class FaqEndpoint {
 
     @GET
     @Path("/faq")
-    public Response search(@QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+    public Response getListaFaqs(@QueryParam("page") Integer page, @QueryParam("size") Integer size ){
         Optional<List<Faq>> faqs = faqService.list(page, size);
         Response response;
         if(faqs.isPresent()) {
@@ -53,7 +53,7 @@ public class FaqEndpoint {
 
     @POST
     @Path("/faq")
-    public Response insert(Faq faq){
+    public Response insertFaq(Faq faq){
         Optional<Faq> faqDB = faqService.insert(faq);
         Response response;
         if(faqDB.isPresent()) {
@@ -66,7 +66,7 @@ public class FaqEndpoint {
 
     @PUT
     @Path("/faq/{uuid}")
-    public Response insert(@PathParam("uuid") String uuid, Faq faq){
+    public Response updateFaq(@PathParam("uuid") String uuid, Faq faq){
         faq.setUuid(uuid);
         Optional<Faq> faqDB = faqService.update(faq);
         Response response;
@@ -80,13 +80,26 @@ public class FaqEndpoint {
 
     @DELETE
     @Path("/faq/{uuid}")
-    public Response delete(@PathParam("uuid") String uuid){
+    public Response deleteFaq(@PathParam("uuid") String uuid){
         Optional<Faq> faq = faqService.get(uuid);
         faq.get().setStatus(-1);
         Optional<Faq> faqDB = faqService.update(faq.get());
         Response response;
         if(faqDB.isPresent()) {
             response = Response.ok(faqDB.get()).build();
+        }else{
+            response = Response.noContent().build();
+        }
+        return response;
+    }
+
+    @GET
+    @Path("/faq")
+    public Response getByTitulo(@QueryParam("titulo") String titulo, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+        Optional<List<Faq>> faqsTitulo = faqService.getTitulo(titulo, page, size);
+        Response response;
+        if(faqsTitulo.isPresent()) {
+            response = Response.ok(faqsTitulo.get()).build();
         }else{
             response = Response.noContent().build();
         }

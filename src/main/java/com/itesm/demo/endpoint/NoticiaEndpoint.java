@@ -26,7 +26,7 @@ public class NoticiaEndpoint {
     private NoticiaService noticiaService;
 
     @GET
-    @Path("/noticia/{uuid}")
+    @Path("/noticias/{uuid}")
     public Response getNoticia(@PathParam("uuid") String uuid){
         Optional<Noticia> noticia = noticiaService.get(uuid);
         Response response;
@@ -39,8 +39,8 @@ public class NoticiaEndpoint {
     }
 
     @GET
-    @Path("/noticia")
-    public Response search(@QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+    @Path("/noticias")
+    public Response getListaNoticias(@QueryParam("page") Integer page, @QueryParam("size") Integer size ){
         Optional<List<Noticia>> noticias = noticiaService.list(page, size);
         Response response;
         if(noticias.isPresent()) {
@@ -52,8 +52,8 @@ public class NoticiaEndpoint {
     }
 
     @POST
-    @Path("/noticia")
-    public Response insert(Noticia noticia){
+    @Path("/noticias")
+    public Response insertNoticia(Noticia noticia){
         Optional<Noticia> noticiaDB = noticiaService.insert(noticia);
         Response response;
         if(noticiaDB.isPresent()) {
@@ -65,8 +65,8 @@ public class NoticiaEndpoint {
     }
 
     @PUT
-    @Path("/noticia/{uuid}")
-    public Response insert(@PathParam("uuid") String uuid, Noticia noticia){
+    @Path("/noticias/{uuid}")
+    public Response updateNoticia(@PathParam("uuid") String uuid, Noticia noticia){
         noticia.setUuid(uuid);
         Optional<Noticia> noticiaDB = noticiaService.update(noticia);
         Response response;
@@ -79,14 +79,27 @@ public class NoticiaEndpoint {
     }
 
     @DELETE
-    @Path("/noticia/{uuid}")
-    public Response delete(@PathParam("uuid") String uuid){
+    @Path("/noticias/{uuid}")
+    public Response deleteNoticia(@PathParam("uuid") String uuid){
         Optional<Noticia> noticia = noticiaService.get(uuid);
         noticia.get().setStatus(-1);
         Optional<Noticia> noticiaDB = noticiaService.update(noticia.get());
         Response response;
         if(noticiaDB.isPresent()) {
             response = Response.ok(noticiaDB.get()).build();
+        }else{
+            response = Response.noContent().build();
+        }
+        return response;
+    }
+
+    @GET
+    @Path("/noticias")
+    public Response searchByTitulo(@QueryParam("titulo") String titulo, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+        Optional<List<Noticia>> noticiasTitulo = noticiaService.getTitulo(titulo, page, size);
+        Response response;
+        if(noticiasTitulo.isPresent()) {
+            response = Response.ok(noticiasTitulo.get()).build();
         }else{
             response = Response.noContent().build();
         }

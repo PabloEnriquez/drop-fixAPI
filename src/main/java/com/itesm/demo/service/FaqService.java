@@ -55,4 +55,9 @@ public class FaqService {
         return faqDAO.list(page, size);
     }
 
+    public Optional<List<Faq>> getTitulo(String titulo, Integer page, Integer size){
+        // validar los datos y cualquier lógica de negocio
+        return faqDAO.getByTitulo(titulo, page, size);
+    }
+
 }

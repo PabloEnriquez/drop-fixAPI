@@ -85,6 +85,20 @@ public class NoticiaDAO {
         return Optional.empty();
     }
 
+    public Optional<List<Noticia>> getByTitulo(String titulo, Integer page, Integer size) {
+        String sql = "SELECT * FROM noticia WHERE titulo=? LIMIT ?, ?";
+        try {
+            List<Noticia> noticias = jdbcTemplate.query(sql,
+                    new BeanPropertyRowMapper<>(Noticia.class), titulo, (page * size), size);
+            logger.debug("Getting noticia list por titulo ");
+            return Optional.of(noticias);
+        } catch (EmptyResultDataAccessException e) {
+            e.printStackTrace();
+            logger.debug("Could not get noticia list por titulo ");
+        }
+        return Optional.empty();
+    }
+
 
 
 }
