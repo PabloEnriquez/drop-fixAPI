@@ -86,7 +86,7 @@ public class NoticiaDAO {
     }
 
     public Optional<List<Noticia>> getByTitulo(String titulo, Integer page, Integer size) {
-        String sql = "SELECT * FROM noticia WHERE titulo=? LIMIT ?, ?";
+        String sql = "SELECT * FROM noticia WHERE titulo LIKE %?% LIMIT ?, ?";
         try {
             List<Noticia> noticias = jdbcTemplate.query(sql,
                     new BeanPropertyRowMapper<>(Noticia.class), titulo, (page * size), size);

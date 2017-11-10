@@ -57,20 +57,16 @@ public class ReporteService {
         return reporteDAO.list(page, size);
     }
 
-    public Optional<Reporte> getStatusAtendido(Long status_atendido){
+    public Optional<List<Reporte>> getStatusAtendido(Long status_atendido, Integer page, Integer size ){
         // validar los datos y cualquier lógica de negocio
         // modificar el objeto o agregar datos
-        Optional<Reporte> reporte = reporteDAO.getByStatusAtendido(status_atendido);
-//        equipo_computo.set;
-        return reporte;
+        return reporteDAO.getByStatusAtendido(status_atendido, page, size);
     }
 
-    public Optional<Reporte> getFechaCreacion(Date fecha_creacion){
+    public Optional<List<Reporte>> getFechaCreacion(Date fecha_creacion, Integer page, Integer size ){
         // validar los datos y cualquier lógica de negocio
         // modificar el objeto o agregar datos
-        Optional<Reporte> reporte = reporteDAO.getByFechaCreacion(fecha_creacion);
-//        equipo_computo.set;
-        return reporte;
+        return reporteDAO.getByFechaCreacion(fecha_creacion, page, size);
     }
 
     public Optional<List<Compra>> listComprasReporte(Long id_reporte, Integer page, Integer size){

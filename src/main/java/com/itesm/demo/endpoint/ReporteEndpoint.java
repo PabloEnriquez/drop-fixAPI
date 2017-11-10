@@ -98,11 +98,11 @@ public class ReporteEndpoint {
 
     @GET
     @Path("/reportes")
-    public Response searchByStatusAtendido(@QueryParam("status_atendido") Long status_atendido ){
-        Optional<Reporte> reporte = reporteService.getStatusAtendido(status_atendido);
+    public Response searchByStatusAtendido(@QueryParam("status_atendido") Long status_atendido, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+        Optional<List<Reporte>> reportesStatusAtendido = reporteService.getStatusAtendido(status_atendido, page, size);
         Response response;
-        if(reporte.isPresent()) {
-            response = Response.ok(reporte.get()).build();
+        if(reportesStatusAtendido.isPresent()) {
+            response = Response.ok(reportesStatusAtendido.get()).build();
         }else{
             response = Response.noContent().build();
         }
@@ -111,11 +111,11 @@ public class ReporteEndpoint {
 
     @GET
     @Path("/reportes")
-    public Response searchByFechaCreacion(@QueryParam("fecha_creacion") Date fecha_creacion ){
-        Optional<Reporte> reporte = reporteService.getFechaCreacion(fecha_creacion);
+    public Response searchByFechaCreacion(@QueryParam("fecha_creacion") Date fecha_creacion, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+        Optional<List<Reporte>> reportesFechaCreacion = reporteService.getFechaCreacion(fecha_creacion, page, size);
         Response response;
-        if(reporte.isPresent()) {
-            response = Response.ok(reporte.get()).build();
+        if(reportesFechaCreacion.isPresent()) {
+            response = Response.ok(reportesFechaCreacion.get()).build();
         }else{
             response = Response.noContent().build();
         }

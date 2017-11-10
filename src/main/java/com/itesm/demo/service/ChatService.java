@@ -69,12 +69,10 @@ public class ChatService {
         return mensajeDAO.listMensajesChat(id_chat, page, size);
     }
 
-    public Optional<Chat> getFechaCreacion(Date fecha_creacion){
+    public Optional<List<Chat>> getFechaCreacion(Date fecha_creacion, Integer page, Integer size){
         // validar los datos y cualquier lógica de negocio
         // modificar el objeto o agregar datos
-        Optional<Chat> chat = chatDAO.getByFechaCreacion(fecha_creacion);
-//        equipo_computo.set;
-        return chat;
+        return chatDAO.getByFechaCreacion(fecha_creacion, page, size);
     }
 
 }

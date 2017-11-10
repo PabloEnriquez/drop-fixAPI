@@ -145,7 +145,7 @@ public class UsuarioDAO {
     }
 
     public Optional<List<Usuario>> getByTipoUsuario(Integer tipo_usuario, Integer page, Integer size){
-        String sql = "SELECT * FROM usuario WHERE tipo_usuario LIKE %?% LIMIT ?, ?";
+        String sql = "SELECT * FROM usuario WHERE tipo_usuario=? LIMIT ?, ?";
         try {
             List<Usuario> usuarios = jdbcTemplate.query(sql,
                     new BeanPropertyRowMapper<>(Usuario.class), tipo_usuario, (page * size), size);

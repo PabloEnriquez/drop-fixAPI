@@ -86,15 +86,16 @@ public class CompraDAO {
         return Optional.empty();
     }
 
-    public Optional<Compra> getByFechaCreacion(Date fecha_creacion) {
-        String sql = "SELECT * FROM compra WHERE fecha_creacion=?";
+    public Optional<List<Compra>> getByFechaCreacion(Date fecha_creacion, Integer page, Integer size ) {
+        String sql = "SELECT * FROM compra WHERE fecha_creacion LIKE %?% LIMIT ?, ?";
         try {
-            BeanPropertyRowMapper<Compra> rowMapper = new BeanPropertyRowMapper<>(Compra.class);
-            Compra compra = jdbcTemplate.queryForObject(sql, rowMapper, fecha_creacion);
-            logger.debug("Getting compra with fecha de creacion: " + fecha_creacion);
-            return Optional.of(compra);
+            List<Compra> compras = jdbcTemplate.query(sql,
+                    new BeanPropertyRowMapper<>(Compra.class), fecha_creacion, (page * size), size);
+            logger.debug("Getting compras list por fecha de creacion ");
+            return Optional.of(compras);
         } catch (EmptyResultDataAccessException e) {
-            logger.debug("No compra with fecha de creacion: " + fecha_creacion);
+            e.printStackTrace();
+            logger.debug("Could not get compras list por fecha de creacion ");
         }
         return Optional.empty();
     }

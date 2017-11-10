@@ -97,11 +97,11 @@ public class CompraEndpoint {
 
     @GET
     @Path("/compras")
-    public Response searchByFechaCreacion(@QueryParam("fecha_cracion") Date fecha_creacion ){
-        Optional<Compra> compra = compraService.getFechaCreacion(fecha_creacion);
+    public Response searchByFechaCreacion(@QueryParam("fecha_cracion") Date fecha_creacion, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+        Optional<List<Compra>> comprasFechaCreacion = compraService.getFechaCreacion(fecha_creacion, page, size);
         Response response;
-        if(compra.isPresent()) {
-            response = Response.ok(compra.get()).build();
+        if(comprasFechaCreacion.isPresent()) {
+            response = Response.ok(comprasFechaCreacion.get()).build();
         }else{
             response = Response.noContent().build();
         }

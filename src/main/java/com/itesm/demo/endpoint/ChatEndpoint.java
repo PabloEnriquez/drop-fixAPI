@@ -125,11 +125,11 @@ public class ChatEndpoint {
 
     @GET
     @Path("/chats")
-    public Response searchByFechaCreacion(@QueryParam("fecha_creacion") Date fecha_creacion){
-        Optional<Chat> chat = chatService.getFechaCreacion(fecha_creacion);
+    public Response searchByFechaCreacion(@QueryParam("fecha_creacion") Date fecha_creacion, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+        Optional<List<Chat>> chatsFechaCreacion = chatService.getFechaCreacion(fecha_creacion, page, size);
         Response response;
-        if(chat.isPresent()) {
-            response = Response.ok(chat.get()).build();
+        if(chatsFechaCreacion.isPresent()) {
+            response = Response.ok(chatsFechaCreacion.get()).build();
         }else{
             response = Response.noContent().build();
         }

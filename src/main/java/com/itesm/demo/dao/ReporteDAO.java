@@ -86,28 +86,30 @@ public class ReporteDAO {
         return Optional.empty();
     }
 
-    public Optional<Reporte> getByStatusAtendido(Long status_atendido) {
-        String sql = "SELECT * FROM reporte WHERE status_atendido=?";
+    public Optional<List<Reporte>> getByStatusAtendido(Long status_atendido, Integer page, Integer size ) {
+        String sql = "SELECT * FROM reporte WHERE status_atendido LIKE %?% LIMIT ?, ?";
         try {
-            BeanPropertyRowMapper<Reporte> rowMapper = new BeanPropertyRowMapper<>(Reporte.class);
-            Reporte reporte = jdbcTemplate.queryForObject(sql, rowMapper, status_atendido);
-            logger.debug("Getting reporte with status atendido: " + status_atendido);
-            return Optional.of(reporte);
+            List<Reporte> reportes = jdbcTemplate.query(sql,
+                    new BeanPropertyRowMapper<>(Reporte.class), status_atendido, (page * size), size);
+            logger.debug("Getting reportes list por status atendido ");
+            return Optional.of(reportes);
         } catch (EmptyResultDataAccessException e) {
-            logger.debug("No reporte with status atendido: " + status_atendido);
+            e.printStackTrace();
+            logger.debug("Could not get reportes list por status atendido ");
         }
         return Optional.empty();
     }
 
-    public Optional<Reporte> getByFechaCreacion(Date fecha_creacion) {
-        String sql = "SELECT * FROM reporte WHERE fecha_creacion=?";
+    public Optional<List<Reporte>> getByFechaCreacion(Date fecha_creacion, Integer page, Integer size) {
+        String sql = "SELECT * FROM reporte WHERE fecha_creacion LIKE %?% LIMIT ?, ?";
         try {
-            BeanPropertyRowMapper<Reporte> rowMapper = new BeanPropertyRowMapper<>(Reporte.class);
-            Reporte reporte = jdbcTemplate.queryForObject(sql, rowMapper, fecha_creacion);
-            logger.debug("Getting reporte with fecha de creacion: " + fecha_creacion);
-            return Optional.of(reporte);
+            List<Reporte> reportes = jdbcTemplate.query(sql,
+                    new BeanPropertyRowMapper<>(Reporte.class), fecha_creacion, (page * size), size);
+            logger.debug("Getting reportes list por fecha de creacion ");
+            return Optional.of(reportes);
         } catch (EmptyResultDataAccessException e) {
-            logger.debug("No reporte with fecha de creacion: " + fecha_creacion);
+            e.printStackTrace();
+            logger.debug("Could not get reportes list por fecha de cracion ");
         }
         return Optional.empty();
     }

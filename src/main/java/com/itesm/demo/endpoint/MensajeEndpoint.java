@@ -41,7 +41,7 @@ public class MensajeEndpoint {
 
     @GET
     @Path("/mensajes")
-    public Response search(@QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+    public Response getListaMensajes(@QueryParam("page") Integer page, @QueryParam("size") Integer size ){
         Optional<List<Mensaje>> mensajes =  mensajeService.list(page, size);
         Response response;
         if(mensajes.isPresent()) {
@@ -54,7 +54,7 @@ public class MensajeEndpoint {
 
     @POST
     @Path("/mensajes")
-    public Response insert(Mensaje mensaje){
+    public Response insertMensaje(Mensaje mensaje){
         Optional<Mensaje> mensajeDB = mensajeService.insert(mensaje);
         Response response;
         if(mensajeDB.isPresent()) {
@@ -65,33 +65,33 @@ public class MensajeEndpoint {
         return response;
     }
 
-    @PUT
-    @Path("/mensajes/{uuid}")
-    public Response insert(@PathParam("uuid") String uuid, Mensaje mensaje){
-        mensaje.setUuid(uuid);
-        Optional<Mensaje> mensajeDB = mensajeService.update(mensaje);
-        Response response;
-        if(mensajeDB.isPresent()) {
-            response = Response.ok(mensajeDB.get()).build();
-        }else{
-            response = Response.noContent().build();
-        }
-        return response;
-    }
+//    @PUT
+//    @Path("/mensajes/{uuid}")
+//    public Response updateMensaje(@PathParam("uuid") String uuid, Mensaje mensaje){
+//        mensaje.setUuid(uuid);
+//        Optional<Mensaje> mensajeDB = mensajeService.update(mensaje);
+//        Response response;
+//        if(mensajeDB.isPresent()) {
+//            response = Response.ok(mensajeDB.get()).build();
+//        }else{
+//            response = Response.noContent().build();
+//        }
+//        return response;
+//    }
 
-    @DELETE
-    @Path("/mensajes/{uuid}")
-    public Response delete(@PathParam("uuid") String uuid){
-        Optional<Mensaje> mensaje = mensajeService.get(uuid);
-//        mensaje.get().setStatus("-1");
-        Optional<Mensaje> mensajeDB = mensajeService.update(mensaje.get());
-        Response response;
-        if(mensajeDB.isPresent()) {
-            response = Response.ok(mensajeDB.get()).build();
-        }else{
-            response = Response.noContent().build();
-        }
-        return response;
-    }
+//    @DELETE
+//    @Path("/mensajes/{uuid}")
+//    public Response deleteMensaje(@PathParam("uuid") String uuid){
+//        Optional<Mensaje> mensaje = mensajeService.get(uuid);
+////        mensaje.get().setStatus("-1");
+//        Optional<Mensaje> mensajeDB = mensajeService.update(mensaje.get());
+//        Response response;
+//        if(mensajeDB.isPresent()) {
+//            response = Response.ok(mensajeDB.get()).build();
+//        }else{
+//            response = Response.noContent().build();
+//        }
+//        return response;
+//    }
 
 }

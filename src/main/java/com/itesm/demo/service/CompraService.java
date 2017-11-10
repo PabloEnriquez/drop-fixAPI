@@ -52,12 +52,10 @@ public class CompraService {
         return compraDAO.list(page, size);
     }
 
-    public Optional<Compra> getFechaCreacion(Date fecha_creacion){
+    public Optional<List<Compra>> getFechaCreacion(Date fecha_creacion, Integer page, Integer size ){
         // validar los datos y cualquier lógica de negocio
         // modificar el objeto o agregar datos
-        Optional<Compra> compra = compraDAO.getByFechaCreacion(fecha_creacion);
-//        equipo_computo.set;
-        return compra;
+        return compraDAO.getByFechaCreacion(fecha_creacion, page, size);
     }
 
 }

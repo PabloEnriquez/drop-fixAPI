@@ -56,19 +56,19 @@ public class MensajeDAO {
         }
     }
 
-    public Optional<Mensaje> update(Mensaje mensaje){
-        try {
-            jdbcTemplate.update("UPDATE mensaje SET " +
-                            "contenido=? WHERE uuid=?",
-                    mensaje.getContenido(), mensaje.getUuid() );
-            logger.debug("Updating mensaje: " + mensaje.getUuid());
-            return getByUuid(mensaje.getUuid());
-        } catch (Exception e) {
-            e.printStackTrace();
-            logger.debug("Could not update mensaje: " + mensaje.getUuid());
-            return Optional.empty();
-        }
-    }
+//    public Optional<Mensaje> update(Mensaje mensaje){
+//        try {
+//            jdbcTemplate.update("UPDATE mensaje SET " +
+//                            "contenido=? WHERE uuid=?",
+//                    mensaje.getContenido(), mensaje.getUuid() );
+//            logger.debug("Updating mensaje: " + mensaje.getUuid());
+//            return getByUuid(mensaje.getUuid());
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            logger.debug("Could not update mensaje: " + mensaje.getUuid());
+//            return Optional.empty();
+//        }
+//    }
 
     public Optional<List<Mensaje>> list(Integer page, Integer size) {
         String sql = "SELECT * FROM mensaje WHERE status != -1 LIMIT ?, ?";

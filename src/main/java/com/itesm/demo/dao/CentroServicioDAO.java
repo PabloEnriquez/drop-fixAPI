@@ -89,7 +89,7 @@ public class CentroServicioDAO {
     }
 
     public Optional<List<CentroServicio>> getByTitulo(String titulo, Integer page, Integer size) {
-        String sql = "SELECT * FROM centro_de_servicio WHERE titulo=? LIMIT ?, ?";
+        String sql = "SELECT * FROM centro_de_servicio WHERE titulo LIKE %?% LIMIT ?, ?";
         try {
             List<CentroServicio> centroServicios = jdbcTemplate.query(sql,
                     new BeanPropertyRowMapper<>(CentroServicio.class), titulo, (page * size), size);
@@ -103,7 +103,7 @@ public class CentroServicioDAO {
     }
 
     public Optional<List<CentroServicio>> getByDireccion(String direccion, Integer page, Integer size) {
-        String sql = "SELECT * FROM centro_de_servicio WHERE direccion=? LIMIT ?, ?";
+        String sql = "SELECT * FROM centro_de_servicio WHERE direccion LIKE %?% LIMIT ?, ?";
         try {
             List<CentroServicio> centroServicios = jdbcTemplate.query(sql,
                     new BeanPropertyRowMapper<>(CentroServicio.class), direccion, (page * size), size);

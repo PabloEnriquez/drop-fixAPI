@@ -30,18 +30,18 @@ public class MensajeService {
         return mensajeDAO.insert(mensaje);
     }
 
-    public Optional<Mensaje> update(Mensaje mensaje){
-        // validar los datos y cualquier lógica de negocio
-        Optional<Mensaje> mensajeDB = mensajeDAO.getByUuid(mensaje.getUuid());
-        if(mensajeDB.isPresent()) {
-            if(mensaje.getContenido() == null){
-                mensaje.setContenido(mensajeDB.get().getContenido());
-            }
-            return mensajeDAO.update(mensaje);
-        } else {
-            return Optional.empty();
-        }
-    }
+//    public Optional<Mensaje> update(Mensaje mensaje){
+//        // validar los datos y cualquier lógica de negocio
+//        Optional<Mensaje> mensajeDB = mensajeDAO.getByUuid(mensaje.getUuid());
+//        if(mensajeDB.isPresent()) {
+//            if(mensaje.getContenido() == null){
+//                mensaje.setContenido(mensajeDB.get().getContenido());
+//            }
+//            return mensajeDAO.update(mensaje);
+//        } else {
+//            return Optional.empty();
+//        }
+//    }
 
     public Optional<List<Mensaje>> list(Integer page, Integer size){
         // validar los datos y cualquier lógica de negocio

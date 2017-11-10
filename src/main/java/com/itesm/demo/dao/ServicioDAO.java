@@ -87,7 +87,7 @@ public class ServicioDAO {
     }
 
     public Optional<List<Servicio>> getByNombre(String nombre, Integer page, Integer size) {
-        String sql = "SELECT * FROM servicio WHERE nombre=? LIMIT ?, ?";
+        String sql = "SELECT * FROM servicio WHERE nombre LIKE %?% LIMIT ?, ?";
         try {
             List<Servicio> servicios = jdbcTemplate.query(sql,
                     new BeanPropertyRowMapper<>(Servicio.class), nombre, (page * size), size);
@@ -101,7 +101,7 @@ public class ServicioDAO {
     }
 
     public Optional<List<Servicio>> getByCosto(Double costo, Integer page, Integer size) {
-        String sql = "SELECT * FROM servicio WHERE costo=? LIMIT ?, ?";
+        String sql = "SELECT * FROM servicio WHERE costo LIKE %?% LIMIT ?, ?";
         try {
             List<Servicio> servicios = jdbcTemplate.query(sql,
                     new BeanPropertyRowMapper<>(Servicio.class), costo, (page * size), size);

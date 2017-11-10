@@ -85,15 +85,16 @@ public class ChatDAO {
         return Optional.empty();
     }
 
-    public Optional<Chat> getByFechaCreacion(Date fecha_creacion) {
-        String sql = "SELECT * FROM chat WHERE fecha_creacion=?";
+    public Optional<List<Chat>> getByFechaCreacion(Date fecha_creacion, Integer page, Integer size ) {
+        String sql = "SELECT * FROM chat WHERE fecha_creacion LIKE %?% LIMIT ?, ?";
         try {
-            BeanPropertyRowMapper<Chat> rowMapper = new BeanPropertyRowMapper<>(Chat.class);
-            Chat chat = jdbcTemplate.queryForObject(sql, rowMapper, fecha_creacion);
-            logger.debug("Getting chat with fecha de creacion: " + fecha_creacion);
-            return Optional.of(chat);
+            List<Chat> chats = jdbcTemplate.query(sql,
+                    new BeanPropertyRowMapper<>(Chat.class), fecha_creacion, (page * size), size);
+            logger.debug("Getting chats list por fecha de creacion ");
+            return Optional.of(chats);
         } catch (EmptyResultDataAccessException e) {
-            logger.debug("No chat with fecha de creacion: " + fecha_creacion);
+            e.printStackTrace();
+            logger.debug("Could not get chats list por fecha de creacion ");
         }
         return Optional.empty();
     }
