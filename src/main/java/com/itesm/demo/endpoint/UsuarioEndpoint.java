@@ -97,7 +97,7 @@ public class UsuarioEndpoint {
     }
 
     @GET
-    @Path("/usuarios")
+    @Path("/usuarios/x-mail")
     public Response searchByEmail(@QueryParam("email") String email, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
         Optional<List<Usuario>> usuariosMail = usuarioService.getMail(email, page, size);
         Response response;
@@ -110,7 +110,7 @@ public class UsuarioEndpoint {
     }
 
     @GET
-    @Path("/usuarios")
+    @Path("/usuarios/x-nombre")
     public Response searchByNombre(@QueryParam("nombre") String nombre, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
         Optional<List<Usuario>> usuariosNombre = usuarioService.getNombre(nombre, page, size);
         Response response;
@@ -123,7 +123,7 @@ public class UsuarioEndpoint {
     }
 
     @GET
-    @Path("/usuarios")
+    @Path("/usuarios/x-nombre-usuario")
     public Response searchByUsuarioNombre(@QueryParam("usuario") String usuario, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
         Optional<List<Usuario>> usuariosUsuarioNombre = usuarioService.getUsuarioNombre(usuario, page, size);
         Response response;
@@ -136,7 +136,7 @@ public class UsuarioEndpoint {
     }
 
     @GET
-    @Path("/usuarios")
+    @Path("/usuarios/x-fecha-creacion")
     public Response searchByFechaCreacion(@QueryParam("fecha_creacion") Date fecha_creacion, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
         Optional<List<Usuario>> usuariosFechaCreacion = usuarioService.getFechaCreacion(fecha_creacion, page, size);
         Response response;
@@ -149,7 +149,7 @@ public class UsuarioEndpoint {
     }
 
     @GET
-    @Path("/usuarios")
+    @Path("/usuarios/x-tipo-usuario")
     public Response searchByTipoUsuario(@QueryParam("tipo_usuario") Integer tipo_usuario, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
         Optional<List<Usuario>> usuariosTipoUsuario = usuarioService.getTipoUsuario(tipo_usuario, page, size);
         Response response;
@@ -162,7 +162,7 @@ public class UsuarioEndpoint {
     }
 
     @GET
-    @Path("/usuarios")
+    @Path("/usuarios/equipos")
     public Response getListaEquipos(@QueryParam("id_usuario") Long id_usuario , @QueryParam("page") Integer page, @QueryParam("size") Integer size){
         Optional<List<EquipoComputo>> equiposUsuario = usuarioService.listEquipos( id_usuario, page, size);
         Response response;
@@ -175,7 +175,7 @@ public class UsuarioEndpoint {
     }
 
     @GET
-    @Path("/usuarios")
+    @Path("/usuarios/reportes")
     public Response getListaReportes(@QueryParam("id_usuario") Long id_usuario, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
         Optional<List<Reporte>> reportesUsuario = usuarioService.listReportes(id_usuario, page, size);
         Response response;
@@ -188,7 +188,7 @@ public class UsuarioEndpoint {
     }
 
     @GET
-    @Path("/usuarios")
+    @Path("/usuarios/chats-usuario")
     public Response getListaChatsUsuario(@QueryParam("id_usuario") Long id_usuario, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
         Optional<List<Chat>> chatsUsuario = usuarioService.listChatsUsuario(id_usuario, page, size);
         Response response;
@@ -201,7 +201,7 @@ public class UsuarioEndpoint {
     }
 
     @GET
-    @Path("/usuarios")
+    @Path("/usuarios/chats-tecnico")
     public Response getListaChatsTecnico(@QueryParam("id_tecnico") Long id_tecnico, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
         Optional<List<Chat>> chatsTecnico = usuarioService.listChatsTecnico(id_tecnico, page, size);
         Response response;
@@ -214,7 +214,7 @@ public class UsuarioEndpoint {
     }
 
     @GET
-    @Path("/usuarios")
+    @Path("/usuarios/compras")
     public Response getListaCompras(@QueryParam("id_usuario") Long id_usuario, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
         Optional<List<Compra>> comprasUsuario = usuarioService.listComprasUsuario(id_usuario, page, size);
         Response response;

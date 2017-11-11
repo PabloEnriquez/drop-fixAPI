@@ -98,7 +98,7 @@ public class ChatEndpoint {
     }
 
     @GET
-    @Path("/chats")
+    @Path("/chats/reportes")
     public Response getListaReportes(@QueryParam("id_chat") Long id_chat, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
         Optional<List<Reporte>> reportesChat = chatService.listReportes(id_chat, page, size);
         Response response;
@@ -111,7 +111,7 @@ public class ChatEndpoint {
     }
 
     @GET
-    @Path("/chats")
+    @Path("/chats/mensajes")
     public Response getListaMensajes(@QueryParam("id_chat") Long id_chat, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
         Optional<List<Mensaje>> mensajesChat = chatService.listMensajes(id_chat, page, size);
         Response response;
@@ -124,7 +124,7 @@ public class ChatEndpoint {
     }
 
     @GET
-    @Path("/chats")
+    @Path("/chats/x-fecha-creacion")
     public Response searchByFechaCreacion(@QueryParam("fecha_creacion") Date fecha_creacion, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
         Optional<List<Chat>> chatsFechaCreacion = chatService.getFechaCreacion(fecha_creacion, page, size);
         Response response;

@@ -97,7 +97,7 @@ public class ReporteEndpoint {
     }
 
     @GET
-    @Path("/reportes")
+    @Path("/reporte/x-status-atendido")
     public Response searchByStatusAtendido(@QueryParam("status_atendido") Long status_atendido, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
         Optional<List<Reporte>> reportesStatusAtendido = reporteService.getStatusAtendido(status_atendido, page, size);
         Response response;
@@ -110,7 +110,7 @@ public class ReporteEndpoint {
     }
 
     @GET
-    @Path("/reportes")
+    @Path("/reportes/x-fecha-creacion")
     public Response searchByFechaCreacion(@QueryParam("fecha_creacion") Date fecha_creacion, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
         Optional<List<Reporte>> reportesFechaCreacion = reporteService.getFechaCreacion(fecha_creacion, page, size);
         Response response;
@@ -123,7 +123,7 @@ public class ReporteEndpoint {
     }
 
     @GET
-    @Path("/reportes")
+    @Path("/reportes/compras")
     public Response getListaComprasReporte(@QueryParam("id_reporte") Long id_reporte, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
         Optional<List<Compra>> comprasReporte = reporteService.listComprasReporte(id_reporte, page, size);
         Response response;

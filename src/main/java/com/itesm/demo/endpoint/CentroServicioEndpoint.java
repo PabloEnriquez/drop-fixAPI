@@ -94,8 +94,8 @@ public class CentroServicioEndpoint {
     }
 
     @GET
-    @Path("/centrosServicio")
-    public Response getByTitulo(@QueryParam("titulo") String titulo, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+    @Path("/centrosServicio/x-titulo")
+    public Response searchByTitulo(@QueryParam("titulo") String titulo, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
         Optional<List<CentroServicio >> faqsTitulo = centroServicioService.getTitulo(titulo, page, size);
         Response response;
         if(faqsTitulo.isPresent()) {
@@ -107,8 +107,8 @@ public class CentroServicioEndpoint {
     }
 
     @GET
-    @Path("/centrosServicio")
-    public Response getByDireccion(@QueryParam("direccion") String direccion, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+    @Path("/centrosServicio/x-direccion")
+    public Response searchByDireccion(@QueryParam("direccion") String direccion, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
         Optional<List<CentroServicio >> faqsDireccion = centroServicioService.getDireccion(direccion, page, size);
         Response response;
         if(faqsDireccion.isPresent()) {

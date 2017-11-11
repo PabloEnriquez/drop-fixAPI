@@ -96,7 +96,7 @@ public class CompraEndpoint {
     }
 
     @GET
-    @Path("/compras")
+    @Path("/compras/x-fecha-creacion")
     public Response searchByFechaCreacion(@QueryParam("fecha_cracion") Date fecha_creacion, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
         Optional<List<Compra>> comprasFechaCreacion = compraService.getFechaCreacion(fecha_creacion, page, size);
         Response response;

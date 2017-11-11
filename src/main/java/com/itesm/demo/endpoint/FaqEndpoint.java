@@ -94,8 +94,8 @@ public class FaqEndpoint {
     }
 
     @GET
-    @Path("/faq")
-    public Response getByTitulo(@QueryParam("titulo") String titulo, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+    @Path("/faq/x-titulo")
+    public Response searchByTitulo(@QueryParam("titulo") String titulo, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
         Optional<List<Faq>> faqsTitulo = faqService.getTitulo(titulo, page, size);
         Response response;
         if(faqsTitulo.isPresent()) {

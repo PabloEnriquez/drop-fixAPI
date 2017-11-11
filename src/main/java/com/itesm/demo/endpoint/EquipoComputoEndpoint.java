@@ -97,8 +97,8 @@ public class EquipoComputoEndpoint {
     }
 
     @GET
-    @Path("/equipos")
-    public Response getByFechaCreacion(@QueryParam("fecha_creacion") Date fecha_creacion, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+    @Path("/equipos/x-fecha-creacion")
+    public Response searchByFechaCreacion(@QueryParam("fecha_creacion") Date fecha_creacion, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
         Optional<List<EquipoComputo>> equiposFechaCreacion = equipoComputoService.getFechaCreacion(fecha_creacion, page, size);
         Response response;
         if(equiposFechaCreacion.isPresent()) {
@@ -110,8 +110,8 @@ public class EquipoComputoEndpoint {
     }
 
     @GET
-    @Path("/equipos")
-    public Response getByNombre(@QueryParam("nombre") String nombre, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+    @Path("/equipos/x-nombre")
+    public Response searchByNombre(@QueryParam("nombre") String nombre, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
         Optional<List<EquipoComputo>> equiposNombre = equipoComputoService.getNombre(nombre, page, size);
         Response response;
         if(equiposNombre.isPresent()) {
@@ -123,8 +123,8 @@ public class EquipoComputoEndpoint {
     }
 
     @GET
-    @Path("/equipos")
-    public Response getByNumSerie(@QueryParam("num_serie") String num_serie, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+    @Path("/equipos/x-num-serie")
+    public Response searchByNumSerie(@QueryParam("num_serie") String num_serie, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
         Optional<List<EquipoComputo>> equiposNumSerie = equipoComputoService.getNumSerie(num_serie, page, size);
         Response response;
         if(equiposNumSerie.isPresent()) {
@@ -136,8 +136,8 @@ public class EquipoComputoEndpoint {
     }
 
     @GET
-    @Path("/equipos")
-    public Response getByModelo(@QueryParam("modelo") String modelo, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+    @Path("/equipos/x-modelo")
+    public Response searchByModelo(@QueryParam("modelo") String modelo, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
         Optional<List<EquipoComputo>> equiposModelo = equipoComputoService.getModelo(modelo, page, size);
         Response response;
         if(equiposModelo.isPresent()) {
@@ -149,8 +149,8 @@ public class EquipoComputoEndpoint {
     }
 
     @GET
-    @Path("/equipos")
-    public Response getByMarca(@QueryParam("marca") String marca, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+    @Path("/equipos/x-marca")
+    public Response searchByMarca(@QueryParam("marca") String marca, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
         Optional<List<EquipoComputo>> equiposMarca = equipoComputoService.getMarca(marca, page, size);
         Response response;
         if(equiposMarca.isPresent()) {
@@ -162,8 +162,8 @@ public class EquipoComputoEndpoint {
     }
 
     @GET
-    @Path("/equipos")
-    public Response getBySistOperativo(@QueryParam("sistema_operativo") String sistema_operativo, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+    @Path("/equipos/x-sist-operativo")
+    public Response searchBySistOperativo(@QueryParam("sistema_operativo") String sistema_operativo, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
         Optional<List<EquipoComputo>> equiposSistOperativo = equipoComputoService.getSistOperativo(sistema_operativo, page, size);
         Response response;
         if(equiposSistOperativo.isPresent()) {
@@ -175,7 +175,7 @@ public class EquipoComputoEndpoint {
     }
 
     @GET
-    @Path("/equipos")
+    @Path("/equipos/reportes")
     public Response getListaReportes(@QueryParam("id_equipo_computo") Long id_equipo_computo, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
         Optional<List<Reporte>> reportesEquipo = equipoComputoService.listReportes(id_equipo_computo, page, size);
         Response response;

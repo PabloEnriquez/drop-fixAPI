@@ -96,7 +96,7 @@ public class ServicioEndpoint {
     }
 
     @GET
-    @Path("/servicios")
+    @Path("/servicios/compras")
     public Response getListaComprasServicio(@QueryParam("id_servicio") Long id_servicio, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
         Optional<List<Compra>> comprasServicio = servicioService.listComprasServicio(id_servicio, page, size);
         Response response;
@@ -109,8 +109,8 @@ public class ServicioEndpoint {
     }
 
     @GET
-    @Path("/servicios")
-    public Response getByNombre(@QueryParam("nombre") String nombre, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+    @Path("/servicios/x-nombre")
+    public Response searchByNombre(@QueryParam("nombre") String nombre, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
         Optional<List<Servicio>> serviciosPorNombre = servicioService.getNombre(nombre, page, size);
         Response response;
         if(serviciosPorNombre.isPresent()) {
@@ -122,8 +122,8 @@ public class ServicioEndpoint {
     }
 
     @GET
-    @Path("/servicios")
-    public Response getByCosto(@QueryParam("costo") Double costo, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+    @Path("/servicios/x-costo")
+    public Response searchByCosto(@QueryParam("costo") Double costo, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
         Optional<List<Servicio>> serviciosPorCosto = servicioService.getCosto(costo, page, size);
         Response response;
         if(serviciosPorCosto.isPresent()) {

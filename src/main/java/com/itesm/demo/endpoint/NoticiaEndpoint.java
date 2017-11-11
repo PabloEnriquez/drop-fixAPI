@@ -94,7 +94,7 @@ public class NoticiaEndpoint {
     }
 
     @GET
-    @Path("/noticias")
+    @Path("/noticias/x-titulo")
     public Response searchByTitulo(@QueryParam("titulo") String titulo, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
         Optional<List<Noticia>> noticiasTitulo = noticiaService.getTitulo(titulo, page, size);
         Response response;
