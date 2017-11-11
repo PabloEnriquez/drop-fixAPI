@@ -51,6 +51,9 @@ public class UsuarioService {
             if(usuario.getStatus() == null){
                 usuario.setStatus(usuarioDB.get().getStatus());
             }
+            if(usuario.getFecha_modificacion() == null){
+                usuario.setFecha_modificacion(usuarioDB.get().getFecha_modificacion());
+            }
             if(usuario.getEmail() == null){
                 usuario.setEmail(usuarioDB.get().getEmail());
             }
@@ -77,7 +80,12 @@ public class UsuarioService {
 
     public Optional<List<Usuario>> list(Integer page, Integer size){
         // validar los datos y cualquier lógica de negocio
-        return usuarioDAO.list(page, size);
+        if ( (page != null && page != 0) && (size != null && size != 0) ){
+            return usuarioDAO.list(page, size);
+        }else {
+            return Optional.empty();
+        }
+
     }
 
     public Optional<List<Usuario>> getMail(String email, Integer page, Integer size){
