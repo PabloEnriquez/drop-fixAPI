@@ -153,7 +153,7 @@ public class UsuarioService {
 
     public Optional<List<EquipoComputo>> listEquipos(Long id_usuario, Integer page, Integer size){
         // validar los datos y cualquier lógica de negocio
-        if ( ((id_usuario != null) && (id_usuario >= 0)) && (page != null && page > 0) && (size != null && size > 0) ){
+        if ( ((id_usuario != null) && (id_usuario > 0)) && (page != null && page > 0) && (size != null && size > 0) ){
             return equipoComputoDAO.listEquiposUsuario(id_usuario, page, size);
         }else{
             return Optional.empty();
@@ -162,7 +162,7 @@ public class UsuarioService {
 
     public Optional<List<Reporte>> listReportes(Long id_usuario, Integer page, Integer size){
         // validar los datos y cualquier lógica de negocio
-        if ( ((id_usuario != null) && (id_usuario >= 0)) && (page != null && page > 0) && (size != null && size > 0) ){
+        if ( ((id_usuario != null) && (id_usuario > 0)) && (page != null && page > 0) && (size != null && size > 0) ){
             return reporteDAO.listReportesUsuario(id_usuario, page, size);
         }else{
             return Optional.empty();
@@ -171,7 +171,7 @@ public class UsuarioService {
 
     public Optional<List<Chat>> listChatsUsuario(Long id_usuario, Integer page, Integer size){
         // validar los datos y cualquier lógica de negocio
-        if ( ((id_usuario != null) && (id_usuario >= 0)) && (page != null && page > 0) && (size != null && size > 0) ){
+        if ( ((id_usuario != null) && (id_usuario > 0)) && (page != null && page > 0) && (size != null && size > 0) ){
             return chatDAO.listChatsUsuario(id_usuario, page, size);
         }else{
             return Optional.empty();
@@ -180,7 +180,7 @@ public class UsuarioService {
 
     public Optional<List<Chat>> listChatsTecnico(Long id_tecnico, Integer page, Integer size){
         // validar los datos y cualquier lógica de negocio
-        if ( ((id_tecnico != null) && (id_tecnico >= 0)) && (page != null && page > 0) && (size != null && size > 0) ){
+        if ( ((id_tecnico != null) && (id_tecnico > 0)) && (page != null && page > 0) && (size != null && size > 0) ){
             return chatDAO.listChatsTecnico(id_tecnico, page, size);
         }else{
             return Optional.empty();
@@ -189,7 +189,7 @@ public class UsuarioService {
 
     public Optional<List<Compra>> listComprasUsuario(Long id_usuario, Integer page, Integer size){
         // validar los datos y cualquier lógica de negocio
-        if ( ((id_usuario != null) && (id_usuario >= 0)) && (page != null && page > 0) && (size != null && size > 0) ){
+        if ( ((id_usuario != null) && (id_usuario > 0)) && (page != null && page > 0) && (size != null && size > 0) ){
             return compraDAO.listComprasUsuario(id_usuario, page, size);
         }else{
             return Optional.empty();
