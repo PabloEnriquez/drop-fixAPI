@@ -33,7 +33,7 @@ public class UsuarioService {
     public Optional<Usuario> get(String uuid){
         // validar los datos y cualquier lógica de negocio
         // modificar el objeto o agregar datos
-        Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
+        Pattern p = Pattern.compile("[^A-Za-z0-9]", Pattern.CASE_INSENSITIVE);
         Matcher m = p.matcher(uuid);
         boolean b = m.find();
         if ( (!uuid.isEmpty()) && (!b) ){
@@ -99,7 +99,6 @@ public class UsuarioService {
         }else {
             return Optional.empty();
         }
-
     }
 
     public Optional<List<Usuario>> getMail(String email, Integer page, Integer size){
