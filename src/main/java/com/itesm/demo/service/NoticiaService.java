@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 public class NoticiaService {
@@ -20,16 +22,26 @@ public class NoticiaService {
     public Optional<Noticia> get(String uuid){
         // validar los datos y cualquier lógica de negocio
         // modificar el objeto o agregar datos
-        //Preguntar al pablovich
-        Optional<Noticia> noticia = noticiaDAO.getByUuid(uuid);
-        return noticia;
+        Pattern p = Pattern.compile("[^A-Za-z0-9]", Pattern.CASE_INSENSITIVE);
+        Matcher m = p.matcher(uuid);
+        boolean b = m.find();
+        if ( (!uuid.isEmpty()) && (!b) ){
+            Optional<Noticia> noticia = noticiaDAO.getByUuid(uuid);
+            return noticia;
+        }else {
+            return Optional.empty();
+        }
     }
 
     public Optional<Noticia> insert(Noticia noticia){
         // validar que el correo no existe por ejemplo
         // validar que vengan todos los campos necesarios
-        noticia.setStatus(1);//marca error de incopatibilidad con int to java.lang.string
-        return noticiaDAO.insert(noticia);
+        if ( (noticia.getTitulo() != null) && (noticia.getDescripcion() != null) && (noticia.getUrl() != null) ){
+            noticia.setStatus(1);
+            return noticiaDAO.insert(noticia);
+        }else{
+            return Optional.empty();
+        }
     }
 
     public Optional<Noticia> update(Noticia noticia){
@@ -38,6 +50,9 @@ public class NoticiaService {
         if(noticiaDB.isPresent()) {
             if(noticia.getStatus() == null){
                 noticia.setStatus(noticiaDB.get().getStatus());
+            }
+            if(noticia.getFecha_modificacion() == null){
+                noticia.setFecha_modificacion(noticiaDB.get().getFecha_modificacion());
             }
             if(noticia.getTitulo() == null){
                 noticia.setTitulo(noticiaDB.get().getTitulo());
@@ -53,12 +68,20 @@ public class NoticiaService {
 
     public Optional<List<Noticia>> list(Integer page, Integer size){
         // validar los datos y cualquier lógica de negocio
-        return noticiaDAO.list(page, size);
+        if ( (page != null && page > 0) && (size != null && size > 0) ){
+            return noticiaDAO.list(page, size);
+        }else {
+            return Optional.empty();
+        }
     }
 
     public Optional<List<Noticia>> getTitulo(String titulo, Integer page, Integer size){
         // validar los datos y cualquier lógica de negocio
-        return noticiaDAO.getByTitulo(titulo, page, size);
+        if ( (!titulo.isEmpty()) && (page != null && page > 0) && (size != null && size > 0) ){
+            return noticiaDAO.getByTitulo(titulo, page, size);
+        }else{
+            return Optional.empty();
+        }
     }
 
 }
