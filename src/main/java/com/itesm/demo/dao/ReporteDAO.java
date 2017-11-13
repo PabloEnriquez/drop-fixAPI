@@ -88,7 +88,7 @@ public class ReporteDAO {
         return Optional.empty();
     }
 
-    public Optional<List<Reporte>> getByStatusAtendido(Long status_atendido, Integer page, Integer size ) {
+    public Optional<List<Reporte>> getByStatusAtendido(Integer status_atendido, Integer page, Integer size ) {
         String sql = "SELECT * FROM reporte WHERE status_atendido LIKE %?% LIMIT ?, ?";
         try {
             List<Reporte> reportes = jdbcTemplate.query(sql,
