@@ -23,7 +23,7 @@ public class CentroServicioService {
     public Optional<CentroServicio> get(String uuid){
         // validar los datos y cualquier lógica de negocio
         // modificar el objeto o agregar datos
-        Pattern p = Pattern.compile("[^A-Za-z0-9]", Pattern.CASE_INSENSITIVE);
+        Pattern p = Pattern.compile("(^[a-zA-Z0-9][ A-Za-z0-9_-]*$)", Pattern.CASE_INSENSITIVE);
         Matcher m = p.matcher(uuid);
         boolean b = m.find();
         if ( (!uuid.isEmpty()) && (!b) ){
@@ -82,7 +82,7 @@ public class CentroServicioService {
 
     public Optional<List<CentroServicio>> list(Integer page, Integer size){
         // validar los datos y cualquier lógica de negocio
-        if ( (page != null && page > 0) && (size != null && size > 0) ){
+        if ( (page != null && page >= 0) && (size != null && size > 0) ){
             return centroServicioDAO.list(page, size);
         }else {
             return Optional.empty();
@@ -91,10 +91,10 @@ public class CentroServicioService {
 
     public Optional<List<CentroServicio>> getTitulo(String titulo, Integer page, Integer size){
         // validar los datos y cualquier lógica de negocio
-        Pattern p = Pattern.compile("[^A-Za-z0-9]", Pattern.CASE_INSENSITIVE);
-        Matcher m = p.matcher(titulo);
-        boolean b = m.find();
-        if ( (!titulo.isEmpty() && (!b)) && (page != null && page > 0) && (size != null && size > 0) ){
+//        Pattern p = Pattern.compile("(^[a-zA-Z0-9][ A-Za-z0-9_-]*$)", Pattern.CASE_INSENSITIVE);
+//        Matcher m = p.matcher(titulo);
+//        boolean b = m.find();
+        if ( (!titulo.isEmpty() /*&& (!b)*/) && (page != null && page >= 0) && (size != null && size > 0) ){
             return centroServicioDAO.getByTitulo(titulo, page, size);
         }else{
             return Optional.empty();
@@ -103,10 +103,10 @@ public class CentroServicioService {
 
     public Optional<List<CentroServicio>> getDireccion(String direccion, Integer page, Integer size){
         // validar los datos y cualquier lógica de negocio
-        Pattern p = Pattern.compile("[^A-Za-z0-9]", Pattern.CASE_INSENSITIVE);
-        Matcher m = p.matcher(direccion);
-        boolean b = m.find();
-        if ( (!direccion.isEmpty() && (!b)) && (page != null && page > 0) && (size != null && size > 0) ){
+//        Pattern p = Pattern.compile("(^[a-zA-Z0-9][ A-Za-z0-9_-]*$)", Pattern.CASE_INSENSITIVE);
+//        Matcher m = p.matcher(direccion);
+//        boolean b = m.find();
+        if ( (!direccion.isEmpty() /*&& (!b)*/) && (page != null && page >= 0) && (size != null && size > 0) ){
             return centroServicioDAO.getByDireccion(direccion, page, size);
         }else{
             return Optional.empty();

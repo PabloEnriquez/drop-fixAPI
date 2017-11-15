@@ -22,7 +22,7 @@ public class FaqService {
     public Optional<Faq> get(String uuid){
         // validar los datos y cualquier lógica de negocio
         // modificar el objeto o agregar datos
-        Pattern p = Pattern.compile("[^A-Za-z0-9]", Pattern.CASE_INSENSITIVE);
+        Pattern p = Pattern.compile("(^[a-zA-Z0-9][ A-Za-z0-9_-]*$)", Pattern.CASE_INSENSITIVE);
         Matcher m = p.matcher(uuid);
         boolean b = m.find();
         if ( (!uuid.isEmpty()) && (!b) ){
@@ -68,7 +68,7 @@ public class FaqService {
 
     public Optional<List<Faq>> list(Integer page, Integer size){
         // validar los datos y cualquier lógica de negocio
-        if ( (page != null && page > 0) && (size != null && size > 0) ){
+        if ( (page != null && page >= 0) && (size != null && size > 0) ){
             return faqDAO.list(page, size);
         }else {
             return Optional.empty();
@@ -77,7 +77,7 @@ public class FaqService {
 
     public Optional<List<Faq>> getTitulo(String titulo, Integer page, Integer size){
         // validar los datos y cualquier lógica de negocio
-        if ( (!titulo.isEmpty()) && (page != null && page > 0) && (size != null && size > 0) ){
+        if ( (!titulo.isEmpty()) && (page != null && page >= 0) && (size != null && size > 0) ){
             return faqDAO.getByTitulo(titulo, page, size);
         }else{
             return Optional.empty();

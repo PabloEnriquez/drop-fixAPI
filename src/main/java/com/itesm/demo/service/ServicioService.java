@@ -25,7 +25,7 @@ public class ServicioService {
     public Optional<Servicio> get(String uuid){
         // validar los datos y cualquier lógica de negocio
         // modificar el objeto o agregar datos
-        Pattern p = Pattern.compile("[^A-Za-z0-9]", Pattern.CASE_INSENSITIVE);
+        Pattern p = Pattern.compile("(^[a-zA-Z0-9][ A-Za-z0-9_-]*$)", Pattern.CASE_INSENSITIVE);
         Matcher m = p.matcher(uuid);
         boolean b = m.find();
         if ( (!uuid.isEmpty()) && (!b) ){
@@ -78,7 +78,7 @@ public class ServicioService {
 
     public Optional<List<Servicio>> list(Integer page, Integer size){
         // validar los datos y cualquier lógica de negocio
-        if ( (page != null && page > 0) && (size != null && size > 0) ){
+        if ( (page != null && page >= 0) && (size != null && size > 0) ){
             return servicioDAO.list(page, size);
         }else {
             return Optional.empty();
@@ -87,7 +87,7 @@ public class ServicioService {
 
     public Optional<List<Compra>> listComprasServicio(Long id_servicio, Integer page, Integer size){
         // validar los datos y cualquier lógica de negocio
-        if ( ((id_servicio != null) && (id_servicio > 0)) && (page != null && page > 0) && (size != null && size > 0) ){
+        if ( ((id_servicio != null) && (id_servicio > 0)) && (page != null && page >= 0) && (size != null && size > 0) ){
             return compraDAO.listComprasServicio(id_servicio, page, size);
         }else{
             return Optional.empty();
@@ -96,7 +96,7 @@ public class ServicioService {
 
     public Optional<List<Servicio>> getNombre(String nombre, Integer page, Integer size){
         // validar los datos y cualquier lógica de negocio
-        if ( (!nombre.isEmpty()) && (page != null && page > 0) && (size != null && size > 0) ){
+        if ( (!nombre.isEmpty()) && (page != null && page >= 0) && (size != null && size > 0) ){
             return servicioDAO.getByNombre(nombre, page, size);
         }else{
             return Optional.empty();
@@ -105,7 +105,7 @@ public class ServicioService {
 
     public Optional<List<Servicio>> getCosto(Double costo, Integer page, Integer size){
         // validar los datos y cualquier lógica de negocio
-        if ( ((costo != null) && (costo > 0)) && (page != null && page > 0) && (size != null && size > 0) ){
+        if ( ((costo != null) && (costo > 0)) && (page != null && page >= 0) && (size != null && size > 0) ){
             return servicioDAO.getByCosto(costo, page, size);
         }else{
             return Optional.empty();

@@ -25,7 +25,7 @@ public class ReporteService {
     public Optional<Reporte> get(String uuid){
         // validar los datos y cualquier lógica de negocio
         // modificar el objeto o agregar datos
-        Pattern p = Pattern.compile("[^A-Za-z0-9]", Pattern.CASE_INSENSITIVE);
+        Pattern p = Pattern.compile("(^[a-zA-Z0-9][ A-Za-z0-9_-]*$)", Pattern.CASE_INSENSITIVE);
         Matcher m = p.matcher(uuid);
         boolean b = m.find();
         if ( (!uuid.isEmpty()) && (!b) ){
@@ -72,7 +72,7 @@ public class ReporteService {
 
     public Optional<List<Reporte>> list(Integer page, Integer size){
         // validar los datos y cualquier lógica de negocio
-        if ( (page != null && page > 0) && (size != null && size > 0) ){
+        if ( (page != null && page >= 0) && (size != null && size > 0) ){
             return reporteDAO.list(page, size);
         }else {
             return Optional.empty();
@@ -82,7 +82,7 @@ public class ReporteService {
     public Optional<List<Reporte>> getStatusAtendido(Integer status_atendido, Integer page, Integer size ){
         // validar los datos y cualquier lógica de negocio
         // modificar el objeto o agregar datos
-        if ( ((status_atendido != null) && (status_atendido >= 0)) && (page != null && page > 0) && (size != null && size > 0) ){
+        if ( ((status_atendido != null) && (status_atendido >= 0)) && (page != null && page >= 0) && (size != null && size > 0) ){
             return reporteDAO.getByStatusAtendido(status_atendido, page, size);
         }else{
             return Optional.empty();
@@ -92,7 +92,7 @@ public class ReporteService {
     public Optional<List<Reporte>> getFechaCreacion(Date fecha_creacion, Integer page, Integer size ){
         // validar los datos y cualquier lógica de negocio
         // modificar el objeto o agregar datos
-        if ( (fecha_creacion != null) && (page != null && page > 0) && (size != null && size > 0) ){
+        if ( (fecha_creacion != null) && (page != null && page >= 0) && (size != null && size > 0) ){
             return reporteDAO.getByFechaCreacion(fecha_creacion, page, size);
         }else{
             return Optional.empty();
@@ -101,7 +101,7 @@ public class ReporteService {
 
     public Optional<List<Compra>> listComprasReporte(Long id_reporte, Integer page, Integer size){
         // validar los datos y cualquier lógica de negocio
-        if ( ((id_reporte != null) && (id_reporte > 0)) && (page != null && page > 0) && (size != null && size > 0) ){
+        if ( ((id_reporte != null) && (id_reporte > 0)) && (page != null && page >= 0) && (size != null && size > 0) ){
             return compraDAO.listComprasReporte(id_reporte, page, size);
         }else{
             return Optional.empty();
