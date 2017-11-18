@@ -22,7 +22,7 @@ public class MensajeService {
         Pattern p = Pattern.compile("(^[a-zA-Z0-9][ A-Za-z0-9_-]*$)", Pattern.CASE_INSENSITIVE);
         Matcher m = p.matcher(uuid);
         boolean b = m.find();
-        if ( (!uuid.isEmpty()) && (!b) ){
+        if ( (!uuid.isEmpty()) /*&& (!b)*/ ){
             Optional<Mensaje> mensaje = mensajeDAO.getByUuid(uuid);
             return mensaje;
         }else {

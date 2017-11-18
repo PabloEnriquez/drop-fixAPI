@@ -43,10 +43,10 @@ public class FaqDAO {
         try {
             jdbcTemplate.update(
                     "INSERT INTO faq "
-                            + " ( id, uuid, status, fecha_creacion, fecha_modificacion, "
+                            + " ( uuid, status, fecha_creacion, fecha_modificacion, "
                             + " titulo, descripcion )"
-                            + " VALUES (?,?,?,?,?,?,?)",
-                    newId, newUuid, faq.getStatus(), Timestamp.from(Instant.now()),
+                            + " VALUES (?,?,?,?,?,?)",
+                    newUuid, faq.getStatus(), Timestamp.from(Instant.now()),
                     Timestamp.from(Instant.now()), faq.getTitulo(), faq.getDescripcion() );
             logger.debug("Inserting faq");
             return getByUuid(newUuid);

@@ -43,10 +43,10 @@ public class CentroServicioDAO {
         try {
             jdbcTemplate.update(
                     "INSERT INTO centro_de_servicio "
-                            + " (id, uuid, status, fecha_creacion, fecha_modificacion, longitud, latitud, "
+                            + " ( uuid, status, fecha_creacion, fecha_modificacion, longitud, latitud, "
                             + " descripcion, direccion, titulo, url )"
-                            + " VALUES (?,?,?,?,?,?,?,?,?,?,?)",
-                    newId, newUuid, centroServicio.getStatus(), Timestamp.from(Instant.now()), Timestamp.from(Instant.now()),
+                            + " VALUES (?,?,?,?,?,?,?,?,?,?)",
+                    newUuid, centroServicio.getStatus(), Timestamp.from(Instant.now()), Timestamp.from(Instant.now()),
                     centroServicio.getLongitud(), centroServicio.getLatitud(), centroServicio.getDescripcion(),
                     centroServicio.getDireccion(), centroServicio.getTitulo(), centroServicio.getUrl() );
             logger.debug("Inserting centroServicio");

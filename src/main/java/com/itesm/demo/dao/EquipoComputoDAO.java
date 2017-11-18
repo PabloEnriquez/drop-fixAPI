@@ -44,11 +44,11 @@ public class EquipoComputoDAO {
         try {
             jdbcTemplate.update(
                     "INSERT INTO equipo_computo "
-                            + " ( id, uuid, status, fecha_creacion, fecha_modificacion,"
+                            + " ( uuid, status, fecha_creacion, fecha_modificacion,"
                             + " nombre, num_serie, modelo, marca, sistema_operativo"
                             + " id_usuario) "
-                            + " VALUES (?,?,?,?,?,?,?,?,?,?,?)",
-                    newId, newUuid, equipo_computo.getStatus(), Timestamp.from(Instant.now()), Timestamp.from(Instant.now()),
+                            + " VALUES (?,?,?,?,?,?,?,?,?,?)",
+                    newUuid, equipo_computo.getStatus(), Timestamp.from(Instant.now()), Timestamp.from(Instant.now()),
                     equipo_computo.getNombre(), equipo_computo.getNum_serie(), equipo_computo.getModelo(),
                     equipo_computo.getMarca(), equipo_computo.getSistema_operativo(), equipo_computo.getId_usuario() );
             logger.debug("Inserting equipo computo");

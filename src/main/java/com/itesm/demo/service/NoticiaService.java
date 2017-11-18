@@ -25,7 +25,7 @@ public class NoticiaService {
         Pattern p = Pattern.compile("(^[a-zA-Z0-9][ A-Za-z0-9_-]*$)", Pattern.CASE_INSENSITIVE);
         Matcher m = p.matcher(uuid);
         boolean b = m.find();
-        if ( (!uuid.isEmpty()) && (!b) ){
+        if ( (!uuid.isEmpty()) /*&& (!b)*/ ){
             Optional<Noticia> noticia = noticiaDAO.getByUuid(uuid);
             return noticia;
         }else {

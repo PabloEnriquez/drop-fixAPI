@@ -45,10 +45,10 @@ public class ChatDAO {
         try {
             jdbcTemplate.update(
                     "INSERT INTO chat "
-                            + " ( id, uuid, status, fecha_creacion, fecha_modificacion,"
+                            + " ( uuid, status, fecha_creacion, fecha_modificacion,"
                             + " id_usuario, id_tecnico )"
-                            + " VALUES (?,?,?,?,?,?,?)",
-                    newId, newUuid, chat.getStatus(), Timestamp.from(Instant.now()), Timestamp.from(Instant.now()),
+                            + " VALUES (?,?,?,?,?,?)",
+                    newUuid, chat.getStatus(), Timestamp.from(Instant.now()), Timestamp.from(Instant.now()),
                     chat.getId_usuario(), chat.getId_tecnico() );
             logger.debug("Inserting chat");
             return getByUuid(newUuid);

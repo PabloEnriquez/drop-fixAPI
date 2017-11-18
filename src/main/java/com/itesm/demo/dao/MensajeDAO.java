@@ -44,10 +44,10 @@ public class MensajeDAO {
         try {
             jdbcTemplate.update(
                     "INSERT INTO mensaje "
-                            + " ( id, uuid, id_dueno, fecha_creacion,"
+                            + " ( uuid, id_dueno, fecha_creacion,"
                             + " contenido, id_chat )"
-                            + " VALUES (?,?,?,?,?,?)",
-                    newId, newUuid, mensaje.getId_dueno(), Timestamp.from(Instant.now()),
+                            + " VALUES (?,?,?,?,?)",
+                    newUuid, mensaje.getId_dueno(), Timestamp.from(Instant.now()),
                     mensaje.getContenido(), mensaje.getId_chat() );
             logger.debug("Inserting mensaje");
             return getByUuid(newUuid);

@@ -45,10 +45,10 @@ public class ReporteDAO {
         try {
             jdbcTemplate.update(
                     "INSERT INTO reporte "
-                            + " ( id, uuid, status, status_atendido, fecha_creacion, fecha_modificacion,"
+                            + " ( uuid, status, status_atendido, fecha_creacion, fecha_modificacion,"
                             + " descripcion, id_equipo_computo, id_usuario, id_chat )"
-                            + " VALUES (?,?,?,?,?,?,?,?,?,?)",
-                    newId, newUuid, reporte.getStatus(), reporte.getStatus_atendido(), Timestamp.from(Instant.now()), Timestamp.from(Instant.now()),
+                            + " VALUES (?,?,?,?,?,?,?,?,?)",
+                    newUuid, reporte.getStatus(), reporte.getStatus_atendido(), Timestamp.from(Instant.now()), Timestamp.from(Instant.now()),
                     reporte.getDescripcion(), reporte.getId_equipo_computo(), reporte.getId_usuario(), reporte.getId_chat() );
             logger.debug("Inserting reporte");
             return getByUuid(newUuid);
