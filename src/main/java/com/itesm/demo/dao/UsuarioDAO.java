@@ -44,10 +44,10 @@ public class UsuarioDAO {
         try {
             jdbcTemplate.update(
                     "INSERT INTO usuario "
-                            + " ( id, uuid, status, fecha_creacion, fecha_modificacion,"
+                            + " ( uuid, status, fecha_creacion, fecha_modificacion,"
                             + " email, nombre, contrasena, telefono, usuario, tipo_usuario )"
-                            + " VALUES (?,?,?,?,?,?,?,?,?,?,?)",
-                    newId, newUuid, usuario.getStatus(), Timestamp.from(Instant.now()), Timestamp.from(Instant.now()),
+                            + " VALUES (?,?,?,?,?,?,?,?,?,?)",
+                    newUuid, usuario.getStatus(), Timestamp.from(Instant.now()), Timestamp.from(Instant.now()),
                     usuario.getEmail(), usuario.getNombre(), usuario.getContrasena(),
                     usuario.getTelefono(), usuario.getUsuario(), usuario.getTipo_usuario() );
             logger.debug("Inserting usuario");
