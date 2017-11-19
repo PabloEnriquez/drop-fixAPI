@@ -3,6 +3,7 @@ package com.itesm.demo.endpoint;
 import com.itesm.demo.domain.Faq;
 import com.itesm.demo.service.FaqService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.DELETE;
@@ -18,7 +19,7 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = {"http://localhost:3000"})
+//@CrossOrigin(origins = {"http://localhost:3000"})
 @Component
 @Path("/v1")
 @Produces(MediaType.APPLICATION_JSON)
