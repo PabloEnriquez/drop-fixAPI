@@ -98,7 +98,7 @@ public class ReporteEndpoint {
 
     @GET
     @Path("/reporte/x-status-atendido")
-    public Response searchByStatusAtendido(@QueryParam("status_atendido") Long status_atendido, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
+    public Response searchByStatusAtendido(@QueryParam("status_atendido") Integer status_atendido, @QueryParam("page") Integer page, @QueryParam("size") Integer size ){
         Optional<List<Reporte>> reportesStatusAtendido = reporteService.getStatusAtendido(status_atendido, page, size);
         Response response;
         if(reportesStatusAtendido.isPresent()) {

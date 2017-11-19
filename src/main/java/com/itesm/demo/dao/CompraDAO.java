@@ -45,10 +45,10 @@ public class CompraDAO {
         try {
             jdbcTemplate.update(
                     "INSERT INTO compra "
-                            + " ( id, uuid, status, fecha_creacion, fecha_modificacion,"
+                            + " ( uuid, status, fecha_creacion, fecha_modificacion,"
                             + " monto_total, id_reporte, id_usuario, id_servicio )"
-                            + " VALUES (?,?,?,?,?,?,?,?,?)",
-                    newId, newUuid, compra.getStatus(), Timestamp.from(Instant.now()), Timestamp.from(Instant.now()),
+                            + " VALUES (?,?,?,?,?,?,?,?)",
+                    newUuid, compra.getStatus(), Timestamp.from(Instant.now()), Timestamp.from(Instant.now()),
                     compra.getMonto_total(), compra.getId_reporte(), compra.getId_usuario(), compra.getId_servicio() );
             logger.debug("Inserting compra");
             return getByUuid(newUuid);

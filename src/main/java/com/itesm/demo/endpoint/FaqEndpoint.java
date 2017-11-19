@@ -18,6 +18,7 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = {"http://localhost:3000"})
 @Component
 @Path("/v1")
 @Produces(MediaType.APPLICATION_JSON)

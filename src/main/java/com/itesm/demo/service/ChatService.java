@@ -30,10 +30,10 @@ public class ChatService {
     public Optional<Chat> get(String uuid){
         // validar los datos y cualquier lógica de negocio
         // modificar el objeto o agregar datos
-        Pattern p = Pattern.compile("[^A-Za-z0-9]", Pattern.CASE_INSENSITIVE);
+        Pattern p = Pattern.compile("(^[a-zA-Z0-9][ A-Za-z0-9_-]*$)", Pattern.CASE_INSENSITIVE);
         Matcher m = p.matcher(uuid);
         boolean b = m.find();
-        if ( (!uuid.isEmpty()) && (!b) ){
+        if ( (!uuid.isEmpty()) /*&& (!b)*/ ){
             Optional<Chat> chat = chatDAO.getByUuid(uuid);
             return chat;
         }else {
@@ -70,7 +70,7 @@ public class ChatService {
 
     public Optional<List<Chat>> list(Integer page, Integer size){
         // validar los datos y cualquier lógica de negocio
-        if ( (page != null && page > 0) && (size != null && size > 0) ){
+        if ( (page != null && page >= 0) && (size != null && size > 0) ){
             return chatDAO.list(page, size);
         }else {
             return Optional.empty();
@@ -79,7 +79,7 @@ public class ChatService {
 
     public Optional<List<Reporte>> listReportes(Long id_chat, Integer page, Integer size){
         // validar los datos y cualquier lógica de negocio
-        if ( ((id_chat != null) && (id_chat > 0)) && (page != null && page > 0) && (size != null && size > 0) ){
+        if ( ((id_chat != null) && (id_chat > 0)) && (page != null && page >= 0) && (size != null && size > 0) ){
             return reporteDAO.listReportesChat(id_chat, page, size);
         }else{
             return Optional.empty();
@@ -88,7 +88,7 @@ public class ChatService {
 
     public Optional<List<Mensaje>> listMensajes(Long id_chat, Integer page, Integer size){
         // validar los datos y cualquier lógica de negocio
-        if ( ((id_chat != null) && (id_chat > 0)) && (page != null && page > 0) && (size != null && size > 0) ){
+        if ( ((id_chat != null) && (id_chat > 0)) && (page != null && page >= 0) && (size != null && size > 0) ){
             return mensajeDAO.listMensajesChat(id_chat, page, size);
         }else{
             return Optional.empty();
@@ -98,7 +98,7 @@ public class ChatService {
     public Optional<List<Chat>> getFechaCreacion(Date fecha_creacion, Integer page, Integer size){
         // validar los datos y cualquier lógica de negocio
         // modificar el objeto o agregar datos
-        if ( (fecha_creacion != null) && (page != null && page > 0) && (size != null && size > 0) ){
+        if ( (fecha_creacion != null) && (page != null && page >= 0) && (size != null && size > 0) ){
             return chatDAO.getByFechaCreacion(fecha_creacion, page, size);
         }else{
             return Optional.empty();

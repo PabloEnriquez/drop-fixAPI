@@ -20,10 +20,10 @@ public class CompraService {
     public Optional<Compra> get(String uuid){
         // validar los datos y cualquier lógica de negocio
         // modificar el objeto o agregar datos
-        Pattern p = Pattern.compile("[^A-Za-z0-9]", Pattern.CASE_INSENSITIVE);
+        Pattern p = Pattern.compile("(^[a-zA-Z0-9][ A-Za-z0-9_-]*$)", Pattern.CASE_INSENSITIVE);
         Matcher m = p.matcher(uuid);
         boolean b = m.find();
-        if ( (!uuid.isEmpty()) && (!b) ){
+        if ( (!uuid.isEmpty())/*&& (!b)*/ ){
             Optional<Compra> compra = compraDAO.getByUuid(uuid);
             return compra;
         }else {
@@ -64,7 +64,7 @@ public class CompraService {
 
     public Optional<List<Compra>> list(Integer page, Integer size){
         // validar los datos y cualquier lógica de negocio
-        if ( (page != null && page > 0) && (size != null && size > 0) ){
+        if ( (page != null && page >= 0) && (size != null && size > 0) ){
             return compraDAO.list(page, size);
         }else {
             return Optional.empty();
@@ -74,7 +74,7 @@ public class CompraService {
     public Optional<List<Compra>> getFechaCreacion(Date fecha_creacion, Integer page, Integer size ){
         // validar los datos y cualquier lógica de negocio
         // modificar el objeto o agregar datos
-        if ( (fecha_creacion != null) && (page != null && page > 0) && (size != null && size > 0) ){
+        if ( (fecha_creacion != null) && (page != null && page >= 0) && (size != null && size > 0) ){
             return compraDAO.getByFechaCreacion(fecha_creacion, page, size);
         }else{
             return Optional.empty();

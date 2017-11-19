@@ -26,10 +26,10 @@ public class EquipoComputoService {
     public Optional<EquipoComputo> get(String uuid){
         // validar los datos y cualquier lógica de negocio
         // modificar el objeto o agregar datos
-        Pattern p = Pattern.compile("[^A-Za-z0-9]", Pattern.CASE_INSENSITIVE);
+        Pattern p = Pattern.compile("(^[a-zA-Z0-9][ A-Za-z0-9_-]*$)", Pattern.CASE_INSENSITIVE);
         Matcher m = p.matcher(uuid);
         boolean b = m.find();
-        if ( (!uuid.isEmpty()) && (!b) ){
+        if ( (!uuid.isEmpty()) /*&& (!b)*/){
             Optional<EquipoComputo> equipo_computo = equipoComputoDAO.getByUuid(uuid);
             return equipo_computo;
         }else {
@@ -83,7 +83,7 @@ public class EquipoComputoService {
 
     public Optional<List<EquipoComputo>> list(Integer page, Integer size){
         // validar los datos y cualquier lógica de negocio
-        if ( (page != null && page > 0) && (size != null && size > 0) ){
+        if ( (page != null && page >= 0) && (size != null && size > 0) ){
             return equipoComputoDAO.list(page, size);
         }else {
             return Optional.empty();
@@ -93,7 +93,7 @@ public class EquipoComputoService {
     public Optional<List<EquipoComputo>> getFechaCreacion(Date fecha_creacion, Integer page, Integer size){
         // validar los datos y cualquier lógica de negocio
         // modificar el objeto o agregar datos
-        if ( (fecha_creacion != null) && (page != null && page > 0) && (size != null && size > 0) ){
+        if ( (fecha_creacion != null) && (page != null && page >= 0) && (size != null && size > 0) ){
             return equipoComputoDAO.getByFechaCreacion(fecha_creacion, page, size);
         }else{
             return Optional.empty();
@@ -103,7 +103,7 @@ public class EquipoComputoService {
     public Optional<List<EquipoComputo>> getNombre(String nombre, Integer page, Integer size ){
         // validar los datos y cualquier lógica de negocio
         // modificar el objeto o agregar datos
-        if ( (!nombre.isEmpty()) && (page != null && page > 0) && (size != null && size > 0) ){
+        if ( (!nombre.isEmpty()) && (page != null && page >= 0) && (size != null && size > 0) ){
             return equipoComputoDAO.getByNombre(nombre, page, size);
         }else{
             return Optional.empty();
@@ -113,7 +113,7 @@ public class EquipoComputoService {
     public Optional<List<EquipoComputo>> getNumSerie(String num_serie, Integer page, Integer size ){
         // validar los datos y cualquier lógica de negocio
         // modificar el objeto o agregar datos
-        if ( (!num_serie.isEmpty()) && (page != null && page > 0) && (size != null && size > 0) ){
+        if ( (!num_serie.isEmpty()) && (page != null && page >= 0) && (size != null && size > 0) ){
             return equipoComputoDAO.getByNumSerie(num_serie, page, size);
         }else{
             return Optional.empty();
@@ -123,7 +123,7 @@ public class EquipoComputoService {
     public Optional<List<EquipoComputo>> getModelo(String modelo, Integer page, Integer size ){
         // validar los datos y cualquier lógica de negocio
         // modificar el objeto o agregar datos
-        if ( (!modelo.isEmpty()) && (page != null && page > 0) && (size != null && size > 0) ){
+        if ( (!modelo.isEmpty()) && (page != null && page >= 0) && (size != null && size > 0) ){
             return equipoComputoDAO.getByModelo(modelo, page, size);
         }else{
             return Optional.empty();
@@ -133,7 +133,7 @@ public class EquipoComputoService {
     public Optional<List<EquipoComputo>> getMarca(String marca, Integer page, Integer size ){
         // validar los datos y cualquier lógica de negocio
         // modificar el objeto o agregar datos
-        if ( (!marca.isEmpty()) && (page != null && page > 0) && (size != null && size > 0) ){
+        if ( (!marca.isEmpty()) && (page != null && page >= 0) && (size != null && size > 0) ){
             return equipoComputoDAO.getByMarca(marca, page, size);
         }else{
             return Optional.empty();
@@ -143,7 +143,7 @@ public class EquipoComputoService {
     public Optional<List<EquipoComputo>> getSistOperativo(String sistema_operativo, Integer page, Integer size ){
         // validar los datos y cualquier lógica de negocio
         // modificar el objeto o agregar datos
-        if ( (!sistema_operativo.isEmpty()) && (page != null && page > 0) && (size != null && size > 0) ){
+        if ( (!sistema_operativo.isEmpty()) && (page != null && page >= 0) && (size != null && size > 0) ){
             return equipoComputoDAO.getBySistemaOp(sistema_operativo, page, size);
         }else{
             return Optional.empty();
@@ -152,7 +152,7 @@ public class EquipoComputoService {
 
     public Optional<List<Reporte>> listReportes(Long id_equipo_computo, Integer page, Integer size){
         // validar los datos y cualquier lógica de negocio
-        if ( ((id_equipo_computo != null) && (id_equipo_computo > 0)) && (page != null && page > 0) && (size != null && size > 0) ){
+        if ( ((id_equipo_computo != null) && (id_equipo_computo > 0)) && (page != null && page >= 0) && (size != null && size > 0) ){
             return reporteDAO.listReportesEquipo(id_equipo_computo, page, size);
         }else{
             return Optional.empty();

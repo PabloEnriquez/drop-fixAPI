@@ -43,10 +43,10 @@ public class NoticiaDAO {
         try {
             jdbcTemplate.update(
                     "INSERT INTO noticia "
-                            + " ( id, uuid, status, fecha_creacion, fecha_modificacion,"
+                            + " ( uuid, status, fecha_creacion, fecha_modificacion,"
                             + " titulo, descripcion, url)"
-                            + " VALUES (?,?,?,?,?,?,?,?)",
-                    newId, newUuid, noticia.getStatus(), Timestamp.from(Instant.now()), Timestamp.from(Instant.now()),
+                            + " VALUES (?,?,?,?,?,?,?)",
+                    newUuid, noticia.getStatus(), Timestamp.from(Instant.now()), Timestamp.from(Instant.now()),
                     noticia.getTitulo(),noticia.getDescripcion(), noticia.getUrl() );
             logger.debug("Inserting noticia");
             return getByUuid(newUuid);
