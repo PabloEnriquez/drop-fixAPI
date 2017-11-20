@@ -22,9 +22,9 @@ public class CentroServicio {
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date fecha_modificacion;
 
-    private Long longitud;
+    private Float longitud;
 
-    private Long latitud;
+    private Float latitud;
 
     private String descripcion;
 
@@ -86,7 +86,7 @@ public class CentroServicio {
 	* Returns value of longitud
 	* @return
 	*/
-	public Long getLongitud() {
+	public Float getLongitud() {
 		return longitud;
 	}
 
@@ -94,7 +94,7 @@ public class CentroServicio {
 	* Sets new value of longitud
 	* @param
 	*/
-	public void setLongitud(Long longitud) {
+	public void setLongitud(Float longitud) {
 		this.longitud = longitud;
 	}
 
@@ -102,7 +102,7 @@ public class CentroServicio {
 	* Returns value of latitud
 	* @return
 	*/
-	public Long getLatitud() {
+	public Float getLatitud() {
 		return latitud;
 	}
 
@@ -110,7 +110,7 @@ public class CentroServicio {
 	* Sets new value of latitud
 	* @param
 	*/
-	public void setLatitud(Long latitud) {
+	public void setLatitud(Float latitud) {
 		this.latitud = latitud;
 	}
 
