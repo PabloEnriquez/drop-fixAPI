@@ -45,7 +45,7 @@ public class EquipoComputoDAO {
             jdbcTemplate.update(
                     "INSERT INTO equipo_computo "
                             + " ( uuid, status, fecha_creacion, fecha_modificacion,"
-                            + " nombre, num_serie, modelo, marca, sistema_operativo"
+                            + " nombre, num_serie, modelo, marca, sistema_operativo,"
                             + " id_usuario) "
                             + " VALUES (?,?,?,?,?,?,?,?,?,?)",
                     newUuid, equipo_computo.getStatus(), Timestamp.from(Instant.now()), Timestamp.from(Instant.now()),
