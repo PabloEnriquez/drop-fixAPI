@@ -1,9 +1,13 @@
+package com.itesm.demo.config;
+
 import javax.ws.rs.container.ContainerResponseFilter;
 import java.io.IOException;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerResponseContext;
 import javax.ws.rs.core.MultivaluedMap;
+import javax.ws.rs.ext.Provider;
 
+@Provider
 public class CORSResponseFilter2 implements   ContainerResponseFilter {
        public void filter(ContainerRequestContext  requestContext,ContainerResponseContext responseContext)
         throws IOException {
