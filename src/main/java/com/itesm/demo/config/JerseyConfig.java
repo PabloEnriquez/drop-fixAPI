@@ -16,7 +16,7 @@ public class JerseyConfig extends ResourceConfig {
         register(JacksonJaxbJsonProvider.class);
         packages("com.itesm.demo.endpoint");
         property(ServerProperties.BV_SEND_ERROR_IN_RESPONSE, true);
-        register(CORSResponseFilter2.class);
+        //register(CORSResponseFilter2.class);
     }
 
 }
